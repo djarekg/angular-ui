@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "angular.ng-template",
+      "biomejs.biome",
+      "prisma.prisma-insider",
+      "task.vscode-task"
+  ]
+}
