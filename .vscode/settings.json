@@ -88,7 +88,7 @@
 
   "html.hover.references": false,
   "html.hover.documentation": false,
-  "html.autoClosingTags": false,
+  "html.autoClosingTags": true,
   "html.format.maxPreserveNewLines": 1,
   "html.autoCreateQuotes": true,
   "html.format.indentInnerHtml": true,
@@ -143,5 +143,8 @@
   "javascript.suggest.paths": false,
 
   "apollographql.devTools.showPanel": "detect",
-  "apollographql.devTools.serverPort": 7095
+  "apollographql.devTools.serverPort": 7095,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
 }

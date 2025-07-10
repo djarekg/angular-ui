@@ -1,5 +1,30 @@
 :host {
-  .angular-icon {
+  a {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+    li {
+      margin-right: 16px;
+    }
+  }
+
+  .angular-logo {
     width: 30px;
     height: 30px;
     margin-right: 10px;
