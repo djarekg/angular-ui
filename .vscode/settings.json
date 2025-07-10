@@ -5,12 +5,11 @@
   "angular.forceStrictTemplates": true,
 
   "editor.lightbulb.enabled": "on",
-  "editor.defaultFormatter": "biomejs.biome",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.insertSpaces": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "quickfix.biome": "explicit",
-    "source.biome": "explicit"
+    "source.fixAll": "explicit"
+    // "source.fixAll.eslint": "explicit"
   },
   "editor.codeActions.triggerOnFocusChange": true,
 
@@ -30,10 +29,10 @@
   "javascript.preferences.importModuleSpecifierEnding": "auto",
   "javascript.suggest.completeJSDocs": true,
   "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.autoClosingTags": true,
   "typescript.check.npmIsInstalled": false,
@@ -57,18 +56,18 @@
   // "typescript.workspaceSymbols.scope": "allOpenProjects",
 
   "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "json.validate.enable": false,
   "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
@@ -80,7 +79,7 @@
     "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "[postcss]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "yaml.schemas": {
@@ -95,7 +94,7 @@
   "css.hover.references": false,
 
   "[css]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "html.hover.references": false,
