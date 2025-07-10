@@ -1,8 +1,15 @@
-<app-header />
+<app-header>
+  <button matIconButton
+          aria-label="Open sidenav"
+          (click)="sidenavOpen.set(true)">
+    <mat-icon>menu</mat-icon>
+  </button>
+</app-header>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side"
-               opened>
+  <mat-sidenav mode="over"
+               [opened]="isSidenavOpen"
+               (openedChange)="sidenavOpen.set($event)">
     <p>Sidenav content</p>
   </mat-sidenav>
   <mat-sidenav-content>

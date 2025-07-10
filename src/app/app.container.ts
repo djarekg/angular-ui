@@ -1,17 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '@/core/layout/header/header/header.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, MatSidenavModule, RouterOutlet],
+  imports: [HeaderComponent, MatButtonModule, MatIconModule, MatSidenavModule, RouterOutlet],
   templateUrl: './app.container.html',
   styles: [
     `
       :host {
         display: block;
         height: 100%;
+      }
+
+      .mat-sidenav-container {
+        height: 100vh;
       }
 
       .mat-sidenav,
@@ -29,4 +35,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     `,
   ],
 })
-export class App {}
+export class App {
+  protected readonly sidenavOpen = signal(false);
+  protected isSidenavOpen = false;
+
+  constructor() {
+    effect(() => (this.isSidenavOpen = this.sidenavOpen()));
+  }
+}

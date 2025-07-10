@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { ChangeDetectionStrategy, Component, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  imports: [MatButtonModule, MatIconModule],
+  imports: [],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  toggleSidenav = new EventEmitter<void>();
+}

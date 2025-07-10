@@ -20,6 +20,7 @@ import {
 import { routes } from './app.routes';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
+import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
 
 const transitionCreated = new Subject<void>();
 
@@ -59,5 +60,11 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withPreloading(PreloadAllModules)
     ),
+    {
+      provide: MAT_ICON_DEFAULT_OPTIONS,
+      useValue: {
+        fontSet: 'material-symbols-outlined',
+      },
+    },
   ],
 };
