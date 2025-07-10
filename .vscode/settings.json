@@ -9,7 +9,6 @@
   "editor.insertSpaces": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
-    // "source.fixAll.eslint": "explicit"
   },
   "editor.codeActions.triggerOnFocusChange": true,
 
@@ -46,14 +45,12 @@
   "typescript.suggest.completeJSDocs": true,
   "typescript.suggest.includeCompletionsForImportStatements": true,
   "typescript.suggest.jsdoc.generateReturns": true,
-  "typescript.tsdk": "../node_modules/typescript/lib",
+  "typescript.tsdk": "./node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsserver.experimental.enableProjectDiagnostics": true,
   "typescript.updateImportsOnFileMove.enabled": "prompt",
   "typescript.preferences.quoteStyle": "single",
   "javascript.preferences.quoteStyle": "single",
-  // "typescript.workspaceSymbols.excludeLibrarySymbols": true,
-  // "typescript.workspaceSymbols.scope": "allOpenProjects",
 
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -81,14 +78,6 @@
   "[postcss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  "yaml.schemas": {
-    "https://taskfile.dev/schema.json": ["**/Taskfile.yml", "./path/to/any/other/taskfile.yml"]
-  },
-
-  "jspm.generate.defaultConditions": "development,browser,module",
-  "jspm.generate.preload": "ask",
-  "jspm.generate.integrity": true,
 
   "css.hover.documentation": false,
   "css.hover.references": false,
@@ -146,33 +135,13 @@
 
   "github.copilot.chat.edits.suggestRelatedFilesForTests": false,
 
-  // "lit-html.format.enabled": true,
-  // "lit-html.tags": ["html", "raw", "css"],
-
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
 
-  // christian-kohler.path-intellisense - required for extension to work
   "typescript.suggest.paths": false,
   "javascript.suggest.paths": false,
 
-  // recommended ApolloGraphQL extension settings.
-  // https://github.com/apollographql/vscode-graphql/blob/main/sampleWorkspace/sampleWorkspace.code-workspace
   "apollographql.devTools.showPanel": "detect",
-  "apollographql.devTools.serverPort": 7095,
-
-  "prisma.schemaPath": "packages/api/prisma/schema.prisma",
-
-  // Project specific settings
-  "files.watcherExclude": {
-    "**/routeTree.gen.ts": true
-  },
-  // "search.exclude": {
-  //   "**/routeTree.gen.ts": true
-  // },
-  "files.readonlyInclude": {
-    "**/routeTree.gen.ts": true
-  },
-  "cSpell.words": ["griffel", "isbot", "Noto", "oklch", "Segoe"]
+  "apollographql.devTools.serverPort": 7095
 }
