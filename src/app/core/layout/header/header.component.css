@@ -7,7 +7,6 @@
   header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 16px;
   }
 
@@ -25,8 +24,14 @@
   }
 
   .angular-logo {
-    width: 30px;
-    height: 30px;
+    width: 64px;
+    height: 64px;
     margin-right: 10px;
+  }
+
+  .app-header-nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 }

@@ -1,0 +1,25 @@
+:host {
+  --_content-padding: 2rem;
+
+  display: block;
+  height: 100%;
+}
+
+.mat-sidenav-container {
+  position: static;
+  height: 100vh;
+}
+
+.mat-sidenav,
+.mat-sidenav-content {
+  padding: var(--_content-padding);
+}
+
+.mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow: auto;
+  padding-block: var(--_content-padding);
+}

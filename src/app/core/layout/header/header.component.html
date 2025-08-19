@@ -1,0 +1,31 @@
+<header>
+  <div class="app-header-nav">
+    <ng-content />
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/">
+            <img class="angular-logo"
+                 src="/assets/images/angular-logo.svg"
+                 alt="Angular" />
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <button matIconButton
+          [matMenuTriggerFor]="menu"
+          aria-label="Open profile menu">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</header>

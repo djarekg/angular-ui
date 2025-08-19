@@ -33,6 +33,8 @@
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
+  "typescript.experimental.useTsgo": true,
   "typescript.autoClosingTags": true,
   "typescript.check.npmIsInstalled": false,
   "typescript.format.semicolons": "insert",

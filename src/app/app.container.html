@@ -7,12 +7,15 @@
 </app-header>
 
 <mat-sidenav-container>
+
   <mat-sidenav mode="over"
                [opened]="isSidenavOpen"
                (openedChange)="sidenavOpen.set($event)">
-    <p>Sidenav content</p>
+    <app-sidenav />
   </mat-sidenav>
+
   <mat-sidenav-content>
     <router-outlet />
   </mat-sidenav-content>
+
 </mat-sidenav-container>

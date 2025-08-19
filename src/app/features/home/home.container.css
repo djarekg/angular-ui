@@ -1,0 +1,14 @@
+:host {
+  padding-block-start: 3rem;
+}
+
+.app-home-title {
+  font-size: 7rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 2rem;
+  background: var(--app-color-gradient-brand);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
