@@ -1,5 +1,13 @@
+packages:
+  - apps/*
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
   - lmdb
   - msgpackr-extract
+
+publicHoistPattern:
+  - esbuild
+  - typescript
+  - typegraphql-prisma

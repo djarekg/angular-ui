@@ -6,6 +6,9 @@
       "label": "pnpm run start",
       "type": "shell",
       "command": "pnpm run start",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/demo"
+      },
       "isBackground": true,
       "problemMatcher": {
         "owner": "typescript",
@@ -25,6 +28,9 @@
       "label": "pnpm run build",
       "type": "shell",
       "command": "pnpm run test",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/demo"
+      },
       "isBackground": true,
       "problemMatcher": {
         "owner": "typescript",
