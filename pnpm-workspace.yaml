@@ -10,4 +10,3 @@ onlyBuiltDependencies:
 publicHoistPattern:
   - esbuild
   - typescript
-  - typegraphql-prisma

@@ -2,6 +2,19 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "launch api",
+      "cwd": "${workspaceFolder}/apps/api",
+      "request": "launch",
+      "type": "node-terminal",
+      "command": "pnpm run dev",
+      "skipFiles": [
+        "**/<node_internals>/**"
+      ],
+      "sourceMaps": true,
+      "smartStep": true,
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",
@@ -16,6 +29,21 @@
       "preLaunchTask": "pnpm run test",
       "url": "http://localhost:9876/debug.html",
       "webRoot": "${workspaceFolder}/apps/demo"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "debug app",
+      "configurations": [
+        "launch api",
+        "ng serve",
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "1",
+        "order": 1
+      }
     }
   ]
 }

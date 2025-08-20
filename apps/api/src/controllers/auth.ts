@@ -1,0 +1,45 @@
+import { prisma } from '#app/client/index.js';
+import { accessTokenSecret } from '#app/config.js';
+import jwt from 'jsonwebtoken';
+import type { Context } from 'koa';
+
+export const signin = async (ctx: Context) => {
+  const { username, password } = (ctx.request as any).body;
+  const user = await prisma.user.findFirst({
+    where: {
+      email: username,
+    },
+    select: {
+      id: true,
+      password: true,
+    },
+  });
+
+  if (!user) {
+    ctx.status = 404; // NOT FOUND
+    return;
+  }
+
+  // Validate password against stored hash
+  const hashPassword = user.password;
+  const isValid = password === hashPassword;
+  // const isValid = compareHash(password, hashPassword);
+
+  if (isValid) {
+    // Credentials are valid, so return a JWT
+    const token = jwt.sign({ username }, accessTokenSecret, {
+      expiresIn: '1h',
+    });
+
+    ctx.body = { token, userId: user.id };
+    return;
+  }
+
+  ctx.status = 401; // UNAUTHORIZED
+};
+
+export const signout = () => {
+  jwt.sign({}, accessTokenSecret!, {
+    expiresIn: '1s', // Expire the token immediately
+  });
+};

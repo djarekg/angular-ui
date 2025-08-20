@@ -10,10 +10,8 @@
   ],
   "settings": {
     "npm.packageManager": "npm",
-
     "angular.log": "verbose",
     "angular.forceStrictTemplates": true,
-
     "editor.lightbulb.enabled": "on",
     "editor.defaultFormatter": "dprint.dprint",
     "editor.insertSpaces": true,
@@ -21,11 +19,12 @@
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit",
     },
-    "editor.rulers": [100],
+    "editor.rulers": [
+      100
+    ],
     "editor.overviewRulerBorder": true,
     "editor.experimentalWhitespaceRendering": "font",
     "editor.renderWhitespace": "none",
-
     "[css]": {
       "editor.defaultFormatter": "vscode.css-language-features",
       "editor.formatOnSave": true,
@@ -35,7 +34,7 @@
       "editor.formatOnSave": true,
     },
     "[jsonc]": {
-      "editor.defaultFormatter": "dprint.dprint",
+      "editor.defaultFormatter": "vscode.json-language-features",
       "editor.formatOnSave": true,
     },
     "[html]": {
@@ -70,17 +69,16 @@
       "editor.defaultFormatter": "redhat.vscode-xml",
       "editor.formatOnSave": true,
     },
-
     "typescript.format.semicolons": "insert",
     "typescript.preferences.importModuleSpecifier": "shortest",
+    "typescript.preferences.importModuleSpecifierEnding": "js",
     "typescript.tsdk": "node_modules/typescript/lib",
-
+    "javascript.preferences.importModuleSpecifier": "shortest",
+    "javascript.preferences.importModuleSpecifierEnding": "js",
     "html.autoClosingTags": true,
     "html.format.indentInnerHtml": true,
     "html.format.maxPreserveNewLines": 1,
-
     "workbench.editor.labelFormat": "medium",
-
     "files.watcherExclude": {
       "**/routeTree.gen.ts": true,
     },
@@ -104,9 +102,12 @@
       "**/.nitro": true,
       "**/.output": true,
       "**/.tanstack": true,
+      "**/prisma/generated": true
     },
   },
   "extensions": {
-    "recommendations": ["dprint.dprint"],
+    "recommendations": [
+      "dprint.dprint"
+    ],
   },
 }

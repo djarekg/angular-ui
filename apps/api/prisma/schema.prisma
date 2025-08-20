@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
+  output          = "generated/prisma/client"
+}
+
+model State {
+  id              String            @id @default(uuid())
+  name            String
+  code            String
+  user            User[]
+  customer        Customer[]
+  customerContact CustomerContact[]
+}
+
+model User {
+  id             String         @id @default(uuid())
+  firstName      String
+  lastName       String
+  email          String         @unique
+  streetAddress  String
+  streetAddress2 String?
+  city           String
+  stateId        String
+  zip            String
+  phone          String
+  password       String
+  role           String
+  dateCreated    DateTime       @default(now())
+  state          State          @relation(fields: [stateId], references: [id])
+  productSales   ProductSales[]
+}
+
+// enum Role {
+//   ADMIN
+//   USER
+//   SALES
+//   ACCOUNTING
+// }
+
+model Customer {
+  id              String            @id @default(uuid())
+  name            String
+  streetAddress   String
+  streetAddress2  String?
+  city            String
+  stateId         String
+  zip             String
+  phone           String
+  dateCreated     DateTime          @default(now())
+  dateUpdated     DateTime          @updatedAt
+  CustomerContact CustomerContact[]
+  state           State             @relation(fields: [stateId], references: [id])
+  productSales    ProductSales[]
+}
+
+model CustomerContact {
+  id             String   @id @default(uuid())
+  customerId     String
+  firstName      String
+  lastName       String
+  email          String
+  streetAddress  String
+  streetAddress2 String?
+  city           String
+  stateId        String
+  zip            String
+  phone          String
+  dateCreated    DateTime @default(now())
+  dateUpdated    DateTime @updatedAt
+  customer       Customer @relation(fields: [customerId], references: [id])
+  state          State    @relation(fields: [stateId], references: [id])
+}
+
+model Color {
+  id           String         @id @default(uuid())
+  name         String
+  dateCreated  DateTime       @default(now())
+  dateUpdated  DateTime       @updatedAt
+  productColor ProductColor[]
+}
+
+model ProductType {
+  id          String    @id @default(uuid())
+  name        String
+  dateCreated DateTime  @default(now())
+  dateUpdated DateTime  @updatedAt
+  product     Product[]
+}
+
+model Product {
+  id               String             @id @default(uuid())
+  name             String
+  description      String
+  price            String
+  genderId         String
+  productTypeId    String
+  dateCreated      DateTime           @default(now())
+  dateUpdated      DateTime           @updatedAt
+  productType      ProductType?       @relation(fields: [productTypeId], references: [id])
+  productInventory ProductInventory[]
+  productSales     ProductSales[]
+  ProductColor     ProductColor[]
+}
+
+model ProductColor {
+  id          String   @id @default(uuid())
+  productId   String
+  colorId     String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  product     Product  @relation(fields: [productId], references: [id])
+  color       Color    @relation(fields: [colorId], references: [id])
+}
+
+model ProductInventory {
+  id          String   @id @default(uuid())
+  productId   String
+  size        String
+  quantity    Int
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  product     Product  @relation(fields: [productId], references: [id])
+}
+
+model ProductSales {
+  id          String   @id @default(uuid())
+  productId   String
+  customerId  String
+  userId      String
+  quantity    Int
+  price       String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  product     Product  @relation(fields: [productId], references: [id])
+  customer    Customer @relation(fields: [customerId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+}

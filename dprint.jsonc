@@ -46,8 +46,6 @@
   },
   "markup": {
   },
-  "graphql": {
-  },
   "excludes": [
     "**/.git",
     "**/node_modules",
@@ -60,7 +58,6 @@
     "https://plugins.dprint.dev/toml-0.7.0.wasm",
     "https://plugins.dprint.dev/g-plane/malva-v0.14.1.wasm",
     "https://plugins.dprint.dev/g-plane/markup_fmt-v0.23.1.wasm",
-    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm",
-    "https://plugins.dprint.dev/g-plane/pretty_graphql-v0.2.3.wasm"
+    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.1.wasm"
   ]
 }
