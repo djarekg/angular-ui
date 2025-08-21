@@ -1,3 +1,4 @@
+import { httpResource } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '@aui/api';
 
@@ -6,7 +7,6 @@ import { User } from '@aui/api';
 })
 export class UserService {
   async getUser(username: string) {
-    const user = await fetch(`/api/users/${username}`).then(r => r.json()) as User;
-    return user;
+    return httpResource<User>(() => `/users/${username}`);
   }
 }

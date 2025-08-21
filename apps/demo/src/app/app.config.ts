@@ -1,3 +1,5 @@
+import { apiInterceptor } from '@/core/api/api.interceptor.js';
+import { provideDefaultOptions } from '@/core/options/defaults/index.js';
 import {
   HttpErrorResponse,
   provideHttpClient,
@@ -10,7 +12,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   createUrlTreeFromSnapshot,
   PreloadAllModules,
@@ -34,9 +36,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
+    provideAnimationsAsync(),
     provideHttpClient(
       withFetch(),
-      withInterceptors([authInterceptor]),
+      withInterceptors([apiInterceptor, authInterceptor]),
     ),
     provideRouter(
       routes,
@@ -70,11 +73,6 @@ export const appConfig: ApplicationConfig = {
       withComponentInputBinding(),
       withPreloading(PreloadAllModules),
     ),
-    {
-      provide: MAT_ICON_DEFAULT_OPTIONS,
-      useValue: {
-        fontSet: 'material-symbols-outlined',
-      },
-    },
+    provideDefaultOptions(),
   ],
 };

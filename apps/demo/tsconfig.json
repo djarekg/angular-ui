@@ -18,6 +18,9 @@
       "@/*": [
         "src/app/*"
       ],
+      "@/environment": [
+        "src/environments/environment.ts"
+      ],
       "@aui/api": [
         "../api/src/index.ts"
       ]

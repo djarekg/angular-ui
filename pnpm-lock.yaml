@@ -178,6 +178,9 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
       typescript-eslint:
         specifier: 8.40.0
         version: 8.40.0(eslint@9.33.0(jiti@2.5.1))(typescript@5.9.2)

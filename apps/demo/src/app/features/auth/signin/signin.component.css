@@ -1,0 +1,14 @@
+:host {
+  display: block;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+}
+
+.full-width {
+  width: 100%;
+}

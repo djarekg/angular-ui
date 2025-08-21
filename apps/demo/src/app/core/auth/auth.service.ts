@@ -22,7 +22,7 @@ export class AuthService {
   readonly #isServer = injectIsServer();
   readonly #router = inject(Router);
   readonly #status = signal<AuthStatus>('idle');
-  readonly #user = signal<User | null>(null);
+  readonly #user = signal<User | undefined | null>(undefined);
   readonly #userService = inject(UserService);
 
   readonly isAuthenticated = computed(() => this.#status() === 'authenticated');
@@ -46,10 +46,10 @@ export class AuthService {
     }
 
     const { username = '' } = JSON.parse(tokenRaw) as CachedToken;
-    const user = await this.#userService.getUser(username);
+    const { value: user, hasValue } = await this.#userService.getUser(username);
 
-    this.#user.set(user);
-    this.#status.set(user ? 'authenticated' : 'unauthenticated');
+    this.#user.set(user());
+    this.#status.set(hasValue() ? 'authenticated' : 'unauthenticated');
   }
 
   /**
