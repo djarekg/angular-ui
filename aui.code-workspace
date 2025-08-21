@@ -9,6 +9,7 @@
     },
   ],
   "settings": {
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "npm.packageManager": "npm",
     "angular.log": "verbose",
     "angular.forceStrictTemplates": true,
@@ -70,10 +71,10 @@
       "editor.formatOnSave": true,
     },
     "typescript.format.semicolons": "insert",
-    "typescript.preferences.importModuleSpecifier": "shortest",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.preferences.importModuleSpecifierEnding": "js",
     "typescript.tsdk": "node_modules/typescript/lib",
-    "javascript.preferences.importModuleSpecifier": "shortest",
+    "javascript.preferences.importModuleSpecifier": "non-relative",
     "javascript.preferences.importModuleSpecifierEnding": "js",
     "html.autoClosingTags": true,
     "html.format.indentInnerHtml": true,
@@ -95,6 +96,7 @@
       "**/.nitro": true,
       "**/.output": true,
       "**/.tanstack": true,
+      "**/.angular": true
     },
     "search.exclude": {
       "**/routeTree.gen.ts": true,

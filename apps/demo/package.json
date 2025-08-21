@@ -21,6 +21,7 @@
     "@angular/material": "20.1.6",
     "@angular/platform-browser": "^20.1.7",
     "@angular/router": "^20.1.7",
+    "@aui/api": "workspace:*",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1"
   },

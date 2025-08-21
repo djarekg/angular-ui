@@ -1,9 +1,16 @@
 import {
+  HttpErrorResponse,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
+import {
   ApplicationConfig,
   inject,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
+import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
 import {
   createUrlTreeFromSnapshot,
   PreloadAllModules,
@@ -17,10 +24,9 @@ import {
   withRouterConfig,
   withViewTransitions,
 } from '@angular/router';
-import { routes } from './app.routes';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from 'rxjs/internal/Subject';
-import { MAT_ICON_DEFAULT_OPTIONS } from '@angular/material/icon';
+import { routes } from './app.routes';
+import { authInterceptor } from './core/auth/auth.interceptor.js';
 
 const transitionCreated = new Subject<void>();
 
@@ -28,6 +34,10 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([authInterceptor]),
+    ),
     provideRouter(
       routes,
       withInMemoryScrolling(),
@@ -58,7 +68,7 @@ export const appConfig: ApplicationConfig = {
         },
       }),
       withComponentInputBinding(),
-      withPreloading(PreloadAllModules)
+      withPreloading(PreloadAllModules),
     ),
     {
       provide: MAT_ICON_DEFAULT_OPTIONS,

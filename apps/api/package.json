@@ -12,13 +12,19 @@
     "#app/prisma/client/*": "./prisma/generated/prisma/client/*",
     "#app/prisma/seed/*": "./prisma/seed/*"
   },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": "./dist/index.ts"
+    }
+  },
   "scripts": {
     "db:clean": "rm -rf prisma/dev.db prisma/generated",
     "db:generate": "pnpm prisma generate",
     "db:seed": "node --loader ts-node/esm prisma/seed/seed.ts --tsconfig=tsconfig.json",
     "db": "pnpm run db:clean && pnpm run db:generate && pnpx prisma db push && pnpm run db:seed",
     "build": "",
-    "dev": "node --loader ts-node/esm --watch --env-file=.env --experimental-default-config-file --no-warnings=ExperimentalWarning src/index.ts"
+    "dev": "node --loader ts-node/esm --watch --env-file=.env --experimental-default-config-file --no-warnings=ExperimentalWarning src/server.ts"
   },
   "dependencies": {
     "@koa/cors": "^5.0.0",
