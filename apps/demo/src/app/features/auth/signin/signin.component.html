@@ -6,9 +6,11 @@
     <input matInput
            formControlName="username"
            autocomplete="username" />
-    <mat-error *ngIf="form.get('username')?.hasError('required')">
+    @if (form.get('username')?.hasError('required')) {
+    <mat-error>
       Username is required
     </mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field class="full-width">
@@ -17,9 +19,11 @@
            type="password"
            formControlName="password"
            autocomplete="current-password" />
-    <mat-error *ngIf="form.get('password')?.hasError('required')">
+    @if (form.get('password')?.hasError('required')) {
+    <mat-error>
       Password is required
     </mat-error>
+    }
   </mat-form-field>
 
   <button mat-raised-button

@@ -1,10 +1,17 @@
-import { Component, effect, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AuthService } from '@/core/auth/auth.service.js';
 import { HeaderComponent } from '@/core/layout/header/header.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { SidenavComponent } from '@/core/sidenav/sidenav.component.js';
+import {
+  Component,
+  effect,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,14 +23,19 @@ import { SidenavComponent } from '@/core/sidenav/sidenav.component.js';
     RouterOutlet,
     SidenavComponent,
   ],
+  styleUrls: ['./app.container.css'],
   templateUrl: './app.container.html',
-  styleUrl: './app.container.css',
 })
-export class App {
+export class App implements OnInit {
+  protected readonly authService = inject(AuthService);
   protected readonly sidenavOpen = signal(false);
   protected isSidenavOpen = false;
 
   constructor() {
     effect(() => (this.isSidenavOpen = this.sidenavOpen()));
+  }
+
+  ngOnInit() {
+    this.authService.refresh();
   }
 }

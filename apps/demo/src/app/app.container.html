@@ -1,3 +1,4 @@
+@if (authService.isAuthenticated()) {
 <app-header>
   <button matIconButton
           aria-label="Open sidenav"
@@ -5,17 +6,15 @@
     <mat-icon>menu</mat-icon>
   </button>
 </app-header>
+}
 
 <mat-sidenav-container>
-
   <mat-sidenav mode="over"
                [opened]="isSidenavOpen"
                (openedChange)="sidenavOpen.set($event)">
     <app-sidenav />
   </mat-sidenav>
-
   <mat-sidenav-content>
     <router-outlet />
   </mat-sidenav-content>
-
 </mat-sidenav-container>

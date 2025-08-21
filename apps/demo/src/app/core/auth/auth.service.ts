@@ -5,6 +5,7 @@ import {
   CachedToken,
 } from '@/core/identity/index.js';
 import { injectIsServer } from '@/core/utils/is-server.js';
+import { HttpClient } from '@angular/common/http';
 import {
   computed,
   inject,
@@ -19,6 +20,7 @@ import { AuthStatus } from './auth-status.js';
   providedIn: 'root',
 })
 export class AuthService {
+  readonly #http = inject(HttpClient);
   readonly #isServer = injectIsServer();
   readonly #router = inject(Router);
   readonly #status = signal<AuthStatus>('idle');
@@ -38,7 +40,7 @@ export class AuthService {
   async refresh() {
     if (this.#isServer) return;
 
-    const tokenRaw = localStorage.getItem(AUTH_TOKEN_CACHE_KEY);
+    const tokenRaw = sessionStorage.getItem(AUTH_TOKEN_CACHE_KEY);
     if (!tokenRaw) {
       this.#user.set(null);
       this.#status.set('unauthenticated');
@@ -46,10 +48,10 @@ export class AuthService {
     }
 
     const { username = '' } = JSON.parse(tokenRaw) as CachedToken;
-    const { value: user, hasValue } = await this.#userService.getUser(username);
+    const user = await this.#userService.getUser(username);
 
-    this.#user.set(user());
-    this.#status.set(hasValue() ? 'authenticated' : 'unauthenticated');
+    this.#user.set(user);
+    this.#status.set(!!user ? 'authenticated' : 'unauthenticated');
   }
 
   /**
@@ -61,6 +63,24 @@ export class AuthService {
     this.refresh().then(() => this.#router.navigate(urlSegments));
   }
 
+  signin(username: string, password: string) {
+    this.#status.set('idle');
+
+    this.#http.post<{ token: string; userId: string; }>('/auth/signin', {
+      username,
+      password,
+    }).subscribe(({ token, userId }) => {
+      if (token) {
+        sessionStorage.setItem(AUTH_TOKEN_CACHE_KEY, JSON.stringify({ token, username }));
+        this.#status.set('authenticated');
+        this.authenticate();
+      }
+      else {
+        this.#status.set('unauthenticated');
+      }
+    });
+  }
+
   /**
    * Signout the user and redirect to the home page.
    */
@@ -70,8 +90,8 @@ export class AuthService {
 
     // reset cache
     if (!this.#isServer) {
-      localStorage.removeItem(AUTH_TOKEN_CACHE_KEY);
-      localStorage.removeItem(AUTH_USER_CACHE_KEY);
+      sessionStorage.removeItem(AUTH_TOKEN_CACHE_KEY);
+      sessionStorage.removeItem(AUTH_USER_CACHE_KEY);
     }
 
     this.#router.navigate(['/']);

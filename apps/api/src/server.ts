@@ -1,6 +1,10 @@
+import cors from '@koa/cors';
 import Koa from 'koa';
 import { koaBody } from 'koa-body';
-import { port } from './config.ts';
+import {
+  corsOrigin,
+  port,
+} from './config.ts';
 import {
   authRouter,
   userRouter,
@@ -8,10 +12,16 @@ import {
 
 const app = new Koa();
 
+app.use(
+  cors({
+    allowMethods: ['GET', 'PUT', 'DELETE', 'POST', 'OPTIONS'],
+    origin: corsOrigin,
+  }),
+);
+app.use(koaBody());
+
 // Setup api routes
 app.use(authRouter.routes());
 app.use(userRouter.routes());
-
-app.use(koaBody());
 
 app.listen(port, () => console.log(`🚀 Server ready at: http://localhost:${port}`));

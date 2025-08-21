@@ -8,7 +8,11 @@ import { HttpInterceptorFn } from '@angular/common/http';
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.startsWith('/')) {
     const { apiUrl } = environment;
-    req = req.clone({ url: `${apiUrl}${req.url}` });
+    req = req.clone({
+      url: `${apiUrl}${req.url}`,
+      mode: 'cors',
+      setHeaders: { 'Access-Control-Allow-Origin': 'true' },
+    });
   }
 
   return next(req);

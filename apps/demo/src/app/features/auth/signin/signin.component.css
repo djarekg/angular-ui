@@ -1,5 +1,7 @@
 :host {
-  display: block;
+  display: grid;
+  place-content: center;
+  height: var(--app-main-height);
 }
 
 .signin-form {

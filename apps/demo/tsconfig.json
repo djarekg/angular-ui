@@ -12,7 +12,12 @@
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2022",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2024"
+    ],
+    "target": "es2024",
     "module": "esnext",
     "paths": {
       "@/*": [

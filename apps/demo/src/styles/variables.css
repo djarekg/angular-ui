@@ -1,9 +1,9 @@
 :root {
   --app-color-primary: #2b7fff;
   --app-color-secondary: #7f22fe;
-  --app-color-gradient-brand: linear-gradient(
-    90deg,
-    var(--app-color-primary) 0%,
-    var(--app-color-secondary) 100%
-  );
+  --app-color-gradient-brand: linear-gradient(90deg,
+      var(--app-color-primary) 0%,
+      var(--app-color-secondary) 100%);
+
+  --app-main-height: calc(100% - (2 * 2rem))
 }

@@ -1,7 +1,10 @@
+import { AuthService } from '@/core/auth/auth.service.js';
+import { isNullOrEmpty } from '@/core/utils/string.js';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   signal,
 } from '@angular/core';
 import {
@@ -27,7 +30,8 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './signin.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SigninComponent {
+export default class SigninComponent {
+  protected readonly authService = inject(AuthService);
   protected readonly isSubmitting = signal(false);
 
   protected form = new FormGroup({
@@ -42,6 +46,12 @@ export class SigninComponent {
     }
 
     const { username, password } = this.form.value;
+
+    if (isNullOrEmpty(username) || isNullOrEmpty(password)) {
+      return;
+    }
+
     this.isSubmitting.set(true);
+    this.authService.signin(username!, password!);
   }
 }
