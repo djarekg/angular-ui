@@ -14,12 +14,5 @@
   },
   "workspaces": [
     "apps/*"
-  ],
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "typescript": "^5.9.2"
-      }
-    }
-  }
+  ]
 }
