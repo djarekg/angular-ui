@@ -1,9 +1,13 @@
 :root {
   --app-color-primary: #2b7fff;
   --app-color-secondary: #7f22fe;
+  /* --app-color-primary: var(--mat-sys-on-primary-container);
+  --app-color-secondary: var(--mat-sys-on-secondary-container); */
   --app-color-gradient-brand: linear-gradient(90deg,
       var(--app-color-primary) 0%,
       var(--app-color-secondary) 100%);
 
-  --app-main-height: calc(100% - (2 * 2rem))
+  --app-height: calc(100% - (2 * 2rem));
+  --app-unprotected-header-height: 180px;
+  --app-unprotected-height: calc(100% - var(--app-unprotected-header-height));
 }

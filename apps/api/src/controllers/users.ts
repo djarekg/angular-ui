@@ -8,10 +8,10 @@ export const getUsers = async (ctx: Context) => {
 };
 
 export const getUser = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+  const { params: { username } } = ctx;
   const user = await prisma.user.findFirst({
     where: {
-      id,
+      email: username,
     },
   });
 

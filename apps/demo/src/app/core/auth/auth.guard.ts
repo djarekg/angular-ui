@@ -15,7 +15,7 @@ export const authGuard = () => {
     filter(() => !authService.isAuthenticating()),
     map(isAuthenticated => {
       if (isAuthenticated) return true;
-      return router.navigate(['/signin']);
+      return router.navigate(['/unprotected/signin']);
     }),
   );
 };

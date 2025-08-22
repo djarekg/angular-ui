@@ -1,16 +1,14 @@
 :host {
-  display: grid;
-  place-content: center;
-  height: var(--app-main-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: var(--app-unprotected-height);
+  padding-block-start: 30px;
 }
 
-.signin-form {
+form {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 320px;
-}
-
-.full-width {
-  width: 100%;
 }

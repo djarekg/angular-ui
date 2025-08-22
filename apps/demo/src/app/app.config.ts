@@ -1,4 +1,5 @@
 import { apiInterceptor } from '@/core/api/api.interceptor.js';
+import { authGuard } from '@/core/auth/auth.guard.js';
 import { provideDefaultOptions } from '@/core/options/defaults/index.js';
 import {
   HttpErrorResponse,
@@ -27,7 +28,6 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import { Subject } from 'rxjs/internal/Subject';
-import { routes } from './app.routes';
 import { authInterceptor } from './core/auth/auth.interceptor.js';
 
 const transitionCreated = new Subject<void>();
@@ -42,7 +42,22 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([apiInterceptor, authInterceptor]),
     ),
     provideRouter(
-      routes,
+      [
+        // The default route is protected and uses the protected-layout.
+        {
+          path: '',
+          canActivate: [authGuard],
+          loadComponent: () =>
+            import('./features/layout/protected-layout/protected-layout.container'),
+          loadChildren: () => import('./app-protected.routes'),
+        },
+        {
+          path: 'unprotected',
+          loadComponent: () =>
+            import('./features/layout/unprotected-layout/unprotected-layout.container'),
+          loadChildren: () => import('./app-unprotected.routes'),
+        },
+      ],
       withInMemoryScrolling(),
       withRouterConfig({ canceledNavigationResolution: 'computed' }),
       withNavigationErrorHandler(({ error }) => {

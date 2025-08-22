@@ -16,14 +16,13 @@
     "trailingCommas": "onlyMultiLine",
     "preferHanging": false,
     "operatorPosition": "maintain",
-
     "arrowFunction.useParentheses": "preferNone",
     "conditionalExpression.linePerExpression": false, // Keep our "match/case"-ish conditionals.
     "functionExpression.spaceAfterFunctionKeyword": true,
-    "importDeclaration.forceMultiLine": "whenMultiple",
+    "importDeclaration.forceMultiLine": "never",
+    "importDeclaration.preferHanging": false,
     "constructorType.spaceAfterNewKeyword": true,
     "constructSignature.spaceAfterNewKeyword": true,
-
     "module.sortImportDeclarations": "caseInsensitive",
     "module.sortExportDeclarations": "caseInsensitive",
     "exportDeclaration.sortNamedExports": "caseInsensitive",
@@ -38,14 +37,10 @@
     "trailingCommas": "never",
     "array.preferSingleLine": false
   },
-  "markdown": {
-  },
-  "toml": {
-  },
-  "malva": {
-  },
-  "markup": {
-  },
+  "markdown": {},
+  "toml": {},
+  "malva": {},
+  "markup": {},
   "excludes": [
     "**/.git",
     "**/node_modules",

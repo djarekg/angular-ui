@@ -6,6 +6,8 @@
         <li>
           <a routerLink="/">
             <img class="angular-logo"
+                 width="64px"
+                 height="64px"
                  src="/assets/images/angular-logo.svg"
                  alt="Angular" />
           </a>
@@ -13,11 +15,15 @@
       </ul>
     </nav>
   </div>
+
+  <span class="title">{{ title() }}</span>
+
   <button matIconButton
           [matMenuTriggerFor]="menu"
           aria-label="Open profile menu">
     <mat-icon>person</mat-icon>
   </button>
+
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
       <mat-icon>settings</mat-icon>
