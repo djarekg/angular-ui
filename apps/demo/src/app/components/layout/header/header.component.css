@@ -1,12 +1,19 @@
+:host {
+  position: fixed;
+  inset-inline: 0 15px;
+  z-index: 9999;
+}
+
 header {
-  /* display: flex;
-  justify-content: space-between; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: "a b c";
   align-items: center;
   grid-template-rows: 100%;
-  padding: 16px;
+  height: var(--app-header-height);
+  padding-inline: 2rem;
+  background: color-mix(in srgb, var(--mat-sys-surface) 80%, transparent);
+  backdrop-filter: blur(4px);
 
   >button {
     grid-area: c;

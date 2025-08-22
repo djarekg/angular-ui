@@ -1,3 +1,5 @@
 {
-  "recommendations": ["angular.ng-template", "prisma.prisma-insider", "task.vscode-task"]
-}
+  "recommendations": [
+    "angular.ng-template",
+    "prisma.prisma-insider""]
+  }

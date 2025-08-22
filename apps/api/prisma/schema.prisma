@@ -24,6 +24,12 @@ model State {
   customerContact CustomerContact[]
 }
 
+model Role {
+  id    String @id
+  name  String
+  users User[]
+}
+
 model User {
   id             String         @id @default(uuid())
   firstName      String
@@ -36,8 +42,9 @@ model User {
   zip            String
   phone          String
   password       String
-  role           String
+  roleId         String
   dateCreated    DateTime       @default(now())
+  role           Role           @relation(fields: [roleId], references: [id])
   state          State          @relation(fields: [stateId], references: [id])
   productSales   ProductSales[]
 }

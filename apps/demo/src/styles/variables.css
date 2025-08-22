@@ -7,7 +7,8 @@
       var(--app-color-primary) 0%,
       var(--app-color-secondary) 100%);
 
-  --app-height: calc(100% - (2 * 2rem));
+  --app-header-height: 100px;
+  --app-height: calc(100% - var(--app-header-height));
   --app-unprotected-header-height: 180px;
   --app-unprotected-height: calc(100% - var(--app-unprotected-header-height));
 }

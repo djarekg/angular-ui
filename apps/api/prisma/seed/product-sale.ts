@@ -6,8 +6,8 @@ export const createProductSales = async (prisma: PrismaClient) => {
 
   const createProductSales = async () => {
     const customerIds = (await prisma.customer.findMany()).map(({ id }) => id);
-    const salesUserIds = (await prisma.user.findMany({ where: { role: Role.Sales } })).map(
-      ({ id }) => id
+    const salesUserIds = (await prisma.user.findMany({ where: { roleId: Role.Sales } })).map(
+      ({ id }) => id,
     );
     const products = await prisma.product.findMany({
       select: {
@@ -33,7 +33,7 @@ export const createProductSales = async (prisma: PrismaClient) => {
       });
 
       console.log(
-        `Created product sale: productId: ${productId}, customerId: ${customerId}, userId: ${userId}, quantity: ${quantity}`
+        `Created product sale: productId: ${productId}, customerId: ${customerId}, userId: ${userId}, quantity: ${quantity}`,
       );
     }
   };

@@ -4,19 +4,16 @@ export default [
   {
     path: '',
     title: 'Home',
-    // canActivate: [authGuard],
     loadComponent: () => import('@/features/home/home.container'),
   },
   {
     path: 'users',
     title: 'Users',
-    // canActivate: [authGuard],
-    loadComponent: () => import('@/features/users/users.container'),
+    loadChildren: () => import('@/features/users/routes'),
   },
   {
     path: 'settings',
     title: 'Settings',
-    // canActivate: [authGuard],
     loadComponent: () => import('@/features/settings/settings.container'),
   },
 ] satisfies Routes;

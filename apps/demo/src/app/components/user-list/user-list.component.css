@@ -1,0 +1,42 @@
+:host {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  width: 100%;
+}
+
+.app-card {
+  will-change: transform;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: transform 150ms ease-in;
+  }
+}
+
+.app-card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fullname {
+  font-size: 1.1rem;
+}
+
+.role {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--app-color-primary);
+}
+
+.avatar {
+  color: var(--mat-sys-outline);
+  border-end-start-radius: var(--mat-sys-corner-medium);
+  border-end-end-radius: var(--mat-sys-corner-medium);
+  margin-block-start: 16px;
+  margin-inline: auto;
+  width: 164px;
+  height: 164px;
+}

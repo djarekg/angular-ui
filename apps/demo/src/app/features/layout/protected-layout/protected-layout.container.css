@@ -9,10 +9,13 @@
 }
 
 .mat-sidenav-content {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  /* height: var(--app-height); */
+  height: 100%;
   overflow: auto;
   padding-block: 2rem;
+  padding-block-start: var(--app-header-height);
 }
