@@ -11,4 +11,24 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  opacity: 0;
+  transform: scale(0.7);
+  will-change: opacity, transform;
+  animation: showTitle 1.5s ease-in 0.5s forwards;
+}
+
+@keyframes showTitle {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  60% {
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
