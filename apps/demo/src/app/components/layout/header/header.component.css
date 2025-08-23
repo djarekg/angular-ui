@@ -1,7 +1,7 @@
 :host {
   position: fixed;
   inset-inline: 0 15px;
-  z-index: 9999;
+  z-index: 2;
 }
 
 header {

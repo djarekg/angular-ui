@@ -6,21 +6,12 @@ html {
     (
       color: (
         primary: mat.$azure-palette,
-        tertiary: mat.$magenta-palette,
         theme-type: dark
       ),
       typography: "Inter Tight",
       density: 0
     )
   );
-}
 
-:root {
-  --mat-text-field-height: 46px;
-
-  .mdc-text-field--outlined {
-    height: var(--mat-text-field-height);
-  }
-
-  @include mat.form-field-overrides((container-height: var(--mat-text-field-height)));
+  @include mat.form-field-density(-3);
 }
