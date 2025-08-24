@@ -1,17 +1,8 @@
 import { UserService } from '@/core/auth/user.service.js';
-import {
-  AUTH_TOKEN_CACHE_KEY,
-  AUTH_USER_CACHE_KEY,
-  CachedToken,
-} from '@/core/identity/index.js';
+import { AUTH_TOKEN_CACHE_KEY, AUTH_USER_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
 import { injectIsServer } from '@/core/utils/is-server.js';
 import { HttpClient } from '@angular/common/http';
-import {
-  computed,
-  inject,
-  Injectable,
-  signal,
-} from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import type { User } from '@aui/api';
 import { AuthStatus } from './auth-status.js';
@@ -64,21 +55,33 @@ export class AuthService {
   }
 
   signin(username: string, password: string) {
+    const { promise, resolve, reject } = Promise.withResolvers<boolean>();
+
     this.#status.set('idle');
 
     this.#http.post<{ token: string; userId: string; }>('/auth/signin', {
       username,
       password,
-    }).subscribe(({ token, userId }) => {
-      if (token) {
-        sessionStorage.setItem(AUTH_TOKEN_CACHE_KEY, JSON.stringify({ token, username }));
-        this.#status.set('authenticated');
-        this.authenticate();
-      }
-      else {
-        this.#status.set('unauthenticated');
-      }
+    }).subscribe({
+      next: ({ token, userId }) => {
+        if (token) {
+          sessionStorage.setItem(AUTH_TOKEN_CACHE_KEY, JSON.stringify({ token, userId, username }));
+          this.#status.set('authenticated');
+          this.authenticate();
+          resolve(true);
+        }
+        else {
+          this.#status.set('unauthenticated');
+          resolve(false);
+        }
+      },
+      error: err => {
+        console.error('Failed to signin', err);
+        resolve(false);
+      },
     });
+
+    return promise;
   }
 
   /**

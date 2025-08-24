@@ -43,6 +43,7 @@ model User {
   phone          String
   password       String
   roleId         String
+  isActive       Boolean        @default(false)
   dateCreated    DateTime       @default(now())
   role           Role           @relation(fields: [roleId], references: [id])
   state          State          @relation(fields: [stateId], references: [id])
@@ -65,6 +66,7 @@ model Customer {
   stateId         String
   zip             String
   phone           String
+  isActive        Boolean           @default(false)
   dateCreated     DateTime          @default(now())
   dateUpdated     DateTime          @updatedAt
   CustomerContact CustomerContact[]
@@ -84,6 +86,7 @@ model CustomerContact {
   stateId        String
   zip            String
   phone          String
+  isActive       Boolean  @default(false)
   dateCreated    DateTime @default(now())
   dateUpdated    DateTime @updatedAt
   customer       Customer @relation(fields: [customerId], references: [id])
@@ -113,6 +116,7 @@ model Product {
   price            String
   genderId         String
   productTypeId    String
+  isActive         Boolean            @default(false)
   dateCreated      DateTime           @default(now())
   dateUpdated      DateTime           @updatedAt
   productType      ProductType?       @relation(fields: [productTypeId], references: [id])

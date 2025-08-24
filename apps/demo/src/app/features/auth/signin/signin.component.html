@@ -1,3 +1,12 @@
+<header>
+  Sign-in to access your account
+  <img width="64px"
+       height="64px"
+       loading="lazy"
+       alt="Ghost"
+       src="/ghost.svg" />
+</header>
+
 <form [formGroup]="form"
       (ngSubmit)="onSubmit()">
   <mat-form-field>
@@ -32,3 +41,11 @@
     Sign In
   </button>
 </form>
+
+<footer>
+  @if (errorMessage()) {
+  <mat-error>
+    {{ errorMessage() }}
+  </mat-error>
+  }
+</footer>

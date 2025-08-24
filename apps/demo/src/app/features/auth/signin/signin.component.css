@@ -1,14 +1,37 @@
 :host {
+  --_width: 320px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   height: var(--app-unprotected-height);
   padding-block-start: 30px;
+}
+
+form,
+header,
+footer {
+  width: var(--_width);
 }
 
 form {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 320px;
+}
+
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  font: var(--mat-sys-title-medium);
+  color: var(--mat-sys-primary);
+  margin-block-end: 0.5rem;
+}
+
+footer {
+  display: grid;
+  place-content: center;
+  height: 30px;
 }

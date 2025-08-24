@@ -1,5 +1,6 @@
 import { prisma } from '#app/client/index.js';
 import { accessTokenSecret } from '#app/config.js';
+import { compareHash } from '#app/crypto/hash.js';
 import jwt from 'jsonwebtoken';
 import type { Context } from 'koa';
 
@@ -22,8 +23,7 @@ export const signin = async (ctx: Context) => {
 
   // Validate password against stored hash
   const hashPassword = user.password;
-  const isValid = password === hashPassword;
-  // const isValid = compareHash(password, hashPassword);
+  const isValid = compareHash(password, hashPassword);
 
   if (isValid) {
     // Credentials are valid, so return a JWT

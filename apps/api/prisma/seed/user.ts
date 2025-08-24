@@ -1,3 +1,4 @@
+import { generateHash } from '#app/crypto/hash.js';
 import type { PrismaClient } from '#app/prisma/client/index.js';
 import { Role } from '../../src/constants/role.ts';
 import { faker } from './faker-context.ts';
@@ -21,8 +22,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         zip: '32084',
         phone: '123-456-7890',
         roleId: Role.Admin,
-        password: 'admin',
-        // password: Bun.password.hashSync('admin'),
+        password: generateHash('admin'),
+        isActive: true,
       },
     });
 
@@ -39,8 +40,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
         roleId: Role.User,
-        password: faker.internet.password(),
-        // password: generateHash(faker.internet.password()),
+        password: generateHash(faker.internet.password()),
+        isActive: faker.datatype.boolean(0.8),
       },
     });
 
@@ -58,8 +59,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
         roleId: Role.Sales,
-        password: faker.internet.password(),
-        // password: Bun.password.hashSync(faker.internet.password()),
+        password: generateHash(faker.internet.password()),
+        isActive: faker.datatype.boolean(0.8),
       },
     });
 
@@ -77,8 +78,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
         roleId: Role.Accounting,
-        password: faker.internet.password(),
-        // password: Bun.password.hashSync(faker.internet.password()),
+        password: generateHash(faker.internet.password()),
+        isActive: faker.datatype.boolean(0.8),
       },
     });
 

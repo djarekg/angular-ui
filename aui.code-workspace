@@ -106,6 +106,9 @@
       "**/.tanstack": true,
       "**/prisma/generated": true
     },
+    "cSpell.words": [
+      "Camo"
+    ],
   },
   "extensions": {
     "recommendations": [

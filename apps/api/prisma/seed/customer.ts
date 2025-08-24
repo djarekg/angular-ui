@@ -18,6 +18,7 @@ export const createCustomers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
+        isActive: faker.datatype.boolean(0.8),
       },
     });
 
