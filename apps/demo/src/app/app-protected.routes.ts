@@ -12,6 +12,11 @@ export default [
     loadChildren: () => import('@/features/users/routes'),
   },
   {
+    path: 'customers',
+    title: 'Customers',
+    loadComponent: () => import('@/features/customers/customers.container'),
+  },
+  {
     path: 'settings',
     title: 'Settings',
     loadComponent: () => import('@/features/settings/settings.container'),

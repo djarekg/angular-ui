@@ -1,18 +1,28 @@
 <header>
   <div class="app-header-nav">
-    <ng-content />
     <nav>
-      <ul>
-        <li>
-          <a routerLink="/">
-            <img class="angular-logo"
-                 width="64px"
-                 height="64px"
-                 src="/assets/images/angular-logo.svg"
-                 alt="Angular" />
-          </a>
-        </li>
-      </ul>
+      <a routerLink="/">
+        <img class="angular-logo"
+             width="64px"
+             height="64px"
+             src="/assets/images/angular-logo.svg"
+             alt="Angular" />
+      </a>
+      <a matButton
+         routerLink="/users"
+         routerLinkActive="app-link-active">
+        Users
+      </a>
+      <a matButton
+         routerLink="/customers"
+         routerLinkActive="app-link-active">
+        Customers
+      </a>
+      <a matButton
+         routerLink="/products"
+         routerLinkActive="app-link-active">
+        Products
+      </a>
     </nav>
   </div>
 
