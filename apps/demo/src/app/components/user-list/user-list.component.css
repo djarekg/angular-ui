@@ -45,18 +45,10 @@ header {
   font-size: 1.1rem;
 }
 
-.active,
 .inactive {
-  font: var(--mat-sys-label-large);
+  font: var(--mat-sys-label-medium);
   text-transform: uppercase;
-}
-
-.active {
-  color: blue;
-}
-
-.inactive {
-  color: red;
+  color: var(--mat-sys-error);
 }
 
 .role {

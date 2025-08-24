@@ -1,11 +1,17 @@
 @use "@angular/material" as mat;
+@use "./theme-colors" as app-theme;
 
 html {
   color-scheme: light dark;
   @include mat.theme(
     (
       color: (
-        primary: mat.$azure-palette,
+        primary: app-theme.$primary-palette,
+        // secondary: app-theme.$secondary-palette,
+        tertiary: app-theme.$tertiary-palette,
+        // neutral: app-theme.$neutral-palette,
+        // neutralVariant: app-theme.$neutral-variant-palette,
+        // error: app-theme.$error-palette,
         theme-type: dark
       ),
       typography: Roboto,

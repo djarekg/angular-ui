@@ -20,9 +20,7 @@
       <mat-card-subtitle>
         <div class="role">{{ user.role.name }}</div>
       </mat-card-subtitle>
-      <span class="active-label"
-            [class.active]="user.isActive"
-            [class.inactive]="!user.isActive">{{ user.isActive ? 'active' : 'in-active' }}</span>
+      <span [class.inactive]="!user.isActive">{{ user.isActive ? '' : 'in-active' }}</span>
     </mat-card-header>
     <svg xmlns="http://www.w3.org/2000/svg"
          viewBox="0 0 8 8"
