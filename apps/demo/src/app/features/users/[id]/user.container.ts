@@ -3,6 +3,7 @@ import { UserService } from '@/core/auth/user.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
+import { User } from '@aui/api';
 
 @Component({
   selector: 'app-user',
@@ -18,4 +19,9 @@ export default class UserContainer {
   protected readonly userResource = resource({
     loader: () => this.#userService.getUser(this.#route.snapshot.paramMap.get('id')!),
   });
+
+  protected async onSave(user: User) {
+    await this.#userService.updateUser(user);
+    this.userResource.reload();
+  }
 }

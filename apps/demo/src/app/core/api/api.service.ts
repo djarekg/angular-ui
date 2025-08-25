@@ -17,4 +17,37 @@ export class ApiService {
 
     return promise;
   }
+
+  post<V, R = unknown>(url: string, value: V) {
+    const { promise, resolve, reject } = Promise.withResolvers<R>();
+
+    this.#http.post<R>(url, value).subscribe({
+      next: data => resolve(data),
+      error: err => reject(err),
+    });
+
+    return promise;
+  }
+
+  put<V, R = unknown>(url: string, value: V) {
+    const { promise, resolve, reject } = Promise.withResolvers<R>();
+
+    this.#http.put<R>(url, value).subscribe({
+      next: data => resolve(data),
+      error: err => reject(err),
+    });
+
+    return promise;
+  }
+
+  delete<T>(url: string) {
+    const { promise, resolve, reject } = Promise.withResolvers<T>();
+
+    this.#http.delete<T>(url).subscribe({
+      next: data => resolve(data),
+      error: err => reject(err),
+    });
+
+    return promise;
+  }
 }

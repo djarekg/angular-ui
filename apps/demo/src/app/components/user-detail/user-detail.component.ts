@@ -90,7 +90,10 @@ export class UserDetailComponent {
   }
 
   protected onSave() {
-    this.save.emit(this.form.value as User);
+    this.save.emit({
+      ...(this.form.value as User),
+      id: this.user()?.id!,
+    });
     this.isEditing.set(false);
   }
 }

@@ -1,5 +1,6 @@
 @if (userResource.hasValue()) {
-<app-user-detail [user]="userResource.value()" />
+<app-user-detail [user]="userResource.value()"
+                 (save)="onSave($event)" />
 }
 @else {
 <mat-spinner strokeWidth="2" />
