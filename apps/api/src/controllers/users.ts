@@ -12,10 +12,10 @@ export const getUsers = async (ctx: Context) => {
 };
 
 export const getUser = async (ctx: Context) => {
-  const { params: { username } } = ctx;
+  const { params: { id } } = ctx;
   const user = await prisma.user.findFirst({
     where: {
-      email: username,
+      id,
     },
     include: {
       role: true,

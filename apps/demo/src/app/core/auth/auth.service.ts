@@ -1,3 +1,4 @@
+import { ApiService } from '@/core/api/api.service.js';
 import { UserService } from '@/core/auth/user.service.js';
 import { AUTH_TOKEN_CACHE_KEY, AUTH_USER_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
 import { injectIsServer } from '@/core/utils/is-server.js';
@@ -11,6 +12,7 @@ import { AuthStatus } from './auth-status.js';
   providedIn: 'root',
 })
 export class AuthService {
+  readonly #api = inject(ApiService);
   readonly #http = inject(HttpClient);
   readonly #isServer = injectIsServer();
   readonly #router = inject(Router);
@@ -22,6 +24,8 @@ export class AuthService {
   readonly isAuthenticating = computed(() => this.#status() === 'idle');
   readonly user = this.#user.asReadonly();
   readonly username = computed(() => this.#user()?.email || '');
+
+  getUser = (username: string) => this.#api.get<User>(`/auth/users/${username}`);
 
   /**
    * Refresh the user authentication status.
@@ -39,7 +43,7 @@ export class AuthService {
     }
 
     const { username = '' } = JSON.parse(tokenRaw) as CachedToken;
-    const user = await this.#userService.getUser(username);
+    const user = await this.getUser(username);
 
     this.#user.set(user);
     this.#status.set(!!user ? 'authenticated' : 'unauthenticated');

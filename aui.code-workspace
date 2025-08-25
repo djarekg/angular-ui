@@ -107,7 +107,8 @@
       "**/prisma/generated": true
     },
     "cSpell.words": [
-      "Camo"
+      "Camo",
+      "labelledby"
     ],
   },
   "extensions": {

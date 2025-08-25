@@ -54,7 +54,7 @@ header {
 .role {
   font-size: 0.9rem;
   text-transform: uppercase;
-  color: var(--app-color-primary);
+  color: var(--app-color-secondary);
 }
 
 .avatar {

@@ -1,18 +1,21 @@
 import { UserDetailComponent } from '@/components/user-detail/user-detail.component.js';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { UserService } from '@/core/auth/user.service.js';
+import { ChangeDetectionStrategy, Component, inject, resource } from '@angular/core';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
-  imports: [UserDetailComponent],
+  imports: [UserDetailComponent, MatProgressSpinnerModule],
   templateUrl: './user.container.html',
   styleUrl: './user.container.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class UserContainer {
-  protected readonly userId = signal<string | null>(null);
+  readonly #route = inject(ActivatedRoute);
+  readonly #userService = inject(UserService);
 
-  constructor(route: ActivatedRoute) {
-    route.paramMap.subscribe(params => this.userId.set(params.get('id')));
-  }
+  protected readonly userResource = resource({
+    loader: () => this.#userService.getUser(this.#route.snapshot.paramMap.get('id')!),
+  });
 }

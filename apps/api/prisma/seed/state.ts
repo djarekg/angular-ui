@@ -67,7 +67,7 @@ export const createStates = async (prisma: PrismaClient) => {
     });
 
   console.log('Adding states...');
-  Array.from({ length: 50 }).forEach(async () => await createState());
+  await createState();
 
   console.groupEnd();
 };

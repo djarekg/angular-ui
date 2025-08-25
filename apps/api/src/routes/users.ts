@@ -4,6 +4,6 @@ import Router from '@koa/router';
 const router = new Router();
 
 router.get('/users', getUsers);
-router.get('/users/:username', getUser);
+router.get('/users/:id', getUser);
 
 export default router;

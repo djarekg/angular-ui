@@ -4,6 +4,17 @@ import { compareHash } from '#app/crypto/hash.js';
 import jwt from 'jsonwebtoken';
 import type { Context } from 'koa';
 
+export const getUser = async (ctx: Context) => {
+  const { params: { username } } = ctx;
+  const user = await prisma.user.findFirst({
+    where: {
+      email: username,
+    },
+  });
+
+  ctx.body = user;
+};
+
 export const signin = async (ctx: Context) => {
   const { username, password } = (ctx.request as any).body;
   const user = await prisma.user.findFirst({

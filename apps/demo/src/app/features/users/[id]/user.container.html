@@ -1,1 +1,6 @@
-<app-user-detail [userId]="userId()" />
+@if (userResource.hasValue()) {
+<app-user-detail [user]="userResource.value()" />
+}
+@else {
+<mat-spinner strokeWidth="2" />
+}
