@@ -1,7 +1,7 @@
-@if (userResource.hasValue()) {
+@defer (when userResource.hasValue()) {
 <app-user-detail [user]="userResource.value()"
                  (save)="onSave($event)" />
 }
-@else {
-<mat-spinner strokeWidth="4" />
+@loading (minimum 2s) {
+<mat-spinner strokeWidth="7" />
 }

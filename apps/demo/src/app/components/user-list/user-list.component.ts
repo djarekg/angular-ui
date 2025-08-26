@@ -4,6 +4,10 @@ import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { User } from '@aui/api';
 
+type SelectedableUser = {
+  selected: boolean;
+} & User;
+
 @Component({
   selector: 'app-user-list',
   imports: [CardSkeletonComponent, MatCardModule],
@@ -13,9 +17,9 @@ import { User } from '@aui/api';
 })
 export class UserListComponent {
   readonly #router = inject(Router);
-  readonly users = input.required<User[]>();
+  readonly users = input.required<SelectedableUser[]>();
 
-  protected onCardClick(event: MouseEvent, id: string) {
+  protected onCardClick(_event: MouseEvent, id: string) {
     this.#router.navigate([`/users/${id}`]);
   }
 }
