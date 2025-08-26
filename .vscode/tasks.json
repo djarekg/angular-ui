@@ -25,6 +25,28 @@
       }
     },
     {
+      "label": "pnpm run start (no hmr)",
+      "type": "shell",
+      "command": "pnpm run start:no-hmr",
+      "options": {
+        "cwd": "${workspaceFolder}/apps/demo"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "typescript",
+        "pattern": "$tsc",
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": {
+            "regexp": "(.*?)"
+          },
+          "endsPattern": {
+            "regexp": "bundle generation complete"
+          }
+        }
+      }
+    },
+    {
       "label": "pnpm run build",
       "type": "shell",
       "command": "pnpm run test",

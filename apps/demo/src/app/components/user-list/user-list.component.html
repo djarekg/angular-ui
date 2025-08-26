@@ -1,6 +1,6 @@
 <section class="card-container">
   @for (user of users(); track user.id) {
-  @defer (on viewport) {
+  @defer {
   <mat-card class="app-card"
             (click)="onCardClick($event, user.id)">
     <mat-card-header class="app-card-header">
@@ -19,8 +19,11 @@
          height="164" />
   </mat-card>
   }
-  @placeholder (minimum 1s) {
-  <div class=".app-card"></div>
+  @loading (minimum 3s) {
+  <app-card-skeleton />
+  }
+  @placeholder {
+  <div class="app-card placeholder"></div>
   }
   }
 </section>

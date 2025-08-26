@@ -8,11 +8,13 @@
 }
 
 .app-card {
-  will-change: transform;
+  &:not(.placeholder) {
+    will-change: transform;
 
-  &:hover {
-    transform: scale(1.05);
-    transition: transform 150ms ease-in;
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 150ms ease-in;
+    }
   }
 }
 

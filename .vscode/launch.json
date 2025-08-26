@@ -24,6 +24,15 @@
       "cwd": "${workspaceFolder}/apps/demo"
     },
     {
+      "name": "ng serve (no hmr)",
+      "type": "chrome",
+      "request": "launch",
+      "preLaunchTask": "pnpm run start (no hmr)",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}/apps/demo",
+      "cwd": "${workspaceFolder}/apps/demo"
+    },
+    {
       "name": "ng test",
       "type": "chrome",
       "request": "launch",
@@ -39,6 +48,19 @@
       "configurations": [
         "launch api",
         "ng serve",
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "1",
+        "order": 1
+      }
+    },
+    {
+      "name": "debug app (no hmr)",
+      "configurations": [
+        "launch api",
+        "ng serve (no hmr)",
       ],
       "stopAll": true,
       "presentation": {
