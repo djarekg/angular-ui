@@ -1,52 +1,47 @@
-import { ApiService } from '@/core/api/api.service.js';
-import { UserService } from '@/core/auth/user.service.js';
-import { AUTH_TOKEN_CACHE_KEY, AUTH_USER_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
-import { injectIsServer } from '@/core/utils/is-server.js';
+import { AUTH_TOKEN_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import type { User } from '@aui/api';
+import { SsrCookieService } from 'ngx-cookie-service-ssr';
 import { AuthStatus } from './auth-status.js';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  readonly #api = inject(ApiService);
   readonly #http = inject(HttpClient);
-  readonly #isServer = injectIsServer();
+  readonly #cookieService = inject(SsrCookieService);
   readonly #router = inject(Router);
   readonly #status = signal<AuthStatus>('idle');
-  readonly #user = signal<User | undefined | null>(undefined);
-  readonly #userService = inject(UserService);
 
   readonly isAuthenticated = computed(() => this.#status() === 'authenticated');
   readonly isAuthenticating = computed(() => this.#status() === 'idle');
-  readonly user = this.#user.asReadonly();
-  readonly username = computed(() => this.#user()?.email || '');
 
-  getUser = (username: string) => this.#api.get<User>(`/auth/users/${username}`);
+  get #tokenCache() {
+    const tokenRaw = this.#cookieService.get(AUTH_TOKEN_CACHE_KEY);
+    return JSON.parse(tokenRaw) as CachedToken;
+  }
+
+  get userId() {
+    return this.#tokenCache.userId;
+  }
+
+  get username() {
+    return this.#tokenCache.username;
+  }
 
   /**
    * Refresh the user authentication status.
-   *
-   * @returns {Promise<void>} - A promise that resolves when the user is authenticated.
    */
   async refresh() {
-    if (this.#isServer) return;
+    const tokenRaw = this.#cookieService.get(AUTH_TOKEN_CACHE_KEY);
 
-    const tokenRaw = sessionStorage.getItem(AUTH_TOKEN_CACHE_KEY);
-    if (!tokenRaw) {
-      this.#user.set(null);
-      this.#status.set('unauthenticated');
-      return;
+    if (tokenRaw) {
+      this.#status.set('authenticated');
     }
-
-    const { username = '' } = JSON.parse(tokenRaw) as CachedToken;
-    const user = await this.getUser(username);
-
-    this.#user.set(user);
-    this.#status.set(!!user ? 'authenticated' : 'unauthenticated');
+    else {
+      this.#status.set('unauthenticated');
+    }
   }
 
   /**
@@ -58,6 +53,9 @@ export class AuthService {
     this.refresh().then(() => this.#router.navigate(urlSegments));
   }
 
+  /**
+   * Verify user credentials and store auth token.
+   */
   signin(username: string, password: string) {
     const { promise, resolve, reject } = Promise.withResolvers<boolean>();
 
@@ -69,7 +67,10 @@ export class AuthService {
     }).subscribe({
       next: ({ token, userId }) => {
         if (token) {
-          sessionStorage.setItem(AUTH_TOKEN_CACHE_KEY, JSON.stringify({ token, userId, username }));
+          this.#cookieService.set(
+            AUTH_TOKEN_CACHE_KEY,
+            JSON.stringify({ token, userId, username }),
+          );
           this.#status.set('authenticated');
           this.authenticate();
           resolve(true);
@@ -81,7 +82,7 @@ export class AuthService {
       },
       error: err => {
         console.error('Failed to signin', err);
-        resolve(false);
+        reject(false);
       },
     });
 
@@ -92,15 +93,8 @@ export class AuthService {
    * Signout the user and redirect to the home page.
    */
   signout() {
-    this.#user.set(null);
+    this.#cookieService.deleteAll();
     this.#status.set('unauthenticated');
-
-    // reset cache
-    if (!this.#isServer) {
-      sessionStorage.removeItem(AUTH_TOKEN_CACHE_KEY);
-      sessionStorage.removeItem(AUTH_USER_CACHE_KEY);
-    }
-
     this.#router.navigate(['/']);
   }
 }

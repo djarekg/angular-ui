@@ -10,7 +10,7 @@ export class ApiService {
   get<T>(url: string) {
     const { promise, resolve, reject } = Promise.withResolvers<T>();
 
-    this.#http.get<T>(url).subscribe({
+    this.#http.get<T>(url, { cache: 'default' }).subscribe({
       next: data => resolve(data),
       error: err => reject(err),
     });
