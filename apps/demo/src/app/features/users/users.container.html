@@ -1,1 +1,16 @@
-<app-user-list />
+<header>
+  <mat-button-toggle-group name="usersActive"
+                           aria-label="Users Active"
+                           [(ngModel)]="usersActiveFilter">
+    <mat-button-toggle value="all"
+                       checked>All</mat-button-toggle>
+    <mat-button-toggle value="true">Active</mat-button-toggle>
+    <mat-button-toggle value="false">In-active</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <button matButton="outlined">
+    New User
+  </button>
+</header>
+
+<app-user-list [users]="users()" />

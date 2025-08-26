@@ -1,5 +1,5 @@
 @import "./styles/variables.css";
-@import "./styles/defaults.css";
+@import "./styles/layout.css";
 @import "./styles/theme.scss";
 
 html,
@@ -15,8 +15,18 @@ body {
   color: var(--mat-sys-on-surface);
 }
 
-.app-link-active {
-  &.mdc-button {
-    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--app-color-primary);
   }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }

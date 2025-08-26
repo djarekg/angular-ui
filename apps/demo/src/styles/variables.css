@@ -7,6 +7,12 @@
       var(--app-color-primary) 0%,
       var(--app-color-secondary) 100%);
 
+  --app-color-success: #14a37f;
+  --app-color-on-success: #2d3038;
+  --app-color-info: #2979ff;
+  --app-color-warning: #ffa726;
+  --app-color-error: var(--mat-sys-error);
+
   --app-header-height: 100px;
   --app-height: calc(100% - var(--app-header-height));
   --app-unprotected-header-height: 180px;

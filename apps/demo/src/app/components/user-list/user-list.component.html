@@ -1,14 +1,3 @@
-<header>
-  <mat-button-toggle-group name="usersActive"
-                           aria-label="Users Active"
-                           [(ngModel)]="usersActiveFilter">
-    <mat-button-toggle value="all"
-                       checked>All</mat-button-toggle>
-    <mat-button-toggle value="true">Active</mat-button-toggle>
-    <mat-button-toggle value="false">In-active</mat-button-toggle>
-  </mat-button-toggle-group>
-</header>
-
 <section class="card-container">
   @for (user of users(); track user.id) {
   <mat-card class="app-card"

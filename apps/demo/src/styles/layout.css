@@ -1,0 +1,30 @@
+button {
+  &:hover {
+    .mat-icon {
+      color: var(--app-color-primary);
+    }
+  }
+}
+
+.app-link-active {
+  &.mdc-button {
+    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
+  }
+}
+
+.app-snackbar-success {
+  --mat-snack-bar-container-color: var(--app-color-success);
+  --mat-snack-bar-button-color: var(--app-color-on-success);
+}
+
+.app-snackbar-info {
+  background: var(--app-color-info);
+}
+
+.app-snackbar-warning {
+  background: var(--app-color-warning);
+}
+
+.app-snackbar-error {
+  background: var(--app-color-error);
+}
