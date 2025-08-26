@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, viewChildren } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { User } from '@aui/api';
@@ -13,8 +13,9 @@ import { User } from '@aui/api';
 export class UserListComponent {
   readonly #router = inject(Router);
   readonly users = input.required<User[]>();
+  readonly cards = viewChildren('.mat-card');
 
-  protected onCardClick(id: string) {
+  protected onCardClick(event: MouseEvent, id: string) {
     this.#router.navigate([`/users/${id}`]);
   }
 }

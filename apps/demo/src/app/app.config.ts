@@ -13,7 +13,7 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideClientHydration, withIncrementalHydration } from '@angular/platform-browser';
 import {
   createUrlTreeFromSnapshot,
   PreloadAllModules,
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
-    provideAnimationsAsync(),
+    provideClientHydration(withIncrementalHydration()),
     provideHttpClient(
       withFetch(),
       withInterceptors([apiInterceptor, authInterceptor]),
