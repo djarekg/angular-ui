@@ -108,7 +108,9 @@
     },
     "cSpell.words": [
       "Camo",
-      "labelledby"
+      "labelledby",
+      "lmdb",
+      "msgpackr"
     ],
   },
   "extensions": {
