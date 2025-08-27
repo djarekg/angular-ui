@@ -2,7 +2,6 @@
   @for (user of users(); track user.id) {
   @defer {
   <mat-card class="app-card"
-            [class.selected]="user.selected"
             (click)="onCardClick($event, user.id)">
     <mat-card-header class="app-card-header">
       <mat-card-title>

@@ -1,7 +1,8 @@
 @defer (when userResource.hasValue()) {
-<app-user-detail [user]="userResource.value()"
+<app-user-detail [mode]="mode()"
+                 [user]="userResource.value()"
                  (save)="onSave($event)" />
 }
 @loading (minimum 2s) {
-<mat-spinner strokeWidth="7" />
+<mat-spinner strokeWidth="6" />
 }

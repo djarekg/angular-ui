@@ -1,11 +1,16 @@
 <form [formGroup]="form">
   <header>
-    <span class="user-id">ID: {{ user()?.id }}</span>
+    <span class="user-id">
+      @if (!isNew()) {
+      ID: {{ user()?.id }}
+      }
+    </span>
     <mat-checkbox formControlName="isActive"
                   labelPosition="before">Active</mat-checkbox>
   </header>
 
-  <section>
+  <h4>Contact</h4>
+  <section class="name">
     <mat-form-field>
       <mat-label>First name</mat-label>
       <input matInput
@@ -28,6 +33,9 @@
       </mat-error>
       }
     </mat-form-field>
+  </section>
+
+  <section class="contact">
     <mat-form-field>
       <mat-label>Email</mat-label>
       <input matInput
@@ -52,7 +60,8 @@
     </mat-form-field>
   </section>
 
-  <section>
+  <h4>Address</h4>
+  <section class="address">
     <mat-form-field>
       <mat-label>Street address</mat-label>
       <input matInput
@@ -64,46 +73,49 @@
       </mat-error>
       }
     </mat-form-field>
+  </section>
+
+  <section class="address2">
     <mat-form-field>
       <mat-label>Street address2</mat-label>
       <input matInput
              formControlName="streetAddress2"
              autocomplete="streetAddress2" />
     </mat-form-field>
+  </section>
 
-    <section class="city-state-zip">
-      <mat-form-field class="city">
-        <mat-label>City</mat-label>
-        <input matInput
-               formControlName="city"
-               autocomplete="city" />
-        @if (form.get('city')?.hasError('required')) {
-        <mat-error>
-          City is required
-        </mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field class="state">
-        <mat-label>State</mat-label>
-        <app-state-select formControlName="stateId" />
-        @if (form.get('stateId')?.hasError('required')) {
-        <mat-error>
-          State is required
-        </mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field class="zip">
-        <mat-label>Zip</mat-label>
-        <input matInput
-               formControlName="zip"
-               autocomplete="zip" />
-        @if (form.get('zip')?.hasError('required')) {
-        <mat-error>
-          Zip is required
-        </mat-error>
-        }
-      </mat-form-field>
-    </section>
+  <section class="location">
+    <mat-form-field class="city">
+      <mat-label>City</mat-label>
+      <input matInput
+             formControlName="city"
+             autocomplete="city" />
+      @if (form.get('city')?.hasError('required')) {
+      <mat-error>
+        City is required
+      </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="state">
+      <mat-label>State</mat-label>
+      <app-state-select formControlName="stateId" />
+      @if (form.get('stateId')?.hasError('required')) {
+      <mat-error>
+        State is required
+      </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="zip">
+      <mat-label>Zip</mat-label>
+      <input matInput
+             formControlName="zip"
+             autocomplete="zip" />
+      @if (form.get('zip')?.hasError('required')) {
+      <mat-error>
+        Zip is required
+      </mat-error>
+      }
+    </mat-form-field>
   </section>
 
   <footer>

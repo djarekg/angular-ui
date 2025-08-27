@@ -1,5 +1,6 @@
 import { UserListComponent } from '@/components/user-list/user-list.component.js';
 import { UserService } from '@/core/auth/user.service.js';
+import { FormMode } from '@/core/constants/form-mode.js';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -49,6 +50,8 @@ export default class UsersContainer {
   });
 
   protected onNewUserClick() {
-    this.#router.navigate(['/users/0?mode=new']);
+    this.#router.navigate(['/users', 0], {
+      queryParams: { mode: FormMode.new },
+    });
   }
 }

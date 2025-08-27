@@ -1,5 +1,15 @@
 import { StateSelectComponent } from '@/components/state-select/state-select.component.js';
-import { ChangeDetectionStrategy, Component, effect, input, output, signal } from '@angular/core';
+import { FormMode } from '@/core/constants/form-mode.js';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+  linkedSignal,
+  output,
+  signal,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -38,10 +48,12 @@ type UserForm = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetailComponent {
+  readonly mode = input<FormMode>();
   readonly user = input.required<User | undefined>();
   readonly save = output<User>();
 
-  protected readonly isEditing = signal(false);
+  protected readonly isEditing = linkedSignal(() => this.mode() !== FormMode.view);
+  protected readonly isNew = computed(() => this.mode() === FormMode.new);
   protected readonly isSubmitting = signal(false);
 
   protected form = new FormGroup<UserForm>({
@@ -85,7 +97,7 @@ export class UserDetailComponent {
   }
 
   protected onCancel() {
-    this.form.reset(this.user());
+    this.form.reset(this.user() || {});
     this.isEditing.set(false);
   }
 
