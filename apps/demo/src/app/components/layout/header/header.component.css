@@ -1,6 +1,8 @@
 :host {
+  --_right-offset: 16px;
+
   position: fixed;
-  inset-inline: 0 15px;
+  inset-inline: 0 var(--_right-offset);
   z-index: 2;
 }
 
@@ -11,7 +13,7 @@ header {
   align-items: center;
   grid-template-rows: 100%;
   height: var(--app-header-height);
-  padding-inline: 2rem;
+  padding-inline: 32px var(--_right-offset);
   background: color-mix(in srgb, var(--mat-sys-surface) 80%, transparent);
   backdrop-filter: blur(4px);
 
