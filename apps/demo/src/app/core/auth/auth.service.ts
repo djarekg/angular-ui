@@ -1,3 +1,4 @@
+import { ApiService } from '@/core/api/api.service.js';
 import { AUTH_TOKEN_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
@@ -9,6 +10,7 @@ import { AuthStatus } from './auth-status.js';
   providedIn: 'root',
 })
 export class AuthService {
+  readonly #api = inject(ApiService);
   readonly #http = inject(HttpClient);
   readonly #cookieService = inject(SsrCookieService);
   readonly #router = inject(Router);
@@ -92,9 +94,15 @@ export class AuthService {
   /**
    * Signout the user and redirect to the home page.
    */
-  signout() {
-    this.#cookieService.deleteAll();
-    this.#status.set('unauthenticated');
-    this.#router.navigate(['/']);
+  async signout() {
+    const { success = false } = await this.#api.post<unknown, { success: boolean; }>(
+      '/auth/signout',
+    );
+
+    if (success) {
+      this.#cookieService.deleteAll();
+      this.#status.set('unauthenticated');
+      this.#router.navigate(['/unprotected/signin']);
+    }
   }
 }

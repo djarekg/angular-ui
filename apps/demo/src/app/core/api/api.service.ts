@@ -22,7 +22,7 @@ export class ApiService {
     return promise;
   }
 
-  post<V, R = unknown>(url: string, value: V) {
+  post<V, R = unknown>(url: string, value?: V) {
     const { promise, resolve, reject } = Promise.withResolvers<R>();
 
     this.#http.post<R>(url, value).subscribe({

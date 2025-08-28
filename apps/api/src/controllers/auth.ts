@@ -53,8 +53,10 @@ export const signin = async (ctx: Context) => {
   ctx.status = 401; // UNAUTHORIZED
 };
 
-export const signout = () => {
+export const signout = (ctx: Context) => {
   jwt.sign({}, accessTokenSecret!, {
     expiresIn: '1s', // Expire the token immediately
   });
+
+  ctx.body = { success: true };
 };
