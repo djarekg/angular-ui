@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
+type HttpOptions = {
+  cache: RequestCache;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   readonly #http = inject(HttpClient);
 
-  get<T>(url: string) {
+  get<T>(url: string, options?: HttpOptions) {
     const { promise, resolve, reject } = Promise.withResolvers<T>();
 
-    this.#http.get<T>(url, { cache: 'default' }).subscribe({
+    this.#http.get<T>(url, options).subscribe({
       next: data => resolve(data),
       error: err => reject(err),
     });

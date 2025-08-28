@@ -1,11 +1,10 @@
-import { generateHash } from '#app/crypto/hash.js';
-import type { PrismaClient } from '#app/prisma/client/index.js';
-import { Role } from '../../src/constants/role.ts';
+import type { PrismaClient } from '#app/generated/prisma/client.js';
+import { Gender } from '#app/generated/prisma/enums.js';
 import { faker } from './faker-context.ts';
 import { useState } from './state.ts';
 
 export const createUsers = async (prisma: PrismaClient) => {
-  console.group('Seeding users');
+  console.log('Seeding User...');
 
   const { randomStateId } = await useState(prisma);
 
@@ -15,14 +14,13 @@ export const createUsers = async (prisma: PrismaClient) => {
         id: faker.string.uuid(),
         firstName: 'Admin',
         lastName: 'User',
+        gender: Gender.MALE,
         email: 'admin@fu.com',
         streetAddress: '123 Admin St',
         city: 'St. Augustine',
         stateId: randomStateId(),
         zip: '32084',
         phone: '123-456-7890',
-        roleId: Role.Admin,
-        password: generateHash('admin'),
         isActive: true,
       },
     });
@@ -33,14 +31,13 @@ export const createUsers = async (prisma: PrismaClient) => {
         id: faker.string.uuid(),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
+        gender: faker.helpers.enumValue(Gender),
         email: faker.internet.email(),
         streetAddress: faker.location.streetAddress(),
         city: faker.location.city(),
         stateId: randomStateId(),
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
-        roleId: Role.User,
-        password: generateHash(faker.internet.password()),
         isActive: faker.datatype.boolean(0.8),
       },
     });
@@ -51,6 +48,7 @@ export const createUsers = async (prisma: PrismaClient) => {
         id: faker.string.uuid(),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
+        gender: faker.helpers.enumValue(Gender),
         email: faker.internet.email(),
         streetAddress: faker.location.streetAddress(),
         streetAddress2: faker.location.secondaryAddress(),
@@ -58,8 +56,6 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
-        roleId: Role.Sales,
-        password: generateHash(faker.internet.password()),
         isActive: faker.datatype.boolean(0.8),
       },
     });
@@ -70,6 +66,7 @@ export const createUsers = async (prisma: PrismaClient) => {
         id: faker.string.uuid(),
         firstName: faker.person.firstName(),
         lastName: faker.person.lastName(),
+        gender: faker.helpers.enumValue(Gender),
         email: faker.internet.email(),
         streetAddress: faker.location.streetAddress(),
         streetAddress2: faker.location.secondaryAddress(),
@@ -77,23 +74,13 @@ export const createUsers = async (prisma: PrismaClient) => {
         stateId: randomStateId(),
         zip: faker.location.zipCode(),
         phone: faker.phone.number(),
-        roleId: Role.Accounting,
-        password: generateHash(faker.internet.password()),
         isActive: faker.datatype.boolean(0.8),
       },
     });
 
-  console.log('Adding admin user...');
   await createAdminUser();
 
-  console.log('Adding user users...');
   Array.from({ length: 10 }).forEach(async () => await createUser());
-
-  console.log('Adding sales users...');
   Array.from({ length: 10 }).forEach(async () => await createSalesUser());
-
-  console.log('Adding accounting users...');
   Array.from({ length: 5 }).forEach(async () => await createAccountingUser());
-
-  console.groupEnd();
 };

@@ -49,9 +49,17 @@ export default class UsersContainer {
     return [];
   });
 
+  protected onSelect(id: string) {
+    this.#navigateToUser(id, FormMode.view);
+  }
+
   protected onNewUserClick() {
-    this.#router.navigate(['/users', 0], {
-      queryParams: { mode: FormMode.new },
+    this.#navigateToUser(0, FormMode.new);
+  }
+
+  #navigateToUser(id: string | number, mode: FormMode) {
+    this.#router.navigate(['/users', id], {
+      queryParams: { mode },
     });
   }
 }

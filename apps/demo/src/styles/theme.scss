@@ -20,4 +20,5 @@ html {
   );
 
   @include mat.form-field-density(-3);
+  @include mat.button-toggle-density(-3);
 }

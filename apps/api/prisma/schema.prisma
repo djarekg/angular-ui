@@ -10,9 +10,50 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
+  provider        = "prisma-client"
   previewFeatures = ["views"]
-  output          = "generated/prisma/client"
+  output          = "../src/generated/prisma"
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  PERFERNOTTOSAY
+}
+
+enum Role {
+  ADMIN
+  USER
+  SALES
+  ACCOUNTING
+}
+
+enum Size {
+  XSMALL
+  SMALL
+  MEDIUM
+  LARGE
+  XLARGE
+  XXLARGE
+  XXXLARGE
+  ONESIZE
+}
+
+enum Color {
+  BLACK
+  BLUE
+  BROWN
+  CAMO
+  CYAN
+  GRAY
+  GREEN
+  MAGENTA
+  ORANGE
+  PINK
+  PURPLE
+  RED
+  WHITE
+  YELLOW
 }
 
 model State {
@@ -24,38 +65,32 @@ model State {
   customerContact CustomerContact[]
 }
 
-model Role {
-  id    String @id
-  name  String
-  users User[]
-}
-
 model User {
-  id             String         @id @default(uuid())
+  id             String          @id @default(uuid())
   firstName      String
   lastName       String
-  email          String         @unique
+  gender         Gender
+  email          String          @unique
   streetAddress  String
   streetAddress2 String?
   city           String
   stateId        String
   zip            String
   phone          String
-  password       String
-  roleId         String
-  isActive       Boolean        @default(false)
-  dateCreated    DateTime       @default(now())
-  role           Role           @relation(fields: [roleId], references: [id])
-  state          State          @relation(fields: [stateId], references: [id])
-  productSales   ProductSales[]
+  isActive       Boolean         @default(false)
+  dateCreated    DateTime        @default(now())
+  state          State           @relation(fields: [stateId], references: [id])
+  productSales   ProductSale[]
+  userCredential UserCredential?
 }
 
-// enum Role {
-//   ADMIN
-//   USER
-//   SALES
-//   ACCOUNTING
-// }
+model UserCredential {
+  id       String @id @default(uuid())
+  userId   String @unique
+  password String
+  role     Role
+  User     User   @relation(fields: [userId], references: [id])
+}
 
 model Customer {
   id              String            @id @default(uuid())
@@ -71,7 +106,7 @@ model Customer {
   dateUpdated     DateTime          @updatedAt
   CustomerContact CustomerContact[]
   state           State             @relation(fields: [stateId], references: [id])
-  productSales    ProductSales[]
+  productSales    ProductSale[]
 }
 
 model CustomerContact {
@@ -91,14 +126,6 @@ model CustomerContact {
   dateUpdated    DateTime @updatedAt
   customer       Customer @relation(fields: [customerId], references: [id])
   state          State    @relation(fields: [stateId], references: [id])
-}
-
-model Color {
-  id           String         @id @default(uuid())
-  name         String
-  dateCreated  DateTime       @default(now())
-  dateUpdated  DateTime       @updatedAt
-  productColor ProductColor[]
 }
 
 model ProductType {
@@ -121,31 +148,30 @@ model Product {
   dateUpdated      DateTime           @updatedAt
   productType      ProductType?       @relation(fields: [productTypeId], references: [id])
   productInventory ProductInventory[]
-  productSales     ProductSales[]
+  productSales     ProductSale[]
   ProductColor     ProductColor[]
 }
 
 model ProductColor {
   id          String   @id @default(uuid())
   productId   String
-  colorId     String
+  color       Color
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
   product     Product  @relation(fields: [productId], references: [id])
-  color       Color    @relation(fields: [colorId], references: [id])
 }
 
 model ProductInventory {
   id          String   @id @default(uuid())
   productId   String
-  size        String
+  size        Size
   quantity    Int
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
   product     Product  @relation(fields: [productId], references: [id])
 }
 
-model ProductSales {
+model ProductSale {
   id          String   @id @default(uuid())
   productId   String
   customerId  String

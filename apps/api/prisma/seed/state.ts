@@ -1,8 +1,8 @@
-import type { PrismaClient } from '#app/prisma/client/index.js';
+import type { PrismaClient } from '#app/generated/prisma/client.js';
 import { faker } from './faker-context.ts';
 
 export const createStates = async (prisma: PrismaClient) => {
-  console.group('Seeding states');
+  console.log('Seeding State...');
 
   const states = [
     { name: 'Alabama', code: 'AL' },
@@ -66,14 +66,11 @@ export const createStates = async (prisma: PrismaClient) => {
       })),
     });
 
-  console.log('Adding states...');
   await createState();
-
-  console.groupEnd();
 };
 
 export const useState = async (prisma: PrismaClient) => {
-  const states = await prisma.state.findMany({
+  const states: { id: string; }[] = await prisma.state.findMany({
     select: {
       id: true,
     },

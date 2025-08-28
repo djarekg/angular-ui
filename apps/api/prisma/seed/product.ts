@@ -1,10 +1,9 @@
-import { Gender } from '#app/constants/gender.js';
 import { ProductType } from '#app/constants/product-type.js';
-import { PrismaClient } from '#app/prisma/client/index.js';
+import { Gender, PrismaClient } from '#app/generated/prisma/client.js';
 import { faker } from '@faker-js/faker';
 
 export const createProducts = async (prisma: PrismaClient) => {
-  console.group('Seeding products');
+  console.log('Seeding Product...');
 
   const createDressProduct = (gender: Gender) =>
     prisma.product.create({
@@ -149,40 +148,17 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  for (const [key, value] of Object.entries(Gender)) {
-    console.log(`Adding ${key} dressses...`);
+  for (const [_, value] of Object.entries(Gender)) {
     Array.from({ length: 5 }).map(async () => await createDressProduct(value));
-
-    console.log(`Adding ${key} hats...`);
     Array.from({ length: 5 }).map(async () => await createCamoHatProduct(value));
-
-    console.log(`Adding ${key} hoodies...`);
     Array.from({ length: 7 }).map(async () => await createHoodieProduct(value));
-
-    console.log(`Adding ${key} jackets...`);
     Array.from({ length: 4 }).map(async () => await createJacketProduct(value));
-
-    console.log(`Adding ${key} pants...`);
     Array.from({ length: 3 }).map(async () => await createPantsProduct(value));
-
-    console.log(`Adding ${key} shirts...`);
     Array.from({ length: 5 }).map(async () => await createShirtProduct(value));
-
-    console.log(`Adding ${key} shoes...`);
     Array.from({ length: 6 }).map(async () => await createShoesProduct(value));
-
-    console.log(`Adding ${key} shorts...`);
     Array.from({ length: 3 }).map(async () => await createShortsProduct(value));
-
-    console.log(`Adding ${key} socks...`);
     Array.from({ length: 33 }).map(async () => await createSocksProduct(value));
-
-    console.log(`Adding ${key} sweaters...`);
     Array.from({ length: 7 }).map(async () => await createSweaterProduct(value));
-
-    console.log(`Adding ${key} underwear...`);
     Array.from({ length: 5 }).map(async () => await createUnderwearProduct(value));
   }
-
-  console.groupEnd();
 };

@@ -16,7 +16,7 @@ build
 
 # Prisma
 *.db
-**/prisma/generated
+generated
 
 # Angular
 .angular

@@ -1,9 +1,9 @@
-import type { PrismaClient } from '#app/prisma/client/index.js';
+import type { PrismaClient } from '#app/generated/prisma/client.js';
 import { faker } from './faker-context.ts';
 import { useState } from './state.ts';
 
 export const createCustomers = async (prisma: PrismaClient) => {
-  console.group('Seeding customers');
+  console.log('Seeding Customer...');
 
   const { randomStateId } = await useState(prisma);
 
@@ -22,8 +22,5 @@ export const createCustomers = async (prisma: PrismaClient) => {
       },
     });
 
-  console.log('Adding customers...');
   Array.from({ length: 120 }).forEach(async () => await createCustomer());
-
-  console.groupEnd();
 };

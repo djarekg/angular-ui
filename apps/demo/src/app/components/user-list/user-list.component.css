@@ -33,7 +33,7 @@
   color: var(--mat-sys-error);
 }
 
-.role {
+.gender {
   font-size: 0.9rem;
   text-transform: uppercase;
   color: var(--app-color-secondary);

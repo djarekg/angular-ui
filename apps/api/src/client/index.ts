@@ -1,4 +1,4 @@
-import { PrismaClient } from '#app/prisma/client/index.js';
+import { PrismaClient } from '#app/generated/prisma/client.js';
 
 /**
  * This is a HMR workaround since the module
@@ -7,7 +7,7 @@ import { PrismaClient } from '#app/prisma/client/index.js';
  *
  * @see {@link https://www.prisma.io/docs/guides/performance-and-optimization/connection-management#prevent-hot-reloading-from-creating-new-instances-of-prismaclient | PrismaClient in long-running applications}
  */
-const globalForPrisma = global as unknown as { prisma: PrismaClient };
+const globalForPrisma = global as unknown as { prisma: PrismaClient; };
 
 /**
  * `PrismaClient` singleton.

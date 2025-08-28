@@ -1,23 +1,21 @@
-import { PrismaClient } from '#app/prisma/client/index.js';
-import { createColors } from '#app/prisma/seed/color.js';
+import { PrismaClient } from '#app/generated/prisma/client.js';
 import { createProductColors } from '#app/prisma/seed/product-color.js';
 import { createProductInventories } from '#app/prisma/seed/product-inventory.js';
 import { createProductSales } from '#app/prisma/seed/product-sale.js';
 import { createProductTypes } from '#app/prisma/seed/product-type.js';
 import { createProducts } from '#app/prisma/seed/product.js';
-import { createRoles } from '#app/prisma/seed/role.js';
+import { createUserCredential } from '#app/prisma/seed/user-credential.js';
 import { createCustomerContacts } from './customer-contact.js';
 import { createCustomers } from './customer.js';
-import { createStates } from './state.js';
+import { createStates } from './state.ts';
 import { createUsers } from './user.js';
 
 const prisma = new PrismaClient();
 
 const load = async () => {
-  await createColors(prisma);
   await createStates(prisma);
-  await createRoles(prisma);
   await createUsers(prisma);
+  await createUserCredential(prisma);
   await createCustomers(prisma);
   await createCustomerContacts(prisma);
   await createProductTypes(prisma);

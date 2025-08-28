@@ -12,10 +12,7 @@ form {
   width: 70%;
 
   >h4 {
-    color: var(--mat-sys-on-surface);
-    /* color: var(--mat-sys-on-surface-variant); */
-    /* color: var(--mat-sys-on-primary-container); */
-    /* color: var(--mat-sys-primary); */
+    color: var(--app-color-text-dim);
     margin-block-start: 0.5rem;
   }
 
@@ -29,32 +26,51 @@ form {
 @container form-container (width < 700px) {
   form {
     width: 100%;
+    gap: 0.9rem;
+
+    h4 {
+      margin: 0;
+    }
+
+    .name,
+    .contact,
+    .address,
+    .address2,
+    .location {
+      .mat-mdc-form-field {
+        width: 100%;
+      }
+    }
   }
 
   section {
     flex-direction: column;
     gap: 0;
   }
+
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-block-end: 2rem; */
 }
 
 footer {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
+
 }
 
+.new-user {
+  margin-inline-end: auto;
+}
 
 .user-id {
   font: var(--mat-sys-label-large);
   font-style: italic;
-  color: var(--mat-sys-outline);
+  color: var(--app-color-text-dim);
 }
 
 .name {

@@ -18,12 +18,16 @@ export const getUser = async (ctx: Context) => {
 export const signin = async (ctx: Context) => {
   const { username, password } = (ctx.request as any).body;
   const user = await prisma.user.findFirst({
-    where: {
-      email: username,
-    },
     select: {
       id: true,
-      password: true,
+      userCredential: {
+        select: {
+          password: true,
+        },
+      },
+    },
+    where: {
+      email: username,
     },
   });
 
@@ -33,7 +37,7 @@ export const signin = async (ctx: Context) => {
   }
 
   // Validate password against stored hash
-  const hashPassword = user.password;
+  const hashPassword = user.userCredential!.password;
   const isValid = compareHash(password, hashPassword);
 
   if (isValid) {

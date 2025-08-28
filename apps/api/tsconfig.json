@@ -9,6 +9,7 @@
     "rewriteRelativeImportExtensions": true,
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true,
+    "allowImportingTsExtensions": false,
     "baseUrl": "src",
     "rootDir": ".",
     "types": [
@@ -22,7 +23,7 @@
         "./constants/*"
       ],
       "#app/prisma/client/*": [
-        "../prisma/generated/prisma/client/*"
+        "./generated/prisma/client/*"
       ],
       "#app/prisma/seed/*": [
         "../prisma/seed/*"

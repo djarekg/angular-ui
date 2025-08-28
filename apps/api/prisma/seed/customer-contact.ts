@@ -1,9 +1,9 @@
-import type { PrismaClient } from '#app/prisma/client/index.js';
+import type { PrismaClient } from '#app/generated/prisma/client.js';
 import { faker } from './faker-context.ts';
 import { useState } from './state.ts';
 
 export const createCustomerContacts = async (prisma: PrismaClient) => {
-  console.group('Seeding customer contacts');
+  console.log('Seeding CustomerContact...');
 
   const customers = await prisma.customer.findMany({
     select: {
@@ -41,9 +41,6 @@ export const createCustomerContacts = async (prisma: PrismaClient) => {
         },
       });
 
-    console.log('Adding customer contacts for customerId:', customerId);
     Array.from({ length: 10 }).forEach(async () => await createCustomerContact());
   }
-
-  console.groupEnd();
 };

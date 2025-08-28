@@ -1,18 +1,15 @@
-import type { Role, User as UserInternal } from '#app/prisma/client/index.js';
-
-export type User = {
-  role: Role;
-} & UserInternal;
-
-export { Role } from '#app/constants/role.js';
 export type {
   Color,
   Customer,
   CustomerContact,
+  Gender,
   Product,
   ProductColor,
   ProductInventory,
-  ProductSales,
+  ProductSale,
   ProductType,
+  Role,
+  Size,
   State,
-} from '#app/prisma/client/index.js';
+  User,
+} from '#app/generated/prisma/client.js';

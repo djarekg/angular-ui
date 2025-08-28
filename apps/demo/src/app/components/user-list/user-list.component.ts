@@ -1,5 +1,5 @@
 import { CardSkeletonComponent } from '@/components/skeletons/card-skeleton/card-skeleton.component.js';
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
 import { User } from '@aui/api';
@@ -14,8 +14,9 @@ import { User } from '@aui/api';
 export class UserListComponent {
   readonly #router = inject(Router);
   readonly users = input.required<User[]>();
+  readonly select = output<string>();
 
   protected onCardClick(_event: MouseEvent, id: string) {
-    this.#router.navigate(['/users', id]);
+    this.select.emit(id);
   }
 }

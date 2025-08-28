@@ -1,14 +1,9 @@
 import { prisma } from '#app/client/index.js';
-import type { User } from '#app/prisma/client/index.js';
+import type { User } from '#app/generated/prisma/client.js';
 import type { Context } from 'koa';
 
 export const getUsers = async (ctx: Context) => {
-  const users = await prisma.user.findMany({
-    include: {
-      role: true,
-    },
-  });
-
+  const users = await prisma.user.findMany();
   ctx.body = users;
 };
 
@@ -18,9 +13,6 @@ export const getUser = async (ctx: Context) => {
     where: {
       id,
     },
-    include: {
-      role: true,
-    },
   });
 
   ctx.body = user;
@@ -28,19 +20,40 @@ export const getUser = async (ctx: Context) => {
 
 export const updateUser = async (ctx: Context) => {
   const { params: { id }, request } = ctx;
+  const data = (request as any).body as User;
 
   try {
     const user = await prisma.user.update({
       where: {
         id,
       },
-      data: (request as any).body as User,
+      data,
     });
 
     ctx.body = user;
   }
   catch (err) {
     console.error(`Failed to update user id: ${id}`, err);
+    ctx.status = 500;
+  }
+};
+
+export const createUser = async (ctx: Context) => {
+  const { request } = ctx;
+  const data = (request as any).body as User;
+
+  try {
+    const { id } = await prisma.user.create({
+      select: {
+        id: true,
+      },
+      data,
+    });
+
+    ctx.body = { id };
+  }
+  catch (err) {
+    console.error(`Failed to create user`, err);
     ctx.status = 500;
   }
 };

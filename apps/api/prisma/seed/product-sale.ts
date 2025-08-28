@@ -1,12 +1,17 @@
-import { Role } from '#app/constants/role.js';
-import { PrismaClient } from '#app/prisma/client/index.js';
+import { type PrismaClient, Role } from '#app/generated/prisma/client.js';
 
 export const createProductSales = async (prisma: PrismaClient) => {
-  console.group('Seeding product sales...');
+  console.log('Seeding ProductSale...');
 
   const createProductSales = async () => {
     const customerIds = (await prisma.customer.findMany()).map(({ id }) => id);
-    const salesUserIds = (await prisma.user.findMany({ where: { roleId: Role.Sales } })).map(
+    const salesUserIds = (await prisma.user.findMany({
+      where: {
+        userCredential: {
+          role: Role.SALES,
+        },
+      },
+    })).map(
       ({ id }) => id,
     );
     const products = await prisma.product.findMany({
@@ -22,7 +27,7 @@ export const createProductSales = async (prisma: PrismaClient) => {
       const userId = salesUserIds[Math.floor(Math.random() * salesUserIds.length)];
       const quantity = Math.floor(Math.random() * 10) + 1;
 
-      await prisma.productSales.create({
+      await prisma.productSale.create({
         data: {
           productId,
           customerId,
@@ -31,15 +36,8 @@ export const createProductSales = async (prisma: PrismaClient) => {
           price,
         },
       });
-
-      console.log(
-        `Created product sale: productId: ${productId}, customerId: ${customerId}, userId: ${userId}, quantity: ${quantity}`,
-      );
     }
   };
 
-  console.log('Adding product sales...');
   await createProductSales();
-
-  console.groupEnd();
 };

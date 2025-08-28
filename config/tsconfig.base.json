@@ -3,14 +3,18 @@
     "outDir": "${configDir}/dist",
     "tsBuildInfoFile": "${configDir}/dist/.tsbuildinfo",
     // "disableSourceOfProjectReferenceRedirect": true,
-
     // Enable latest features
     "target": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": false,
     "downlevelIteration": true,
-    "types": ["vite/client"],
-
+    "types": [
+      "vite/client"
+    ],
     // Bundler mode
     "module": "ESNext",
     "moduleDetection": "force",
@@ -25,7 +29,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-
     // Best practices
     "strict": true,
     "skipLibCheck": true,
@@ -36,8 +39,7 @@
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "alwaysStrict": true,
-    "allowImportingTsExtensions": true,
-
+    "allowImportingTsExtensions": false,
     // Some stricter flags (disabled by default)
     "noImplicitAny": true,
     "noUnusedLocals": true,

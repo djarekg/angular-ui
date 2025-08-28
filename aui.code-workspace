@@ -108,9 +108,13 @@
     },
     "cSpell.words": [
       "Camo",
+      "dotenv",
       "labelledby",
       "lmdb",
-      "msgpackr"
+      "msgpackr",
+      "XLARGE",
+      "XSMALL",
+      "XXLARGE"
     ],
   },
   "extensions": {

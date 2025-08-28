@@ -1,9 +1,8 @@
 import { ProductType } from '#app/constants/product-type.js';
-import { Size } from '#app/constants/size.js';
-import { PrismaClient } from '#app/prisma/client/index.js';
+import { type PrismaClient, Size } from '#app/generated/prisma/client.js';
 
 export const createProductInventories = async (prisma: PrismaClient) => {
-  console.log('Seeding inventories...');
+  console.log('Seeding ProductInventory...');
 
   const idCache: Record<ProductType, string> = {} as Record<ProductType, string>;
   const getProductId = async (type: ProductType) => {
@@ -18,114 +17,111 @@ export const createProductInventories = async (prisma: PrismaClient) => {
       data: [
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.XSmall,
+          size: Size.XSMALL,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 8,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 2,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.Large,
+          size: Size.LARGE,
           quantity: 13,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.XLarge,
+          size: Size.XLARGE,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.XXLarge,
+          size: Size.XXLARGE,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.XXXLarge,
+          size: Size.XXXLARGE,
           quantity: 4,
         },
         {
           productId: await getProductId(ProductType.Dress),
-          size: Size.XSmall,
+          size: Size.XSMALL,
           quantity: 44,
         },
         {
           productId: await getProductId(ProductType.Hat),
-          size: Size.Onesize,
+          size: Size.ONESIZE,
           quantity: 33,
         },
         {
           productId: await getProductId(ProductType.Hoodie),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Jacket),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Pants),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Shirt),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 2,
         },
         {
           productId: await getProductId(ProductType.Shorts),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Shorts),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 9,
         },
         {
           productId: await getProductId(ProductType.Shorts),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 10,
         },
         {
           productId: await getProductId(ProductType.Shorts),
-          size: Size.Large,
+          size: Size.LARGE,
           quantity: 3,
         },
         {
           productId: await getProductId(ProductType.Socks),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 76,
         },
         {
           productId: await getProductId(ProductType.Sweater),
-          size: Size.Small,
+          size: Size.SMALL,
           quantity: 4,
         },
         {
           productId: await getProductId(ProductType.Sweater),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 4,
         },
         {
           productId: await getProductId(ProductType.Underwear),
-          size: Size.Medium,
+          size: Size.MEDIUM,
           quantity: 50,
         },
       ],
     });
 
-  console.log('Adding inventories...');
   await createInventories();
-
-  console.groupEnd();
 };

@@ -1,17 +1,17 @@
 :root {
   --app-color-primary: #2b7fff;
   --app-color-secondary: #7f22fe;
-  /* --app-color-primary: var(--mat-sys-on-primary-container);
-  --app-color-secondary: var(--mat-sys-on-secondary-container); */
   --app-color-gradient-brand: linear-gradient(90deg,
       var(--app-color-primary) 0%,
       var(--app-color-secondary) 100%);
 
-  --app-color-success: #1cd5a6;
-  --app-color-on-success: #2d3038;
+  --app-color-success: #26a69a;
+  --app-color-on-success: var(--mat-sys-on-surface);
   --app-color-info: #2979ff;
   --app-color-warning: #ffa726;
   --app-color-error: var(--mat-sys-error);
+  --app-color-text: #8b90a0;
+  --app-color-text-dim: var(--mat-sys-outline);
 
   --app-header-height: 100px;
   --app-height: calc(100% - var(--app-header-height));

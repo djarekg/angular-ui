@@ -5,8 +5,13 @@
       ID: {{ user()?.id }}
       }
     </span>
-    <mat-checkbox formControlName="isActive"
-                  labelPosition="before">Active</mat-checkbox>
+    <mat-button-toggle-group aria-label="Is actvie"
+                             value="{{ user()?.isActive }}"
+                             [disabled]="!isEditing()"
+                             (change)="onIsActiveToggleChange($event.value)">
+      <mat-button-toggle value="true">Active</mat-button-toggle>
+      <mat-button-toggle value="false">Inactive</mat-button-toggle>
+    </mat-button-toggle-group>
   </header>
 
   <h4>Contact</h4>
@@ -32,6 +37,14 @@
         Last name is required
       </mat-error>
       }
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender">
+        <mat-option value="MALE">Male</mat-option>
+        <mat-option value="FEMALE">Female</mat-option>
+        <mat-option value="PREFERNOTTOSAY">Prefer not to say</mat-option>
+      </mat-select>
     </mat-form-field>
   </section>
 
@@ -119,6 +132,13 @@
   </section>
 
   <footer>
+    <button class="new-user"
+            matButton="filled"
+            color="primary"
+            [hidden]="isEditing()"
+            (click)="onNew()">
+      New User
+    </button>
     <button matButton="outlined"
             color="primary"
             [hidden]="isEditing()"

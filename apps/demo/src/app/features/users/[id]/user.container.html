@@ -1,6 +1,9 @@
 @defer (when userResource.hasValue()) {
 <app-user-detail [mode]="mode()"
                  [user]="userResource.value()"
+                 (new)="onNew()"
+                 (edit)="onEdit()"
+                 (cancel)="onCancel()"
                  (save)="onSave($event)" />
 }
 @loading (minimum 2s) {

@@ -15,6 +15,7 @@ button {
 .app-snackbar-success {
   --mat-snack-bar-container-color: var(--app-color-success);
   --mat-snack-bar-button-color: var(--app-color-on-success);
+  --mat-snack-bar-supporting-text-color: var(--app-color-on-success);
 }
 
 .app-snackbar-info {

@@ -8,7 +8,7 @@
         <span class="fullname">{{ user.firstName}} {{ user.lastName }}</span>
       </mat-card-title>
       <mat-card-subtitle>
-        <div class="role">{{ user.role.name }}</div>
+        <div class="gender">{{ user.gender }}</div>
       </mat-card-subtitle>
       <span [class.inactive]="!user.isActive">{{ user.isActive ? '' : 'in-active' }}</span>
     </mat-card-header>
@@ -19,7 +19,7 @@
          height="164" />
   </mat-card>
   }
-  @loading (minimum 2s) {
+  @loading (minimum 1s) {
   <app-card-skeleton />
   }
   @placeholder {

@@ -1,8 +1,8 @@
 import { ProductType } from '#app/constants/product-type.js';
-import { PrismaClient } from '#app/prisma/client/index.js';
+import { Color, type PrismaClient } from '#app/generated/prisma/client.js';
 
 export const createProductColors = async (prisma: PrismaClient) => {
-  console.group('Seeding product colors...');
+  console.log('Seeding ProductColor...');
 
   const createProductColors = async () =>
     prisma.productColor.createMany({
@@ -11,73 +11,70 @@ export const createProductColors = async (prisma: PrismaClient) => {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Dress },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Black' } }))!.id,
+          color: Color.BLACK,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Hat },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Green' } }))!.id,
+          color: Color.GREEN,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Hoodie },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Blue' } }))!.id,
+          color: Color.BLUE,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Jacket },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Pink' } }))!.id,
+          color: Color.PINK,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Pants },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Blue' } }))!.id,
+          color: Color.BLUE,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Shirt },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Red' } }))!.id,
+          color: Color.RED,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Shoes },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'White' } }))!.id,
+          color: Color.WHITE,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Shorts },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Yellow' } }))!.id,
+          color: Color.YELLOW,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Socks },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'White' } }))!.id,
+          color: Color.WHITE,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Sweater },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Black' } }))!.id,
+          color: Color.BLACK,
         },
         {
           productId: (await prisma.product.findFirst({
             where: { productTypeId: ProductType.Underwear },
           }))!.id,
-          colorId: (await prisma.color.findFirst({ where: { name: 'Orange' } }))!.id,
+          color: Color.ORANGE,
         },
       ],
     });
 
-  console.log('Adding dress product colors...');
   await createProductColors();
-
-  console.groupEnd();
 };
