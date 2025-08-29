@@ -12,9 +12,8 @@
       </mat-card-subtitle>
       <span [class.inactive]="!user.isActive">{{ user.isActive ? '' : 'in-active' }}</span>
     </mat-card-header>
-    <img loading="lazy"
-         alt="Avatar"
-         src="/assets/images/avatar.svg"
+    <img priority
+         ngSrc="/assets/images/avatar.svg"
          width="164"
          height="164" />
   </mat-card>
