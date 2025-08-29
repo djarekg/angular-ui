@@ -4,6 +4,9 @@ import { Color, type PrismaClient } from '#app/generated/prisma/client.js';
 export const createProductColors = async (prisma: PrismaClient) => {
   console.log('Seeding ProductColor...');
 
+  // A wait is need for previous seeding to complete
+  await new Promise(resolve => setTimeout(() => resolve(true)));
+
   const createProductColors = async () =>
     prisma.productColor.createMany({
       data: [

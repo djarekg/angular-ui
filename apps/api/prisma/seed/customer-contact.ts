@@ -5,6 +5,9 @@ import { useState } from './state.ts';
 export const createCustomerContacts = async (prisma: PrismaClient) => {
   console.log('Seeding CustomerContact...');
 
+  // A wait is need for previous seeding to complete
+  await new Promise(resolve => setTimeout(() => resolve(true)));
+
   const customers = await prisma.customer.findMany({
     select: {
       id: true,

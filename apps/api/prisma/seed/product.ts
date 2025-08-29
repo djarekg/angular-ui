@@ -5,8 +5,8 @@ import { faker } from '@faker-js/faker';
 export const createProducts = async (prisma: PrismaClient) => {
   console.log('Seeding Product...');
 
-  const createDressProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createDressProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Dress`,
@@ -18,8 +18,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createCamoHatProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createCamoHatProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Hat`,
@@ -31,8 +31,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createHoodieProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createHoodieProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Hoodie`,
@@ -44,8 +44,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createJacketProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createJacketProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Jacket`,
@@ -57,8 +57,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createPantsProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createPantsProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} ${faker.word.interjection()} Pants`,
@@ -70,8 +70,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createShirtProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createShirtProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Shirt`,
@@ -83,8 +83,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createShoesProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createShoesProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Shoes`,
@@ -96,8 +96,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createShortsProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createShortsProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Shorts`,
@@ -109,8 +109,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createSocksProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createSocksProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Socks`,
@@ -122,8 +122,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createSweaterProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createSweaterProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Sweater`,
@@ -135,8 +135,8 @@ export const createProducts = async (prisma: PrismaClient) => {
       },
     });
 
-  const createUnderwearProduct = (gender: Gender) =>
-    prisma.product.create({
+  const createUnderwearProduct = async (gender: Gender) =>
+    await prisma.product.create({
       data: {
         id: faker.string.uuid(),
         name: `${faker.commerce.productAdjective()} Underwear`,
@@ -149,16 +149,16 @@ export const createProducts = async (prisma: PrismaClient) => {
     });
 
   for (const [_, value] of Object.entries(Gender)) {
-    Array.from({ length: 5 }).map(async () => await createDressProduct(value));
-    Array.from({ length: 5 }).map(async () => await createCamoHatProduct(value));
-    Array.from({ length: 7 }).map(async () => await createHoodieProduct(value));
-    Array.from({ length: 4 }).map(async () => await createJacketProduct(value));
-    Array.from({ length: 3 }).map(async () => await createPantsProduct(value));
-    Array.from({ length: 5 }).map(async () => await createShirtProduct(value));
-    Array.from({ length: 6 }).map(async () => await createShoesProduct(value));
-    Array.from({ length: 3 }).map(async () => await createShortsProduct(value));
-    Array.from({ length: 33 }).map(async () => await createSocksProduct(value));
-    Array.from({ length: 7 }).map(async () => await createSweaterProduct(value));
-    Array.from({ length: 5 }).map(async () => await createUnderwearProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createDressProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createCamoHatProduct(value));
+    Array.from({ length: 7 }).forEach(async () => await createHoodieProduct(value));
+    Array.from({ length: 4 }).forEach(async () => await createJacketProduct(value));
+    Array.from({ length: 3 }).forEach(async () => await createPantsProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createShirtProduct(value));
+    Array.from({ length: 6 }).forEach(async () => await createShoesProduct(value));
+    Array.from({ length: 3 }).forEach(async () => await createShortsProduct(value));
+    Array.from({ length: 33 }).forEach(async () => await createSocksProduct(value));
+    Array.from({ length: 7 }).forEach(async () => await createSweaterProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createUnderwearProduct(value));
   }
 };

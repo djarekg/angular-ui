@@ -22,10 +22,10 @@
       "#app/constants/*": [
         "./constants/*"
       ],
-      "#app/prisma/client/*": [
+      "#app/generated/prisma/client/*": [
         "./generated/prisma/client/*"
       ],
-      "#app/prisma/seed/*": [
+      "#prisma/seed/*": [
         "../prisma/seed/*"
       ]
     }
@@ -37,7 +37,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "prisma/generated"
   ],
   "ts-node": {
     "experimentalSpecifierResolution": "node",

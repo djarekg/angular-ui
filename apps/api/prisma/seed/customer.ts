@@ -7,8 +7,8 @@ export const createCustomers = async (prisma: PrismaClient) => {
 
   const { randomStateId } = await useState(prisma);
 
-  const createCustomer = () =>
-    prisma.customer.create({
+  const createCustomer = async () =>
+    await prisma.customer.create({
       data: {
         id: faker.string.uuid(),
         name: faker.company.name(),

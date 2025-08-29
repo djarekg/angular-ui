@@ -1,5 +1,6 @@
 import { PrismaClient } from '#app/generated/prisma/client.js';
-
+import { PrismaPg } from '@prisma/adapter-pg';
+// import { PrismaClient } from '@prisma/client';
 /**
  * This is a HMR workaround since the module
  * responsible for exporting PrismaClient gets refreshed, which can result
@@ -9,10 +10,22 @@ import { PrismaClient } from '#app/generated/prisma/client.js';
  */
 const globalForPrisma = global as unknown as { prisma: PrismaClient; };
 
+type getPrismaProps = {
+  connectionString: string;
+};
+
+const getPrisma = ({ connectionString }: getPrismaProps): PrismaClient => {
+  if (globalForPrisma.prisma) return globalForPrisma.prisma;
+
+  const adapter = new PrismaPg({ connectionString });
+  const prisma = new PrismaClient({ adapter });
+  return prisma;
+};
+
 /**
  * `PrismaClient` singleton.
  */
-export const prisma = globalForPrisma.prisma || new PrismaClient();
+export const prisma = getPrisma({ connectionString: `${process.env.DATABASE_URL}` });
 
 if (process.env['NODE_ENV'] !== 'production') {
   globalForPrisma.prisma = prisma;
