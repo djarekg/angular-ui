@@ -22,13 +22,12 @@ export const routerProviders = provideRouter(
     {
       path: '',
       canActivate: [authGuard],
-      loadComponent: () => import('@/features/layout/protected-layout/protected-layout.container'),
+      loadComponent: () => import('@/features/layout/protected-layout/protected-layout'),
       loadChildren: () => import('@/app-protected.routes'),
     },
     {
       path: 'unprotected',
-      loadComponent: () =>
-        import('@/features/layout/unprotected-layout/unprotected-layout.container'),
+      loadComponent: () => import('@/features/layout/unprotected-layout/unprotected-layout'),
       loadChildren: () => import('@/app-unprotected.routes'),
     },
   ],

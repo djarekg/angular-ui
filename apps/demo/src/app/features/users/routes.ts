@@ -3,10 +3,10 @@ import { Routes } from '@angular/router';
 export default [
   {
     path: '',
-    loadComponent: () => import('./users.container'),
+    loadComponent: () => import('./users'),
   },
   {
     path: ':id',
-    loadComponent: () => import('./[id]/user.container'),
+    loadComponent: () => import('./[id]/user'),
   },
 ] satisfies Routes;

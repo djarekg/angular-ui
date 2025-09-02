@@ -1,8 +1,8 @@
-import { RelativeLinkPipe } from './relative-link-pipe';
+import { RelativeLink } from './relative-link-pipe';
 
 describe('RelativeLinkPipe', () => {
   it('create an instance', () => {
-    const pipe = new RelativeLinkPipe();
+    const pipe = new RelativeLink();
     expect(pipe).toBeTruthy();
   });
 });

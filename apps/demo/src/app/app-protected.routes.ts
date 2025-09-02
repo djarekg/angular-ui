@@ -9,7 +9,7 @@ export default [
   {
     path: '',
     title: 'Home',
-    loadComponent: () => import('@/features/home/home.container'),
+    loadComponent: () => import('@/features/home/home'),
   },
   {
     path: 'users',
@@ -19,11 +19,11 @@ export default [
   {
     path: 'customers',
     title: 'Customers',
-    loadComponent: () => import('@/features/customers/customers.container'),
+    loadComponent: () => import('@/features/customers/customers'),
   },
   {
     path: 'settings',
     title: 'Settings',
-    loadComponent: () => import('@/features/settings/settings.container'),
+    loadComponent: () => import('@/features/settings/settings'),
   },
 ] satisfies Routes;

@@ -1,8 +1,8 @@
-import { ClickOutsideDirective } from './click-outside.directive';
+import { ClickOutside } from './click-outside.directive';
 
 describe('ClickOutsideDirective', () => {
   it('should create an instance', () => {
-    const directive = new ClickOutsideDirective();
+    const directive = new ClickOutside();
     expect(directive).toBeTruthy();
   });
 });

@@ -4,6 +4,6 @@ export default [
   {
     path: 'signin',
     title: 'Welcome to Angular UI',
-    loadComponent: () => import('@/features/auth/signin/signin.component'),
+    loadComponent: () => import('@/features/auth/signin/signin'),
   },
 ] satisfies Routes;

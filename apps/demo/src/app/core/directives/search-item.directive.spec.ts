@@ -1,8 +1,8 @@
-import { SearchItemDirective } from './search-item.directive';
+import { SearchItem } from './search-item.directive';
 
 describe('SearchItemDirective', () => {
   it('should create an instance', () => {
-    const directive = new SearchItemDirective();
+    const directive = new SearchItem();
     expect(directive).toBeTruthy();
   });
 });
