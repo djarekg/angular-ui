@@ -1,5 +1,5 @@
 import { prisma } from '#app/client/index.js';
-import { SearchResultTypes } from '#app/constants/search-result-type.ts';
+import { SearchResultTypes } from '#app/constants/search-result-type.js';
 import type { SearchResultParams } from '#app/types/search-result-params.js';
 import type { SearchResult } from '#app/types/search-result.js';
 import { randomUUID } from 'crypto';
