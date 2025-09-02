@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+}
+
+.app-text-field-input {
+  width: 100%;
+  background: transparent;
+  height: 24px;
+  font-size: 1.125rem;
+  outline: none;
+  border: none;
+
+  &::placeholder {
+    color: var(--app-color-text-input-placeholder);
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+}
+
+.app-text-field-reset {
+  all: unset;
+  padding: 1px 6px;
+  cursor: pointer;
+}

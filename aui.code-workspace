@@ -108,10 +108,15 @@
     },
     "cSpell.words": [
       "Camo",
+      "coor",
+      "Coor",
+      "customerid",
       "dotenv",
       "labelledby",
       "lmdb",
       "msgpackr",
+      "tsquery",
+      "tsvector",
       "XLARGE",
       "XSMALL",
       "XXLARGE"

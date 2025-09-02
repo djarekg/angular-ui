@@ -12,7 +12,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client"
-  previewFeatures = ["queryCompiler", "driverAdapters"]
+  previewFeatures = ["queryCompiler", "driverAdapters", "fullTextSearchPostgres"]
   output          = "../src/generated/prisma"
 }
 

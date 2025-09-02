@@ -1,3 +1,4 @@
+export type { SearchResultType } from '#app/constants/index.js';
 export type {
   Color,
   Customer,
@@ -13,3 +14,4 @@ export type {
   State,
   User,
 } from '#app/generated/prisma/client.js';
+export type { SearchResult, SearchResultParams } from '#app/types/index.js';

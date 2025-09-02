@@ -1,17 +1,20 @@
+@use "sass:map";
 @use "@angular/material" as mat;
 @use "./theme-colors" as app-theme;
 
 html {
+  $app-color-text: map.get(app-theme.$primary-palette, neutral-variant, 80);
+  --app-color-text: #{$app-color-text};
+
+  $app-color-text-input-placeholder: map.get(app-theme.$primary-palette, neutral-variant, 60);
+  --app-color-text-input-placeholder: #{$app-color-text-input-placeholder};
+
   color-scheme: light dark;
   @include mat.theme(
     (
       color: (
         primary: app-theme.$primary-palette,
-        // secondary: app-theme.$secondary-palette,
         tertiary: app-theme.$tertiary-palette,
-        // neutral: app-theme.$neutral-palette,
-        // neutralVariant: app-theme.$neutral-variant-palette,
-        // error: app-theme.$error-palette,
         theme-type: dark
       ),
       typography: Roboto,

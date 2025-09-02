@@ -3,8 +3,8 @@
   "compilerOptions": {
     "noEmit": true,
     "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "rewriteRelativeImportExtensions": true,
     "verbatimModuleSyntax": true,

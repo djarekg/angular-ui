@@ -8,12 +8,17 @@
 </app-header> -->
 
 <mat-sidenav-container>
-  <mat-sidenav mode="over"
+  <!-- <mat-sidenav mode="over"
                [opened]="isSidenavOpen"
                (openedChange)="sidenavOpen.set($event)">
     <app-sidenav />
-  </mat-sidenav>
+  </mat-sidenav> -->
   <mat-sidenav-content>
+    @defer (when isBrowser) {
+    @defer (when displaySearchDialog(); prefetch on idle) {
+    <app-command-palette (close)="displaySearchDialog.set(false)" />
+    }
+    }
     <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>

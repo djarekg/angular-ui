@@ -45,7 +45,7 @@ export class StateSelectComponent
 {
   static nextId = 0;
   readonly #stateService = inject(StateService);
-  readonly stateIdSelect = viewChild.required<HTMLInputElement>('stateId');
+  readonly stateIdSelect = viewChild.required<ElementRef<HTMLInputElement>>('stateId');
   ngControl = inject(NgControl, { optional: true, self: true });
   readonly parts = new FormGroup({
     stateId: new FormControl<ValueType>(null),
@@ -181,7 +181,7 @@ export class StateSelectComponent
   }
 
   onContainerClick() {
-    this.#focusMonitor.focusVia(this.stateIdSelect(), 'program');
+    this.#focusMonitor.focusVia(this.stateIdSelect().nativeElement, 'program');
   }
 
   writeValue(value: ValueType): void {
