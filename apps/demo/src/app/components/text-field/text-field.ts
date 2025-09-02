@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   afterNextRender,
   ChangeDetectionStrategy,
@@ -14,7 +14,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 
 @Component({
   selector: 'app-text-field',
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   templateUrl: './text-field.html',
   styleUrl: './text-field.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

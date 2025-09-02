@@ -1,6 +1,6 @@
 import { AuthService } from '@/core/auth/auth.service.js';
 import { isNullOrEmpty } from '@/core/utils/string.js';
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,12 +12,11 @@ const ERROR_MSG_SIGNIN_FAILED = 'Failed to login with username and password';
 @Component({
   selector: 'app-signin',
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
-  ],
+    MatButtonModule
+],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
