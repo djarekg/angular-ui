@@ -1,6 +1,7 @@
 import { LOCAL_STORAGE } from '@/core/providers/local-storage.js';
 import { SearchResultItem } from '@/core/types/search-result-item.js';
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { SearchResultType } from '@aui/api';
 
 // Add version postfix to the key in case (if ever) the data model changes in the future.
 export const SEARCH_HISTORY_LS_KEY = 'app-search-history-v1';
@@ -11,6 +12,7 @@ export const MAX_RECENT_HISTORY_SIZE = 10;
 export type HistoryItem = {
   id: string;
   itemId: string;
+  type: SearchResultType;
   labelHtml: string;
   url: string;
   isFavorite: boolean;
@@ -44,6 +46,7 @@ export class SearchHistory {
       map.set(item.id, {
         id: item.id,
         itemId: item.itemId,
+        type: item.type,
         labelHtml,
         url: item.url,
         isFavorite: false,

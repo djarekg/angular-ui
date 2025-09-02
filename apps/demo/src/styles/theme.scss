@@ -6,6 +6,9 @@ html {
   $app-color-text: map.get(app-theme.$primary-palette, neutral-variant, 80);
   --app-color-text: #{$app-color-text};
 
+  $app-color-label: map.get(app-theme.$primary-palette, neutral-variant, 70);
+  --app-color-label: #{$app-color-label};
+
   $app-color-text-input-placeholder: map.get(app-theme.$primary-palette, neutral-variant, 60);
   --app-color-text-input-placeholder: #{$app-color-text-input-placeholder};
 

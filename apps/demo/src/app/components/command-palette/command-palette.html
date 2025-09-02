@@ -15,8 +15,13 @@
           [item]="result">
         <a [routerLink]="result.url"
            (click)="history.addItem(result)">
-          <span [innerHTML]="result.labelHtml"></span>
-          <span [innerHTML]="result.subLabelHtml"></span>
+          <mat-icon>{{ iconMap[result.type] }}</mat-icon>
+          <div class="text-content">
+            <div class="label"
+                 [innerHTML]="result.labelHtml"></div>
+            <div class="sublabel"
+                 [innerHTML]="result.subLabelHtml"></div>
+          </div>
         </a>
       </li>
       }

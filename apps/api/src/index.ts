@@ -1,4 +1,4 @@
-export type { SearchResultType } from '#app/constants/index.js';
+export { type SearchResultType, SearchResultTypes } from '#app/constants/index.js';
 export type {
   Color,
   Customer,

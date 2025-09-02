@@ -1,5 +1,6 @@
 import { SearchHistory as SearchHistoryComponent } from '@/components/search-history/search-history.js';
 import { TextField } from '@/components/text-field/text-field.js';
+import { searchResultTypeIconMap } from '@/core/constants/search-result-type-icon-map.js';
 import { ClickOutside } from '@/core/directives/click-outside.directive.js';
 import { SearchItem } from '@/core/directives/search-item.directive.js';
 import { SearchHistory } from '@/core/services/search-history.service.js';
@@ -20,12 +21,14 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-command-palette',
   imports: [
     ClickOutside,
+    MatIconModule,
     ReactiveFormsModule,
     RouterLink,
     SearchHistoryComponent,
@@ -37,7 +40,9 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandPalette {
-  readonly close = output();
+  readonly onClose = output();
+
+  protected readonly iconMap = searchResultTypeIconMap;
   protected readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('searchDialog');
   protected readonly items = viewChildren(SearchItem);
   protected readonly textField = viewChild(TextField);
@@ -101,6 +106,6 @@ export class CommandPalette {
 
   closeSearchDialog() {
     this.#dialog.close();
-    this.close.emit();
+    this.onClose.emit();
   }
 }
