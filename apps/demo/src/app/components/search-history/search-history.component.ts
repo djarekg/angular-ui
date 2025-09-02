@@ -13,8 +13,7 @@ import {
   viewChildren,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
-import { Router } from 'express';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-history',
@@ -22,6 +21,10 @@ import { Router } from 'express';
   templateUrl: './search-history.component.html',
   styleUrl: './search-history.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(document:keydown)': 'onKeydown($event)',
+    '(document:mousemove)': 'onMouseMove($event)',
+  },
 })
 export class SearchHistory {
   protected readonly items = viewChildren(SearchItem);
