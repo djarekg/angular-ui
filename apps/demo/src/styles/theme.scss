@@ -12,6 +12,9 @@ html {
   $app-color-text-input-placeholder: map.get(app-theme.$primary-palette, neutral-variant, 60);
   --app-color-text-input-placeholder: #{$app-color-text-input-placeholder};
 
+  $app-color-border-light: map.get(app-theme.$primary-palette, neutral, 98);
+  --app-color-border-light: #{$app-color-border-light};
+
   color-scheme: light dark;
   @include mat.theme(
     (

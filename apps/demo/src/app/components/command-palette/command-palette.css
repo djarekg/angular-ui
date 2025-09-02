@@ -1,11 +1,11 @@
 :host {
   --_padding-left: 16px;
+
 }
 
 dialog {
   margin: 0 auto;
   margin-block-start: 150px;
-  width: 500px;
   background: var(--mat-sys-surface);
   border: 1px solid var(--mat-sys-outline);
   border-radius: var(--mat-sys-corner-small);
@@ -24,7 +24,8 @@ dialog {
 }
 
 .container {
-  /* padding-inline: 10px; */
+  width: 600px;
+  max-width: 80vw;
 }
 
 .search-input {
@@ -34,18 +35,27 @@ dialog {
 .search-results {
   display: flex;
   flex-direction: column;
-  gap: 4px;
   border-block-start: 1px solid var(--mat-sys-outline);
-  padding: var(--_padding-left);
+  padding-block: var(--_padding-left);
+  padding-inline-start: var(--_padding-left);
   overflow: hidden auto;
+  max-height: 50vh;
 }
 
 .search-result-item {
+  --_color: var(--app-color-text-input-placeholder);
+
   display: flex;
-  padding: 6px;
+  padding-block: 6px;
+  padding-inline: 10px 0;
+  border-inline-start: 2px solid var(--mat-sys-outline);
+  transition: background-color 0.2s ease, color 0.2s ease;
 
   &:hover {
-    background: var(--mat-sys-surface-bright);
+    --_color: var(--app-color-text);
+
+    background: var(--mat-sys-surface-container-low);
+    border-inline-start-color: var(--app-color-border-light);
   }
 
   >a {
@@ -53,7 +63,11 @@ dialog {
     gap: 1rem;
   }
 
-
+  .mat-icon {
+    font-size: 20px;
+    margin-block-start: 2px;
+    color: var(--_color);
+  }
 }
 
 .search-results-empty,
@@ -68,19 +82,13 @@ dialog {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  mark {
-    background: red;
-    color: var(--mat-sys-error);
-  }
+  color: var(--_color);
 }
 
 .label {
   font: var(--mat-sys-body-large);
-  color: var(--app-color-text);
 }
 
 .sublabel {
   font: var(--mat-sys-body-medium);
-  color: var(--app-color-text-input-placeholder);
 }

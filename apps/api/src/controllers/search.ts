@@ -1,4 +1,5 @@
 import { prisma } from '#app/client/index.js';
+import { SearchResultTypes } from '#app/constants/search-result-type.ts';
 import type { SearchResultParams } from '#app/types/search-result-params.js';
 import type { SearchResult } from '#app/types/search-result.js';
 import { randomUUID } from 'crypto';
@@ -70,7 +71,7 @@ const getUsers = async (query: string, highlightOption: string) => {
   return users.map(user => ({
     id: randomUUID(),
     itemId: user.id,
-    type: 0,
+    type: SearchResultTypes.user,
     name: `${user.firstname} ${user.lastname}`,
     description: null,
     url: `/users/${user.id}`,
@@ -91,7 +92,7 @@ const getCustomers = async (query: string, highlightOption: string) => {
   return customers.map(customer => ({
     id: randomUUID(),
     itemId: customer.id,
-    type: 1,
+    type: SearchResultTypes.customer,
     name: customer.name,
     description: null,
     url: `/customers/${customer.id}`,
@@ -120,7 +121,7 @@ const getCustomerContacts = async (query: string, highlightOption: string) => {
   return contacts.map(contact => ({
     id: randomUUID(),
     itemId: contact.id,
-    type: 2,
+    type: SearchResultTypes.customerContact,
     name: `${contact.firstname} ${contact.lastname}`,
     description: null,
     url: `/customers/${contact.customerid}/contacts/${contact.id}`,
@@ -148,7 +149,7 @@ const getProducts = async (query: string, highlightOption: string) => {
   return products.map(product => ({
     id: randomUUID(),
     itemId: product.id,
-    type: 1,
+    type: SearchResultTypes.product,
     name: product.name,
     description: product.description,
     url: `/products/${product.id}`,

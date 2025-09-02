@@ -2,7 +2,7 @@ import { SearchResultTypes } from '@aui/api';
 
 export const searchResultTypeIconMap = {
   [SearchResultTypes.user]: 'person',
-  [SearchResultTypes.customer]: 'business',
-  [SearchResultTypes.customerContact]: 'contacts',
-  [SearchResultTypes.product]: 'inventory_2',
+  [SearchResultTypes.customer]: 'shopping_bag',
+  [SearchResultTypes.customerContact]: 'contact_mail',
+  [SearchResultTypes.product]: 'deployed_code',
 };

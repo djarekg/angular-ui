@@ -2,6 +2,7 @@
 @import "./styles/layout.css";
 @import "./styles/theme.scss";
 @import "./styles/scroll-track.css";
+@import "./styles/command-palette.css";
 
 html,
 body {

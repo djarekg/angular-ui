@@ -1,0 +1,6 @@
+.search-result-item {
+  mark {
+    background: transparent;
+    color: var(--mat-sys-error);
+  }
+}
