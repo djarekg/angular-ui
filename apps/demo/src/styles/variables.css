@@ -12,6 +12,8 @@
   --app-color-error: var(--mat-sys-error-container);
   --app-color-on-error: var(--mat-sys-on-surface);
   --app-color-text-dim: var(--mat-sys-outline);
+  --app-color-yellow: #fff9c4;
+  --app-color-light-blue: #90caf9;
 
   --app-header-height: 100px;
   --app-height: calc(100% - var(--app-header-height));

@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { NavigationSkipped, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationSkipped, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
@@ -38,6 +38,12 @@ export default class ProtectedLayoutContainer {
 
   constructor() {
     this.#closeSearchDialogOnNavigationSkipped();
+
+    this.#router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+    ).subscribe(() => {
+      this.displaySearchDialog.set(false);
+    });
 
     // effect(() => (this.isSidenavOpen = this.sidenavOpen()));
   }

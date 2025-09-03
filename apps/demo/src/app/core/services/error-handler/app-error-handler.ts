@@ -1,7 +1,7 @@
 import { injectIsServer } from '@/core/utils/is-server.js';
 import { DOCUMENT, ErrorHandler, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ErrorSnackBar, ErrorSnackBarData } from './error-snack-bar.component.js';
+import { ErrorSnackBar, ErrorSnackBarData } from './error-snack-bar.js';
 
 export class AppErrorHandler implements ErrorHandler {
   readonly #snackbar = inject(MatSnackBar);

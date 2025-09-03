@@ -7,8 +7,7 @@
   <li appSearchItem
       [item]="item"
       (mouseenter)="onMouseEnter($event, idx)">
-    <a [routerLink]="'/' + item.url | relativeLink: 'pathname'"
-       [fragment]="item.url | relativeLink: 'hash'"
+    <a [routerLink]="item.url"
        (click)="history.addItem(item)">
       <i role="presentation"
          class="material-symbols-outlined"
@@ -44,8 +43,7 @@
   <li appSearchItem
       [item]="item"
       (mouseenter)="onMouseEnter($event, items.recent.length + idx)">
-    <a [routerLink]="'/' + item.url | relativeLink: 'pathname'"
-       [fragment]="item.url | relativeLink: 'hash'">
+    <a [routerLink]="item.url">
       <i role="presentation"
          class="material-symbols-outlined"
          aria-hidden="true"> star </i>

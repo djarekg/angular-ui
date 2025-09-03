@@ -40,7 +40,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandPalette {
-  readonly onClose = output();
+  readonly close = output();
 
   protected readonly iconMap = searchResultTypeIconMap;
   protected readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('searchDialog');
@@ -106,6 +106,6 @@ export class CommandPalette {
 
   closeSearchDialog() {
     this.#dialog.close();
-    this.onClose.emit();
+    this.close.emit();
   }
 }
