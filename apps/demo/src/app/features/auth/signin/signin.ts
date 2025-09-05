@@ -1,8 +1,10 @@
 import { AuthService } from '@/core/auth/auth.service.js';
-import { isNullOrEmpty } from '@/core/utils/string.js';
+import { SigninModel } from '@/features/auth/signin/signin.model.js';
+import { signinSchema } from '@/features/auth/signin/signin.schema.js';
 
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Control, customError, form, submit, ValidationError } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,48 +14,51 @@ const ERROR_MSG_SIGNIN_FAILED = 'Failed to login with username and password';
 @Component({
   selector: 'app-signin',
   imports: [
+    Control,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
-],
+    MatButtonModule,
+  ],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class SigninComponent {
   protected readonly authService = inject(AuthService);
-  protected readonly isSubmitting = signal(false);
   protected readonly errorMessage = signal<string | null>(null);
 
-  protected form = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+  readonly #signinModel = signal<SigninModel>({
+    username: '',
+    password: '',
   });
 
-  protected async onSubmit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
+  protected readonly form = form(this.#signinModel, signinSchema);
 
-    const { username, password } = this.form.value;
+  protected async onSubmit(e: Event) {
+    e?.preventDefault();
 
-    if (isNullOrEmpty(username) || isNullOrEmpty(password)) {
-      return;
-    }
+    await submit(this.form, async form => {
+      const errors: ValidationError[] = [];
+      const { username, password } = form().value();
 
-    this.isSubmitting.set(true);
+      try {
+        await this.authService.signin(username, password);
+      }
+      catch (err) {
+        this.errorMessage.set(ERROR_MSG_SIGNIN_FAILED);
 
-    const success = await this.authService.signin(username!, password!);
+        errors.push(customError({
+          field: form,
+          error: {
+            kind: 'authenticationError',
+            message: ERROR_MSG_SIGNIN_FAILED,
+          },
+        }));
+      }
 
-    this.isSubmitting.set(false);
-
-    if (success) {
       this.errorMessage.set(null);
-    }
-    else {
-      this.errorMessage.set(ERROR_MSG_SIGNIN_FAILED);
-    }
+      return errors;
+    });
   }
 }
