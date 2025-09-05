@@ -1,12 +1,22 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { RouterLink } from '@angular/router';
 import { Customer } from '@aui/api';
 
 @Component({
   selector: 'app-customer-list',
-  imports: [DatePipe, MatIconModule, MatTableModule],
+  imports: [
+    DatePipe,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatTooltipModule,
+    RouterLink,
+  ],
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,7 +24,14 @@ import { Customer } from '@aui/api';
 export class CustomerList {
   readonly customers = input.required<Customer[]>();
 
-  protected readonly columnsToDisplay = ['name', 'city', 'stateId', 'isActive', 'dateCreated'];
+  protected readonly columnsToDisplay = [
+    'name',
+    'city',
+    'stateId',
+    'dateCreated',
+    'isActive',
+    'view',
+  ];
   protected readonly dataSource = new MatTableDataSource<Customer>([]);
 
   constructor() {

@@ -1,4 +1,6 @@
+@defer (when dataSource.data.length) {
 <mat-table matSort
+           class="app-selectable"
            [dataSource]="dataSource">
 
   <ng-container matColumnDef="name">
@@ -19,16 +21,6 @@
     <mat-cell *matCellDef="let row"> {{ row.state.code }} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="isActive">
-    <mat-header-cell *matHeaderCellDef
-                     mat-sort-header> Active </mat-header-cell>
-    <mat-cell *matCellDef="let row">
-      <mat-icon>
-        {{ row.isActive ? 'check_box' : 'check_box_outline_blank' }}
-      </mat-icon>
-    </mat-cell>
-  </ng-container>
-
   <ng-container matColumnDef="dateCreated">
     <mat-header-cell *matHeaderCellDef
                      mat-sort-header
@@ -37,7 +29,33 @@
               justify="end"> {{ row.dateCreated | date:'yyyy-MM-dd' }} </mat-cell>
   </ng-container>
 
-  <mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: false" />
+  <ng-container matColumnDef="isActive">
+    <mat-header-cell *matHeaderCellDef
+                     mat-sort-header> Active </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      @if (row.isActive) {
+      <mat-icon>
+        check
+      </mat-icon>
+      }
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="view">
+    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <a [routerLink]="['/customers', row.id]"
+         matTooltip="View Details">
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true" />
   <mat-row *matRowDef="let row; columns: columnsToDisplay" />
 
 </mat-table>
+}
+@loading (minimum 1s) {
+<mat-spinner strokeWidth="4" />
+}

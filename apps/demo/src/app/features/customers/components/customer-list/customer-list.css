@@ -1,6 +1,8 @@
 :host {
-  display: block;
+  display: flex;
+  justify-content: center;
   width: 100%;
+  height: 100%;
   padding: 1rem 2rem;
   box-sizing: border-box;
 }
@@ -8,6 +10,7 @@
 .mat-mdc-table {
   border: 1px solid var(--mat-sys-outline);
   border-radius: var(--mat-sys-corner-medium);
+  overflow: hidden auto;
 }
 
 .mat-mdc-header-row {
@@ -40,4 +43,27 @@
       }
     }
   }
+}
+
+.mat-column-dateCreated {
+  max-width: 150px;
+}
+
+.mat-column-stateId {
+  max-width: 100px;
+}
+
+.mat-column-isActive,
+.mat-column-view {
+  max-width: 90px;
+}
+
+.mat-column-isActive {
+  .mat-icon {
+    color: var(--app-color-success);
+  }
+}
+
+.mat-mdc-progress-spinner {
+  align-self: center;
 }
