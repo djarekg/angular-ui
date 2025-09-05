@@ -19,7 +19,7 @@ export default [
   {
     path: 'customers',
     title: 'Customers',
-    loadComponent: () => import('@/features/customers/customers'),
+    loadChildren: () => import('@/features/customers/routes'),
   },
   {
     path: 'settings',

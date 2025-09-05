@@ -14,4 +14,4 @@ export type {
   State,
   User,
 } from '#app/generated/prisma/client.js';
-export type { SearchResult, SearchResultParams } from '#app/types/index.js';
+export type { CustomerHeaderInfo, SearchResult, SearchResultParams } from '#app/types/index.js';

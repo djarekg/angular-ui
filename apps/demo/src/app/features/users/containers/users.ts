@@ -1,6 +1,6 @@
-import { UserList } from '@/components/user-list/user-list.js';
-import { UserService } from '@/core/auth/user.service.js';
 import { FormMode } from '@/core/constants/form-mode.js';
+import { UserList } from '@/features/users/components/user-list/user-list.js';
+import { UserService } from '@/features/users/services';
 import {
   ChangeDetectionStrategy,
   Component,

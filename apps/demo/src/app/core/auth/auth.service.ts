@@ -1,5 +1,5 @@
 import { ApiService } from '@/core/api/api.service.js';
-import { AUTH_TOKEN_CACHE_KEY, CachedToken } from '@/core/identity/index.js';
+import { AUTH_TOKEN_CACHE_KEY } from '@/core/identity/index.js';
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,18 +19,18 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.#status() === 'authenticated');
   readonly isAuthenticating = computed(() => this.#status() === 'idle');
 
-  get #tokenCache() {
-    const tokenRaw = this.#cookieService.get(AUTH_TOKEN_CACHE_KEY);
-    return JSON.parse(tokenRaw) as CachedToken;
-  }
+  // get #tokenCache() {
+  //   const tokenRaw = this.#cookieService.get(AUTH_TOKEN_CACHE_KEY);
+  //   return JSON.parse(tokenRaw) as CachedToken;
+  // }
 
-  get userId() {
-    return this.#tokenCache.userId;
-  }
+  // get userId() {
+  //   return this.#tokenCache.userId;
+  // }
 
-  get username() {
-    return this.#tokenCache.username;
-  }
+  // get username() {
+  //   return this.#tokenCache.username;
+  // }
 
   /**
    * Refresh the user authentication status.

@@ -1,6 +1,6 @@
-import { UserDetail } from '@/components/user-detail/user-detail.js';
-import { UserService } from '@/core/auth/user.service.js';
 import { FormMode } from '@/core/constants/form-mode.js';
+import { UserDetail } from '@/features/users/components/user-detail/user-detail.js';
+import { UserService } from '@/features/users/services/user.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';

@@ -3,19 +3,34 @@ import type { User } from '#app/generated/prisma/client.js';
 import type { Context } from 'koa';
 
 export const getUsers = async (ctx: Context) => {
-  const users = await prisma.user.findMany();
-  ctx.body = users;
+  try {
+    const users = await prisma.user.findMany();
+    ctx.body = users;
+  }
+  catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: 'Failed to fetch users' };
+    console.error('Failed to fetch users', err);
+  }
 };
 
 export const getUser = async (ctx: Context) => {
   const { params: { id } } = ctx;
-  const user = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
 
-  ctx.body = user;
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        id,
+      },
+    });
+
+    ctx.body = user;
+  }
+  catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: `Failed to fetch user: ${id}` };
+    console.error(`Failed to fetch user: ${id}`, err);
+  }
 };
 
 export const updateUser = async (ctx: Context) => {
@@ -33,8 +48,9 @@ export const updateUser = async (ctx: Context) => {
     ctx.body = user;
   }
   catch (err) {
-    console.error(`Failed to update user id: ${id}`, err);
     ctx.status = 500;
+    ctx.body = { error: `Failed to update user id: ${id}` };
+    console.error(`Failed to update user id: ${id}`, err);
   }
 };
 
@@ -53,8 +69,9 @@ export const createUser = async (ctx: Context) => {
     ctx.body = { id };
   }
   catch (err) {
-    console.error(`Failed to create user`, err);
     ctx.status = 500;
+    ctx.body = { error: 'Failed to create user' };
+    console.error(`Failed to create user`, err);
   }
 };
 
@@ -71,7 +88,8 @@ export const deleteUser = async (ctx: Context) => {
     ctx.body = true;
   }
   catch (err) {
-    console.error(`Failed to delete user id: ${id}`, err);
     ctx.status = 500;
+    ctx.body = { error: `Failed to delete user id: ${id}` };
+    console.error(`Failed to delete user id: ${id}`, err);
   }
 };

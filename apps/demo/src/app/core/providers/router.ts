@@ -41,24 +41,26 @@ export const routerProviders = provideRouter(
     return void 0;
   }),
   withViewTransitions(),
-  // withViewTransitions({
-  //   onViewTransitionCreated: ({ transition, to }) => {
-  //     transitionCreated.next();
-  //     const router = inject(Router);
-  //     const toTree = createUrlTreeFromSnapshot(to, []);
-  //     // Skip the transition if the only thing changing is the fragment and queryParams
-  //     if (
-  //       router.isActive(toTree, {
-  //         paths: 'exact',
-  //         matrixParams: 'exact',
-  //         fragment: 'ignored',
-  //         queryParams: 'ignored',
-  //       })
-  //     ) {
-  //       transition.skipTransition();
-  //     }
-  //   },
-  // }),
+  withViewTransitions(
+    /*{
+    onViewTransitionCreated: ({ transition, to }) => {
+      transitionCreated.next();
+      const router = inject(Router);
+      const toTree = createUrlTreeFromSnapshot(to, []);
+      // Skip the transition if the only thing changing is the fragment and queryParams
+      if (
+        router.isActive(toTree, {
+          paths: 'exact',
+          matrixParams: 'exact',
+          fragment: 'ignored',
+          queryParams: 'ignored',
+        })
+      ) {
+        transition.skipTransition();
+      }
+    },
+  }*/
+  ),
   withComponentInputBinding(),
   withPreloading(PreloadAllModules),
 );

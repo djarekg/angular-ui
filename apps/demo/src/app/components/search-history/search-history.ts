@@ -17,7 +17,7 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-search-history',
-  imports: [RelativeLink, RouterLink, SearchItem],
+  imports: [RouterLink, SearchItem],
   templateUrl: './search-history.html',
   styleUrl: './search-history.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
