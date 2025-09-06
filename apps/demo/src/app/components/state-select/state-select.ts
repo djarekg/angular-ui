@@ -26,7 +26,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MAT_FORM_FIELD, MatFormFieldControl } from '@angular/material/form-field';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Subject } from 'rxjs';
 
 type ValueType = string | null;
@@ -45,7 +45,7 @@ export class StateSelect
 {
   static nextId = 0;
   readonly #stateService = inject(StateService);
-  readonly stateIdSelect = viewChild.required<ElementRef<HTMLInputElement>>('stateId');
+  readonly stateIdSelect = viewChild.required(MatSelect);
   ngControl = inject(NgControl, { optional: true, self: true });
   readonly parts = new FormGroup({
     stateId: new FormControl<ValueType>(null),
@@ -181,7 +181,7 @@ export class StateSelect
   }
 
   onContainerClick() {
-    this.#focusMonitor.focusVia(this.stateIdSelect().nativeElement, 'program');
+    this.#focusMonitor.focusVia(this.stateIdSelect()._elementRef, 'program');
   }
 
   writeValue(value: ValueType): void {

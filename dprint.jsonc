@@ -40,7 +40,13 @@
   "markdown": {},
   "toml": {},
   "malva": {},
-  "markup": {},
+  "markup": {
+    "angularNextControlFlowSameLine": false,
+    "component.selfClosing": true,
+    "html.scriptIndent": true,
+    "html.styleIndent": true,
+    "maxAttrsPerLine": 2,
+  },
   "excludes": [
     "**/.git",
     "**/node_modules",
