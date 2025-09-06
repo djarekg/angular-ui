@@ -46,6 +46,8 @@
     "html.scriptIndent": true,
     "html.styleIndent": true,
     "maxAttrsPerLine": 2,
+    "scriptIndent": true,
+    "styleIndent": true,
   },
   "excludes": [
     "**/.git",

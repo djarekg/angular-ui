@@ -108,14 +108,13 @@ footer {
   }
 }
 
-.location {
-  .mat-mdc-form-field {
-    &:first-child {
-      width: 40%;
-    }
-  }
+.city,
+.state {
+  width: 50%;
 }
 
 .zip {
-  width: 14ch;
+  input {
+    width: 20ch;
+  }
 }
