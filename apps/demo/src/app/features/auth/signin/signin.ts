@@ -57,6 +57,7 @@ export default class SigninComponent {
       }
 
       this.errorMessage.set(null);
+
       return errors;
     });
   }

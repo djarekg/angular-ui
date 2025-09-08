@@ -25,22 +25,26 @@ export const createUsers = async (prisma: PrismaClient) => {
       },
     });
 
-  const createUser = () =>
-    prisma.user.create({
+  const createUser = () => {
+    const gender = faker.helpers.enumValue(Gender);
+    const nameGender = gender === Gender.FEMALE ? 'female' : 'male';
+
+    return prisma.user.create({
       data: {
         id: faker.string.uuid(),
-        firstName: faker.person.firstName(),
-        lastName: faker.person.lastName(),
-        gender: faker.helpers.enumValue(Gender),
+        firstName: faker.person.firstName(nameGender),
+        lastName: faker.person.lastName(nameGender),
+        gender,
         email: faker.internet.email(),
         streetAddress: faker.location.streetAddress(),
         city: faker.location.city(),
         stateId: randomStateId(),
-        zip: faker.location.zipCode(),
-        phone: faker.phone.number(),
+        zip: faker.location.zipCode({ format: '#####' }),
+        phone: faker.phone.number({ style: 'national' }),
         isActive: faker.datatype.boolean(0.8),
       },
     });
+  };
 
   const createSalesUser = () =>
     prisma.user.create({
@@ -54,8 +58,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         streetAddress2: faker.location.secondaryAddress(),
         city: faker.location.city(),
         stateId: randomStateId(),
-        zip: faker.location.zipCode(),
-        phone: faker.phone.number(),
+        zip: faker.location.zipCode({ format: '#####' }),
+        phone: faker.phone.number({ style: 'national' }),
         isActive: faker.datatype.boolean(0.8),
       },
     });
@@ -72,8 +76,8 @@ export const createUsers = async (prisma: PrismaClient) => {
         streetAddress2: faker.location.secondaryAddress(),
         city: faker.location.city(),
         stateId: randomStateId(),
-        zip: faker.location.zipCode(),
-        phone: faker.phone.number(),
+        zip: faker.location.zipCode({ format: '#####' }),
+        phone: faker.phone.number({ style: 'national' }),
         isActive: faker.datatype.boolean(0.8),
       },
     });

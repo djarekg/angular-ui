@@ -1,3 +1,7 @@
 @if (resource.hasValue()) {
-<app-customer-detail [customer]="resource.value()" />
+<app-customer-detail [customer]="resource.value()"
+                     [mode]="mode()"
+                     (cancel)="onCancel()"
+                     (edit)="onEdit()"
+                     (save)="onSave($event)" />
 }

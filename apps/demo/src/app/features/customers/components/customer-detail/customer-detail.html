@@ -1,5 +1,4 @@
-<form>
-
+<form aria-disabled="true">
   <h4>Contact</h4>
   <section class="name">
     <mat-form-field>
@@ -7,8 +6,8 @@
       <input matInput
              autocapitalize="name"
              [control]="form.name" />
-      @if (form.name().touched() && form.name().errors().length) {
-      <mat-error>Name is required</mat-error>
+      @if (form.name().errors().length) {
+      <mat-error>{{ form.name().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field>
@@ -17,8 +16,8 @@
              autocapitalize="phone"
              type="tel"
              [control]="form.phone" />
-      @if (form.phone().touched() && form.phone().errors().length) {
-      <mat-error>Phone is required</mat-error>
+      @if (form.phone().errors().length) {
+      <mat-error>{{ form.phone().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
   </section>
@@ -30,10 +29,8 @@
       <input matInput
              autocomplete="streetAddress"
              [control]="form.streetAddress" />
-      @if (form.streetAddress().touched() && form.streetAddress().errors().length) {
-      <mat-error>
-        Street address is required
-      </mat-error>
+      @if (form.streetAddress().errors().length) {
+      <mat-error>{{ form.streetAddress().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
   </section>
@@ -53,19 +50,15 @@
       <input matInput
              autocomplete="city"
              [control]="form.city" />
-      @if (form.city().touched() && form.city().errors().length) {
-      <mat-error>
-        City is required
-      </mat-error>
+      @if (form.city().errors().length) {
+      <mat-error>{{ form.city().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field class="state">
       <mat-label>State</mat-label>
       <app-state-select [control]="form.stateId" />
-      @if (form.stateId().touched() && form.stateId().errors().length) {
-      <mat-error>
-        State is required
-      </mat-error>
+      @if (form.stateId().errors().length) {
+      <mat-error>{{ form.stateId().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
     <mat-form-field class="zip">
@@ -73,12 +66,30 @@
       <input matInput
              autocomplete="zip"
              [control]="form.zip" />
-      @if (form.zip().touched() && form.zip().errors().length) {
-      <mat-error>
-        Zip is required
-      </mat-error>
+      @if (form.zip().errors().length) {
+      <mat-error>{{ form.zip().errors()[0].message }}</mat-error>
       }
     </mat-form-field>
   </section>
-
 </form>
+
+<footer>
+  @if (isEditing()) {
+  <button matButton="outlined"
+          [disabled]="form().submitting()"
+          (click)="onCancel()">
+    Cancel
+  </button>
+  <button matButton="outlined"
+          [disabled]="form().invalid() || form().submitting()"
+          (click)="onSave()">
+    Save
+  </button>
+  }
+  @else {
+  <button matButton="outlined"
+          (click)="onEdit()">
+    Edit
+  </button>
+  }
+</footer>

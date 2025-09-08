@@ -1,21 +1,28 @@
 import { StateSelect } from '@/components/state-select/state-select.js';
+import { FormMode } from '@/core/constants/form-mode.js';
 import { CustomerModel } from '@/features/customers/forms/customer.model.js';
 import { customerSchema } from '@/features/customers/forms/customer.schema.js';
-import { ChangeDetectionStrategy, Component, input, linkedSignal } from '@angular/core';
-import { Control, form } from '@angular/forms/signals';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  linkedSignal,
+  output,
+} from '@angular/core';
+import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { Customer } from '@aui/api';
 
 @Component({
   selector: 'app-customer-detail',
-  imports: [Control, MatInputModule, StateSelect],
+  imports: [Control, MatButtonModule, MatInputModule, StateSelect],
   templateUrl: './customer-detail.html',
   styleUrl: './customer-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerDetail {
-  readonly customer = input.required<Customer>();
-
   readonly #customer = linkedSignal<CustomerModel>(() => {
     const { name, phone, streetAddress, streetAddress2, city, stateId, zip, isActive } = this
       .customer();
@@ -24,7 +31,7 @@ export class CustomerDetail {
       name,
       phone,
       streetAddress,
-      streetAddress2: streetAddress2 || '',
+      streetAddress2: streetAddress2 ?? '',
       city,
       stateId,
       zip,
@@ -32,5 +39,41 @@ export class CustomerDetail {
     };
   });
 
-  protected readonly form = form(this.#customer, customerSchema);
+  readonly customer = input.required<Customer>();
+  readonly mode = input<FormMode>(FormMode.view);
+  readonly cancel = output();
+  readonly edit = output();
+  readonly save = output<CustomerModel>();
+
+  protected readonly isEditing = computed(() => this.mode() === FormMode.edit);
+  protected readonly form = form(this.#customer, path => {
+    apply(path, customerSchema);
+    disabled(path, () => this.mode() === FormMode.view);
+  });
+
+  protected onCancel() {
+    this.cancel.emit();
+  }
+
+  protected onEdit() {
+    this.edit.emit();
+  }
+
+  protected async onSave() {
+    await submit(this.form, async form => {
+      try {
+        this.save.emit(form().value());
+      }
+      catch (err) {
+        console.error('Failed to save customer', err);
+
+        return [{
+          kind: 'customer-update-failed',
+          message: 'Failed to save customer.',
+        }];
+      }
+
+      return [];
+    });
+  }
 }

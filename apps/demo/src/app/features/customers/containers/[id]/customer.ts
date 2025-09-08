@@ -1,7 +1,11 @@
+import { FormMode } from '@/core/constants/form-mode.js';
 import { CustomerDetail } from '@/features/customers/components/customer-detail/customer-detail.js';
+import { CustomerModel } from '@/features/customers/forms/customer.model.js';
 import { CustomerService } from '@/features/customers/services/customer.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-customer',
@@ -12,10 +16,46 @@ import { ActivatedRoute } from '@angular/router';
 })
 export default class CustomerContainer {
   readonly #service = inject(CustomerService);
-  readonly #id = signal(inject(ActivatedRoute).snapshot.params['id']);
+  readonly #id = signal('');
+  readonly #snackbar = inject(MatSnackBar);
+
+  protected readonly mode = signal<FormMode>(FormMode.view);
 
   protected readonly resource = resource({
     params: () => ({ id: this.#id() }),
     loader: ({ params: { id } }) => this.#service.getCustomer(id),
   });
+
+  constructor(route: ActivatedRoute) {
+    route.params.pipe(
+      map(params => params['id'] as string),
+      distinctUntilChanged(),
+      tap(id => this.#id.set(id)),
+    ).subscribe();
+
+    route.queryParams.pipe(
+      map(params => params['mode'] as FormMode || FormMode.view),
+      distinctUntilChanged(),
+      tap(mode => this.mode.set(mode)),
+    ).subscribe();
+  }
+
+  protected onCancel() {
+    this.mode.set(FormMode.view);
+  }
+
+  protected onEdit() {
+    this.mode.set(FormMode.edit);
+  }
+
+  protected async onSave(customer: CustomerModel) {
+    await this.#service.updateCustomer(this.#id(), customer);
+
+    this.mode.set(FormMode.view);
+
+    this.#snackbar.open('Customer updated successfully', 'OK', {
+      duration: 5000,
+      panelClass: 'app-snackbar-success',
+    });
+  }
 }

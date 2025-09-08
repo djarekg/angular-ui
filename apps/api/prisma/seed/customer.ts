@@ -16,8 +16,8 @@ export const createCustomers = async (prisma: PrismaClient) => {
         streetAddress2: faker.location.secondaryAddress(),
         city: faker.location.city(),
         stateId: randomStateId(),
-        zip: faker.location.zipCode(),
-        phone: faker.phone.number(),
+        zip: faker.location.zipCode({ format: '#####' }),
+        phone: faker.phone.number({ style: 'national' }),
         isActive: faker.datatype.boolean(0.8),
       },
     });

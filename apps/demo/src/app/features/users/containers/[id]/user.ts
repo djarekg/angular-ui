@@ -69,7 +69,7 @@ export default class UserContainer {
     // Reset back mode
     this.mode.set(FormMode.view);
 
-    this.#snackbar.open('User saved successfully', 'OK', {
+    this.#snackbar.open('User updated successfully', 'OK', {
       duration: 3000,
       panelClass: 'app-snackbar-success',
     });
