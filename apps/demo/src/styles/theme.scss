@@ -34,7 +34,7 @@ html {
   @include mat.progress-spinner-overrides(
     (
       active-indicator-color: var(--app-color-primary),
-      active-indicator-width: 4px
+      active-indicator-width: 4
     )
   );
 }

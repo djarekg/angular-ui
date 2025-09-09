@@ -3,8 +3,16 @@ import type { CustomerContactModel } from '#app/generated/prisma/models.js';
 import type { Context } from 'koa';
 
 export const getCustomerContacts = async (ctx: Context) => {
+  const { query: { customerId } } = ctx;
+  const where = customerId ? { customerId: String(customerId) } : undefined;
+
   try {
-    const customerContacts = await prisma.customerContact.findMany();
+    const customerContacts = await prisma.customerContact.findMany({
+      include: {
+        state: true,
+      },
+      where,
+    });
     ctx.body = customerContacts;
   }
   catch (err) {
