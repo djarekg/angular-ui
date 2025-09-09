@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './unprotected-layout.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class UnprotectedLayoutContainer {
+export default class UnprotectedLayout {
   readonly #titleService = inject(TitleService);
   protected readonly title = this.#titleService.title;
 }

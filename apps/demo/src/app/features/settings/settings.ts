@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './settings.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SettingsContainer {
+export default class Settings {
 }

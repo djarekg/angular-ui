@@ -1,1 +1,6 @@
-<app-customer-list [customers]="resource.value() || []" />
+@defer (when resource.hasValue()) {
+<app-customer-list [customers]="resource.value()" />
+}
+@loading (minimum 200s) {
+<mat-spinner />
+}

@@ -1,11 +1,6 @@
 import { Routes } from '@angular/router';
 
 export default [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'home',
-  // },
   {
     path: '',
     title: 'Home',
@@ -20,6 +15,11 @@ export default [
     path: 'customers',
     title: 'Customers',
     loadChildren: () => import('@/features/customers/routes'),
+  },
+  {
+    path: 'customer-contacts',
+    title: 'Customer Contacts',
+    loadChildren: () => import('@/features/customer-contacts/routes'),
   },
   {
     path: 'settings',

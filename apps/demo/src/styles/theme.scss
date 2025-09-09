@@ -30,4 +30,11 @@ html {
 
   @include mat.form-field-density(-3);
   @include mat.button-toggle-density(-3);
+
+  @include mat.progress-spinner-overrides(
+    (
+      active-indicator-color: var(--app-color-primary),
+      active-indicator-width: 4px
+    )
+  );
 }

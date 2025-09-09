@@ -20,6 +20,9 @@ import { CustomerModel } from '@aui/api';
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'app-loader',
+  },
 })
 export class CustomerList {
   readonly customers = input.required<CustomerModel[]>();

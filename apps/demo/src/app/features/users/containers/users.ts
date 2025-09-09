@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrl: './users.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class UsersContainer {
+export default class Users {
   readonly #router = inject(Router);
   readonly #userService = inject(UserService);
   readonly #usersResource = resource({

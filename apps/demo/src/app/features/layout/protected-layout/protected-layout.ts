@@ -27,7 +27,7 @@ import { filter } from 'rxjs';
     '(window:keydown)': 'setSearchDialogVisibilityOnKeyPress($event)',
   },
 })
-export default class ProtectedLayoutContainer {
+export default class ProtectedLayout {
   // protected readonly sidenavOpen = signal(false);
   // protected isSidenavOpen = false;
   readonly #router = inject(Router);

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import UnprotectedLayoutContainer from './unprotected-layout';
+import UnprotectedLayout from './unprotected-layout';
 
-describe('UnprotectedLayoutContainer', () => {
-  let component: UnprotectedLayoutContainer;
-  let fixture: ComponentFixture<UnprotectedLayoutContainer>;
+describe('UnprotectedLayout', () => {
+  let component: UnprotectedLayout;
+  let fixture: ComponentFixture<UnprotectedLayout>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UnprotectedLayoutContainer],
+      imports: [UnprotectedLayout],
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(UnprotectedLayoutContainer);
+    fixture = TestBed.createComponent(UnprotectedLayout);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

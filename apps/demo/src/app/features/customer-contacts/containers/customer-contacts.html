@@ -1,1 +1,6 @@
-<p>customer-contacts works!</p>
+@defer (when resource.hasValue()) {
+<app-customer-contact-list [items]="resource.value()" />
+}
+@loading (minimum 2s) {
+<mat-spinner />
+}

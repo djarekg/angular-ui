@@ -7,6 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './customer-contact-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CustomerContactDetail {
+export default class CustomerContactDetail {
 
 }

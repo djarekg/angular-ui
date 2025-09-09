@@ -23,7 +23,7 @@ const ERROR_MSG_SIGNIN_FAILED = 'Failed to login with username and password';
   styleUrl: './signin.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class SigninComponent {
+export default class Signin {
   protected readonly authService = inject(AuthService);
   protected readonly errorMessage = signal<string | null>(null);
 

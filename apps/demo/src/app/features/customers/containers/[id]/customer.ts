@@ -15,8 +15,11 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
   templateUrl: './customer.html',
   styleUrl: './customer.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'app-loader',
+  },
 })
-export default class CustomerContainer {
+export default class Customer {
   readonly #service = inject(CustomerService);
   readonly #id = signal('');
   readonly #snackbar = inject(MatSnackBar);

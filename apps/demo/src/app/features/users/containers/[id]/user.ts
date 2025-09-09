@@ -13,8 +13,11 @@ import { UserModel } from '@aui/api';
   templateUrl: './user.html',
   styleUrl: './user.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'app-loader',
+  },
 })
-export default class UserContainer {
+export default class User {
   readonly #route = inject(ActivatedRoute);
   readonly #router = inject(Router);
   readonly #userService = inject(UserService);
