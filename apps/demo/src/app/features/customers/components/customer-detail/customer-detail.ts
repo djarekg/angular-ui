@@ -1,6 +1,6 @@
 import { StateSelect } from '@/components/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
-import { CustomerModel } from '@/features/customers/forms/customer.model.js';
+import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { customerSchema } from '@/features/customers/forms/customer.schema.js';
 import {
   ChangeDetectionStrategy,
@@ -13,7 +13,7 @@ import {
 import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { Customer } from '@aui/api';
+import { CustomerModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-detail',
@@ -23,7 +23,7 @@ import { Customer } from '@aui/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerDetail {
-  readonly #customer = linkedSignal<CustomerModel>(() => {
+  readonly #customer = linkedSignal<AppCustomerModel>(() => {
     const { name, phone, streetAddress, streetAddress2, city, stateId, zip, isActive } = this
       .customer();
 
@@ -39,11 +39,11 @@ export class CustomerDetail {
     };
   });
 
-  readonly customer = input.required<Customer>();
+  readonly customer = input.required<CustomerModel>();
   readonly mode = input<FormMode>(FormMode.view);
   readonly cancel = output();
   readonly edit = output();
-  readonly save = output<CustomerModel>();
+  readonly save = output<AppCustomerModel>();
 
   protected readonly isEditing = computed(() => this.mode() === FormMode.edit);
   protected readonly form = form(this.#customer, path => {

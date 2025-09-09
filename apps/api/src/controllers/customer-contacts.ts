@@ -1,5 +1,5 @@
 import { prisma } from '#app/client/index.js';
-import type { CustomerContact } from '#app/generated/prisma/client.js';
+import type { CustomerContactModel } from '#app/generated/prisma/models.js';
 import type { Context } from 'koa';
 
 export const getCustomerContacts = async (ctx: Context) => {
@@ -35,7 +35,7 @@ export const getCustomerContact = async (ctx: Context) => {
 
 export const updateCustomerContact = async (ctx: Context) => {
   const { params: { id }, request } = ctx;
-  const data = (request as any).body as CustomerContact;
+  const data = (request as any).body as CustomerContactModel;
 
   try {
     const customerContact = await prisma.customerContact.update({
@@ -56,7 +56,7 @@ export const updateCustomerContact = async (ctx: Context) => {
 
 export const createCustomerContact = async (ctx: Context) => {
   const { request } = ctx;
-  const data = (request as any).body as CustomerContact;
+  const data = (request as any).body as CustomerContactModel;
 
   try {
     const { id } = await prisma.customerContact.create({

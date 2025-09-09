@@ -1,15 +1,17 @@
 import { FormMode } from '@/core/constants/form-mode.js';
 import { CustomerDetail } from '@/features/customers/components/customer-detail/customer-detail.js';
-import { CustomerModel } from '@/features/customers/forms/customer.model.js';
+import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { CustomerService } from '@/features/customers/services/customer.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
 import { distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-customer',
-  imports: [CustomerDetail],
+  imports: [CustomerDetail, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -48,7 +50,7 @@ export default class CustomerContainer {
     this.mode.set(FormMode.edit);
   }
 
-  protected async onSave(customer: CustomerModel) {
+  protected async onSave(customer: AppCustomerModel) {
     await this.#service.updateCustomer(this.#id(), customer);
 
     this.mode.set(FormMode.view);

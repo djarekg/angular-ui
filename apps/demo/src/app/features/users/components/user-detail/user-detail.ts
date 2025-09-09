@@ -23,7 +23,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { User } from '@aui/api';
+import { UserModel } from '@aui/api';
 
 type UserForm = {
   firstName: FormControl<string | null>;
@@ -58,11 +58,11 @@ type UserForm = {
 })
 export class UserDetail {
   readonly mode = input<FormMode>();
-  readonly user = input.required<User | undefined>();
+  readonly user = input.required<UserModel | undefined>();
   readonly new = output();
   readonly edit = output();
   readonly cancel = output();
-  readonly save = output<User>();
+  readonly save = output<UserModel>();
 
   protected readonly isEditing = linkedSignal(() => this.mode() !== FormMode.view);
   protected readonly isNew = computed(() => this.mode() === FormMode.new);
@@ -133,7 +133,7 @@ export class UserDetail {
 
   protected onSave() {
     this.save.emit({
-      ...(this.form.value as User),
+      ...(this.form.value as UserModel),
       id: this.user()?.id!,
     });
     this.isEditing.set(false);

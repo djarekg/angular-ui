@@ -5,7 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
-import { Customer } from '@aui/api';
+import { CustomerModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-list',
@@ -22,7 +22,7 @@ import { Customer } from '@aui/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CustomerList {
-  readonly customers = input.required<Customer[]>();
+  readonly customers = input.required<CustomerModel[]>();
 
   protected readonly columnsToDisplay = [
     'name',
@@ -32,7 +32,7 @@ export class CustomerList {
     'isActive',
     'view',
   ];
-  protected readonly dataSource = new MatTableDataSource<Customer>([]);
+  protected readonly dataSource = new MatTableDataSource<CustomerModel>([]);
 
   constructor() {
     effect(() => {

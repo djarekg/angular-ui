@@ -1,7 +1,24 @@
+@defer (when resource.hasValue()) {
 @if (resource.hasValue()) {
-<app-customer-detail [customer]="resource.value()"
-                     [mode]="mode()"
-                     (cancel)="onCancel()"
-                     (edit)="onEdit()"
-                     (save)="onSave($event)" />
+<mat-tab-group dynamicHeight
+               mat-stretch-tabs="false">
+  <mat-tab label="Details">
+    <ng-template matTabContent>
+      <app-customer-detail [customer]="resource.value()"
+                           [mode]="mode()"
+                           (cancel)="onCancel()"
+                           (edit)="onEdit()"
+                           (save)="onSave($event)" />
+    </ng-template>
+  </mat-tab>
+  <mat-tab label="Contacts">
+    <ng-template matTabContent>
+      Contacts
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+}
+}
+@loading (minimum 2s) {
+<mat-spinner strokeWidth="4" />
 }

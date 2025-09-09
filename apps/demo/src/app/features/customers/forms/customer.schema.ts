@@ -1,7 +1,7 @@
-import { CustomerModel } from '@/features/customers/forms/customer.model.js';
+import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { required, schema } from '@angular/forms/signals';
 
-export const customerSchema = schema<CustomerModel>(path => {
+export const customerSchema = schema<AppCustomerModel>(path => {
   required(path.name, { message: 'Name is required' });
   required(path.phone, { message: 'Phone is required' });
   required(path.streetAddress, { message: 'Street Address is required' });

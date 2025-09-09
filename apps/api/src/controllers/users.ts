@@ -1,5 +1,5 @@
 import { prisma } from '#app/client/index.js';
-import type { User } from '#app/generated/prisma/client.js';
+import type { UserModel } from '#app/generated/prisma/models.js';
 import type { Context } from 'koa';
 
 export const getUsers = async (ctx: Context) => {
@@ -35,7 +35,7 @@ export const getUser = async (ctx: Context) => {
 
 export const updateUser = async (ctx: Context) => {
   const { params: { id }, request } = ctx;
-  const data = (request as any).body as User;
+  const data = (request as any).body as UserModel;
 
   try {
     const user = await prisma.user.update({
@@ -56,7 +56,7 @@ export const updateUser = async (ctx: Context) => {
 
 export const createUser = async (ctx: Context) => {
   const { request } = ctx;
-  const data = (request as any).body as User;
+  const data = (request as any).body as UserModel;
 
   try {
     const { id } = await prisma.user.create({

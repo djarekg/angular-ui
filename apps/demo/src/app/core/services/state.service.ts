@@ -1,6 +1,6 @@
 import { ApiService } from '@/core/api/api.service.js';
 import { inject, Injectable } from '@angular/core';
-import { State } from '@aui/api';
+import { StateModel } from '@aui/api';
 
 @Injectable({
   providedIn: 'root',
@@ -8,5 +8,5 @@ import { State } from '@aui/api';
 export class StateService {
   readonly #api = inject(ApiService);
 
-  getStates = () => this.#api.get<State[]>('/states');
+  getStates = () => this.#api.get<StateModel[]>('/states');
 }

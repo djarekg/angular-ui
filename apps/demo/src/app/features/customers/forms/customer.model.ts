@@ -1,4 +1,4 @@
-export type CustomerModel = {
+export type AppCustomerModel = {
   name: string;
   streetAddress: string;
   streetAddress2: string;

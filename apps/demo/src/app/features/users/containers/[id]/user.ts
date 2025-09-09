@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@a
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '@aui/api';
+import { UserModel } from '@aui/api';
 
 @Component({
   selector: 'app-user',
@@ -29,7 +29,7 @@ export default class UserContainer {
       if (id && this.mode() === FormMode.view) {
         return this.#userService.getUser(id);
       }
-      return Promise.resolve({} as User);
+      return Promise.resolve({} as UserModel);
     },
   });
 
@@ -57,7 +57,7 @@ export default class UserContainer {
     this.#navigateToUser(FormMode.view);
   }
 
-  protected async onSave(user: User) {
+  protected async onSave(user: UserModel) {
     if (this.mode() === FormMode.edit) {
       await this.#userService.updateUser(user);
     }
