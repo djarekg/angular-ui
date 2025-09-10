@@ -3,6 +3,7 @@ import { CustomerDetail } from '@/features/customers/components/customer-detail/
 import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { CustomerService } from '@/features/customers/services/customer.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -11,7 +12,13 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-customer',
-  imports: [CustomerDetail, MatProgressSpinnerModule, MatSnackBarModule, MatTabsModule],
+  imports: [
+    CustomerDetail,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    MatTabsModule,
+  ],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,8 +28,8 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
 })
 export default class Customer {
   readonly #service = inject(CustomerService);
-  readonly #id = signal('');
   readonly #snackbar = inject(MatSnackBar);
+  readonly #id = signal('');
 
   protected readonly mode = signal<FormMode>(FormMode.view);
 

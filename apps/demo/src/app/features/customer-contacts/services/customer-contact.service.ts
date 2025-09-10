@@ -12,6 +12,11 @@ export class CustomerContact {
     return this.#api.get<CustomerContactModel[]>('/customer-contacts');
   }
 
+  getForCustomer(customerId?: string) {
+    const qs = customerId ? `?customerId=${encodeURIComponent(customerId)}` : '';
+    return this.#api.get<CustomerContactModel[]>(`/customer-contacts${qs}`);
+  }
+
   getById(id: string) {
     return this.#api.get<CustomerContactModel>(`/customer-contacts/${id}`);
   }

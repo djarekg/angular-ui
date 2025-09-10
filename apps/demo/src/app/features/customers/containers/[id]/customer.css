@@ -7,5 +7,6 @@
 }
 
 ::ng-deep .mat-mdc-tab-body-content {
-  padding: 1rem;
+  padding: 1rem 0;
+  box-sizing: border-box;
 }

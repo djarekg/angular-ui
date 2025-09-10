@@ -2,6 +2,8 @@ import CustomerContactList from '@/features/customer-contacts/components/custome
 import { CustomerContact } from '@/features/customer-contacts/services/customer-contact.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActivatedRoute } from '@angular/router';
+import type { CustomerContactModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-contacts',
@@ -14,10 +16,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   },
 })
 export default class CustomerContacts {
+  readonly #route = inject(ActivatedRoute);
   readonly #service = inject(CustomerContact);
 
-  protected readonly resource = resource({
+  readonly #customerId = this.#route.snapshot.paramMap.get('id')
+    ?? this.#route.parent?.snapshot.paramMap.get('id')
+    ?? undefined;
+
+  protected readonly resource = resource<CustomerContactModel[], string | undefined>({
     defaultValue: [],
-    loader: () => this.#service.get(),
+    params: () => this.#customerId,
+    loader: ({ params: id }) => this.#service.getForCustomer(id),
   });
 }

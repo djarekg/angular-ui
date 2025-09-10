@@ -8,5 +8,11 @@ export default [
   {
     path: ':id',
     loadComponent: () => import('./containers/[id]/customer'),
+    children: [
+      {
+        path: 'contacts',
+        loadChildren: () => import('@/features/customer-contacts/routes'),
+      },
+    ],
   },
 ] satisfies Routes;
