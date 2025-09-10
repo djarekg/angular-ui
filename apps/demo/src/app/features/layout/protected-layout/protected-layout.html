@@ -1,26 +1,11 @@
 <app-header />
-<!-- <app-header>
-  <button matIconButton
-          aria-label="Open sidenav"
-          (click)="sidenavOpen.set(true)">
-    <mat-icon>menu</mat-icon>
-  </button>
-</app-header> -->
-
-<mat-sidenav-container>
-  <!-- <mat-sidenav mode="over"
-               [opened]="isSidenavOpen"
-               (openedChange)="sidenavOpen.set($event)">
-    <app-sidenav />
-  </mat-sidenav> -->
-  <mat-sidenav-content>
-    @defer (when isBrowser) {
-    @defer (when displaySearchDialog(); prefetch on idle) {
-    @if (displaySearchDialog()) {
-    <app-command-palette (close)="displaySearchDialog.set(false)" />
-    }
-    }
-    }
-    <router-outlet />
-  </mat-sidenav-content>
-</mat-sidenav-container>
+@defer (when isBrowser) {
+@defer (when displaySearchDialog(); prefetch on idle) {
+@if (displaySearchDialog()) {
+<app-command-palette (close)="displaySearchDialog.set(false)" />
+}
+}
+}
+<main>
+  <router-outlet />
+</main>

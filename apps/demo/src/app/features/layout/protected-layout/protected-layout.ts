@@ -3,9 +3,6 @@ import { Header } from '@/components/layout/header/header.js';
 import { ESCAPE, SEARCH_TRIGGER_KEY } from '@/core/constants/keys.js';
 import { injectIsBrowser } from '@/core/utils/is-browser.js';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationEnd, NavigationSkipped, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 
@@ -14,11 +11,7 @@ import { filter } from 'rxjs';
   imports: [
     CommandPalette,
     Header,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
     RouterOutlet,
-    // SidenavComponent,
   ],
   templateUrl: './protected-layout.html',
   styleUrl: './protected-layout.css',
@@ -28,8 +21,6 @@ import { filter } from 'rxjs';
   },
 })
 export default class ProtectedLayout {
-  // protected readonly sidenavOpen = signal(false);
-  // protected isSidenavOpen = false;
   readonly #router = inject(Router);
 
   protected readonly isBrowser = injectIsBrowser();
@@ -44,8 +35,6 @@ export default class ProtectedLayout {
     ).subscribe(() => {
       this.displaySearchDialog.set(false);
     });
-
-    // effect(() => (this.isSidenavOpen = this.sidenavOpen()));
   }
 
   protected setSearchDialogVisibilityOnKeyPress(event: KeyboardEvent): void {

@@ -1,21 +1,17 @@
-.mat-sidenav-container {
-  position: static;
-  height: 100vh;
-}
-
-.mat-sidenav,
-.mat-sidenav-content {
-  padding: 2rem
-}
-
-.mat-sidenav-content {
+:host {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* height: var(--app-height); */
   height: 100%;
-  overflow: auto;
-  padding-block: 2rem;
+}
+
+main {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
   padding-block-start: var(--app-header-height);
+  padding-block-end: 2rem;
+  padding-inline: 2rem;
+  overflow: hidden auto;
 }
