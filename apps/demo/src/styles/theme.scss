@@ -15,6 +15,9 @@ html {
   $app-color-border-light: map.get(app-theme.$primary-palette, neutral, 98);
   --app-color-border-light: #{$app-color-border-light};
 
+  $app-color-error-light: map.get(app-theme.$primary-palette, error, 60);
+  --app-color-error-light: #{$app-color-error-light};
+
   color-scheme: light dark;
   @include mat.theme(
     (
@@ -35,6 +38,29 @@ html {
     (
       active-indicator-color: var(--app-color-primary),
       active-indicator-width: 4
+    )
+  );
+
+  @include mat.slide-toggle-overrides(
+    (
+      disabled-label-text-color: white,
+      disabled-selected-handle-color: color-mix(in srgb, var(--app-color-success) 20%, transparent),
+      disabled-unselected-handle-color: color-mix(in srgb, $app-color-error-light 20%, transparent),
+      selected-icon-color: white,
+      selected-handle-color: var(--app-color-success),
+      selected-hover-handle-color: var(--app-color-success),
+      selected-pressed-handle-color: var(--app-color-success),
+      selected-focus-handle-color: var(--app-color-success),
+      selected-track-color: var(--mat-sys-surface-bright),
+      selected-focus-track-color: var(--mat-sys-surface-bright),
+      selected-hover-track-color: var(--mat-sys-surface-bright),
+      selected-pressed-track-color: var(--mat-sys-surface-bright),
+      unselected-icon-color: white,
+      unselected-handle-color: $app-color-error-light,
+      unselected-hover-handle-color: $app-color-error-light,
+      unselected-pressed-handle-color: $app-color-error-light,
+      unselected-focus-handle-color: $app-color-error-light,
+      unselected-track-color: var(--mat-sys-surface-bright)
     )
   );
 }

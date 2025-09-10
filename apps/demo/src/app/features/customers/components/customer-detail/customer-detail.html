@@ -1,78 +1,92 @@
 <form aria-disabled="true">
 
-  <mat-card>
-    <section class="name">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput
-               autocapitalize="name"
-               [control]="form.name" />
-        @if (form.name().errors().length) {
-        <mat-error>{{ form.name().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Phone</mat-label>
-        <input matInput
-               autocapitalize="phone"
-               type="tel"
-               [control]="form.phone" />
-        @if (form.phone().errors().length) {
-        <mat-error>{{ form.phone().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-    </section>
+  <mat-card appearance="filled">
+    <mat-card-subtitle>
+      Details
+      <mat-slide-toggle #activeToggle
+                        class="app-acive"
+                        [matTooltip]="activeToggle.checked ? 'Customer is active' : 'Customer is inactive'"
+                        [control]="form.isActive" />
+    </mat-card-subtitle>
+    <mat-card-content>
+      <section class="name">
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput
+                 autocapitalize="name"
+                 [control]="form.name" />
+          @if (form.name().errors().length) {
+          <mat-error>{{ form.name().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone</mat-label>
+          <input matInput
+                 autocapitalize="phone"
+                 type="tel"
+                 [control]="form.phone" />
+          @if (form.phone().errors().length) {
+          <mat-error>{{ form.phone().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+      </section>
+    </mat-card-content>
   </mat-card>
 
-  <mat-card>
-    <section class="address">
-      <mat-form-field>
-        <mat-label>Street address</mat-label>
-        <input matInput
-               autocomplete="streetAddress"
-               [control]="form.streetAddress" />
-        @if (form.streetAddress().errors().length) {
-        <mat-error>{{ form.streetAddress().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-    </section>
+  <mat-card appearance="filled">
+    <mat-card-subtitle>
+      Address
+    </mat-card-subtitle>
+    <mat-card-content>
+      <section class="address">
+        <mat-form-field>
+          <mat-label>Street address</mat-label>
+          <input matInput
+                 autocomplete="streetAddress"
+                 [control]="form.streetAddress" />
+          @if (form.streetAddress().errors().length) {
+          <mat-error>{{ form.streetAddress().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+      </section>
 
-    <section class="address2">
-      <mat-form-field>
-        <mat-label>Street address2</mat-label>
-        <input matInput
-               autocomplete="streetAddress2"
-               [control]="form.streetAddress2" />
-      </mat-form-field>
-    </section>
+      <section class="address2">
+        <mat-form-field>
+          <mat-label>Street address2</mat-label>
+          <input matInput
+                 autocomplete="streetAddress2"
+                 [control]="form.streetAddress2" />
+        </mat-form-field>
+      </section>
 
-    <section class="location">
-      <mat-form-field class="city">
-        <mat-label>City</mat-label>
-        <input matInput
-               autocomplete="city"
-               [control]="form.city" />
-        @if (form.city().errors().length) {
-        <mat-error>{{ form.city().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field class="state">
-        <mat-label>State</mat-label>
-        <app-state-select [control]="form.stateId" />
-        @if (form.stateId().errors().length) {
-        <mat-error>{{ form.stateId().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-      <mat-form-field class="zip">
-        <mat-label>Zip</mat-label>
-        <input matInput
-               autocomplete="zip"
-               [control]="form.zip" />
-        @if (form.zip().errors().length) {
-        <mat-error>{{ form.zip().errors()[0].message }}</mat-error>
-        }
-      </mat-form-field>
-    </section>
+      <section class="location">
+        <mat-form-field class="city">
+          <mat-label>City</mat-label>
+          <input matInput
+                 autocomplete="city"
+                 [control]="form.city" />
+          @if (form.city().errors().length) {
+          <mat-error>{{ form.city().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="state">
+          <mat-label>State</mat-label>
+          <app-state-select [control]="form.stateId" />
+          @if (form.stateId().errors().length) {
+          <mat-error>{{ form.stateId().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="zip">
+          <mat-label>Zip</mat-label>
+          <input matInput
+                 autocomplete="zip"
+                 [control]="form.zip" />
+          @if (form.zip().errors().length) {
+          <mat-error>{{ form.zip().errors()[0].message }}</mat-error>
+          }
+        </mat-form-field>
+      </section>
+    </mat-card-content>
   </mat-card>
 
 </form>
@@ -84,7 +98,7 @@
           (click)="onCancel()">
     Cancel
   </button>
-  <button matButton="outlined"
+  <button matButton="filled"
           [disabled]="form().invalid() || form().submitting()"
           (click)="onSave()">
     Save

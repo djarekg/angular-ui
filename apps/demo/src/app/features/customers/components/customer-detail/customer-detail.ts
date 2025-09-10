@@ -14,11 +14,21 @@ import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CustomerModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-detail',
-  imports: [Control, MatButtonModule, MatCardModule, MatInputModule, StateSelect],
+  imports: [
+    Control,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+    StateSelect,
+  ],
   templateUrl: './customer-detail.html',
   styleUrl: './customer-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -54,6 +54,7 @@ export default class Customer {
 
   protected onCancel() {
     this.mode.set(FormMode.view);
+    this.resource.reload();
   }
 
   protected onEdit() {

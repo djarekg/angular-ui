@@ -1,14 +1,13 @@
 :host {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: center;
-  height: 100%;
 }
 
 main {
   box-sizing: border-box;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   padding-block-start: var(--app-header-height);
   padding-block-end: 2rem;

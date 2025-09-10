@@ -4,9 +4,9 @@
 
 .mat-mdc-tab-group {
   width: var(--_container-width);
+  margin-inline: auto;
 }
 
 ::ng-deep .mat-mdc-tab-body-content {
-  box-sizing: border-box;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
