@@ -1,7 +1,7 @@
+import { Spinner } from '@/components/spinner/spinner';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
@@ -12,10 +12,10 @@ import { CustomerModel } from '@aui/api';
   imports: [
     DatePipe,
     MatIconModule,
-    MatProgressSpinnerModule,
     MatTableModule,
     MatTooltipModule,
     RouterLink,
+    Spinner,
   ],
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',

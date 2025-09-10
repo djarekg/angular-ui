@@ -70,7 +70,7 @@
       "editor.defaultFormatter": "redhat.vscode-xml",
       "editor.formatOnSave": true,
     },
-    "typescript.experimental.useTsgo": true,
+    // "typescript.experimental.useTsgo": true,
     "typescript.format.semicolons": "insert",
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "typescript.preferences.importModuleSpecifierEnding": "js",

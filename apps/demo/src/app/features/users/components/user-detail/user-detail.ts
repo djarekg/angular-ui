@@ -1,54 +1,40 @@
 import { StateSelect } from '@/components/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
+import { userSchema } from '@/features/users/forms';
+import { CustomUserModel } from '@/features/users/forms/user.model.js';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
-  effect,
   input,
   linkedSignal,
   output,
-  signal,
 } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { UserModel } from '@aui/api';
-
-type UserForm = {
-  firstName: FormControl<string | null>;
-  lastName: FormControl<string | null>;
-  gender: FormControl<string | null>;
-  email: FormControl<string | null>;
-  phone: FormControl<string | null>;
-  streetAddress: FormControl<string | null>;
-  streetAddress2: FormControl<string | null>;
-  city: FormControl<string | null>;
-  stateId: FormControl<string | null>;
-  zip: FormControl<string | null>;
-  isActive: FormControl<boolean | null>;
-};
 
 @Component({
   selector: 'app-user-detail',
   imports: [
+    Control,
     FormsModule,
     MatButtonModule,
-    MatButtonToggleModule,
+    MatCardModule,
     MatCheckboxModule,
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
     ReactiveFormsModule,
     StateSelect,
   ],
@@ -57,85 +43,82 @@ type UserForm = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserDetail {
+  readonly #user = linkedSignal<CustomUserModel>(() => {
+    const {
+      id,
+      firstName,
+      lastName,
+      gender,
+      email,
+      phone,
+      streetAddress,
+      streetAddress2,
+      city,
+      stateId,
+      zip,
+      isActive,
+    } = this
+      .user();
+
+    return {
+      id,
+      firstName,
+      lastName,
+      gender,
+      email,
+      phone,
+      streetAddress,
+      streetAddress2: streetAddress2 ?? '',
+      city,
+      stateId,
+      zip,
+      isActive,
+    };
+  });
+
+  readonly user = input.required<UserModel>();
   readonly mode = input<FormMode>();
-  readonly user = input.required<UserModel | undefined>();
-  readonly new = output();
-  readonly edit = output();
   readonly cancel = output();
-  readonly save = output<UserModel>();
+  readonly edit = output();
+  readonly new = output();
+  readonly save = output<CustomUserModel>();
 
   protected readonly isEditing = linkedSignal(() => this.mode() !== FormMode.view);
   protected readonly isNew = computed(() => this.mode() === FormMode.new);
-  protected readonly isSubmitting = signal(false);
-
-  protected form = new FormGroup<UserForm>({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    gender: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required]),
-    streetAddress: new FormControl('', [Validators.required]),
-    streetAddress2: new FormControl(''),
-    city: new FormControl('', [Validators.required]),
-    stateId: new FormControl('', [Validators.required]),
-    zip: new FormControl('', [Validators.required]),
-    isActive: new FormControl(false, [Validators.required]),
+  protected readonly form = form(this.#user, path => {
+    apply(path, userSchema);
+    disabled(path, () => this.mode() === FormMode.view);
   });
 
-  constructor() {
-    effect(() => {
-      const user = this.user()!;
-
-      if (user) {
-        this.form.patchValue(user);
-      }
-      else {
-        this.form.reset();
-      }
-    });
-
-    effect(() => {
-      if (this.isEditing()) {
-        this.form.enable();
-      }
-      else {
-        this.form.disable();
-      }
-    });
+  protected onCancel() {
+    this.cancel.emit();
   }
 
-  /**
-   * IsActive button toggle is not working with ReactiveForms
-   * for some reason. Couldn't find any open issues with the
-   * component, so binding to value and patching form value
-   * thru change event is the work around for now.
-   */
-  protected onIsActiveToggleChange(isActive: boolean) {
-    this.form.patchValue({
-      isActive,
-    });
+  protected onEdit() {
+    this.edit.emit();
   }
 
   protected onNew() {
     this.new.emit();
   }
 
-  protected onEdit() {
-    this.edit.emit();
-    this.isEditing.set(true);
-  }
+  protected async onSave(e: Event) {
+    e.preventDefault();
 
-  protected onCancel() {
-    this.form.reset(this.user() || {});
-    this.cancel.emit();
-    this.isEditing.set(false);
-  }
+    await submit(this.form, async form => {
+      try {
+        this.save.emit(form().value());
+      }
+      catch (err) {
+        console.error('Failed to save customer', err);
 
-  protected onSave() {
-    this.save.emit({
-      ...(this.form.value as UserModel),
-      id: this.user()?.id!,
+        return [{
+          kind: 'customer-update-failed',
+          message: 'Failed to save customer.',
+        }];
+      }
+
+      return [];
     });
-    this.isEditing.set(false);
   }
 }

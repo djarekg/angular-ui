@@ -1,11 +1,11 @@
+import { Spinner } from '@/components/spinner/spinner';
 import { CustomerList } from '@/features/customers/components/customer-list/customer-list.js';
 import { CustomerService } from '@/features/customers/services';
 import { ChangeDetectionStrategy, Component, inject, resource } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-customers',
-  imports: [CustomerList, MatProgressSpinnerModule],
+  imports: [CustomerList, Spinner],
   templateUrl: './customers.html',
   styleUrl: './customers.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

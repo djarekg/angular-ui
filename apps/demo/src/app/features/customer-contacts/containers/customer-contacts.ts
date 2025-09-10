@@ -1,13 +1,13 @@
+import { Spinner } from '@/components/spinner/spinner';
 import CustomerContactList from '@/features/customer-contacts/components/customer-contact-list/customer-contact-list.js';
 import { CustomerContact } from '@/features/customer-contacts/services/customer-contact.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import type { CustomerContactModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-contacts',
-  imports: [CustomerContactList, MatProgressSpinnerModule],
+  imports: [CustomerContactList, Spinner],
   templateUrl: './customer-contacts.html',
   styleUrl: './customer-contacts.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

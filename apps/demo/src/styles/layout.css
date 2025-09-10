@@ -38,7 +38,7 @@ button {
   height: 100%;
   margin-inline: auto;
 
-  .mat-mdc-progress-spinner {
-    margin: auto;
+  &:has(.mat-mdc-table) {
+    display: flex;
   }
 }

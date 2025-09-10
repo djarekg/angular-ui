@@ -1,10 +1,10 @@
+import { Spinner } from '@/components/spinner/spinner';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { CustomerDetail } from '@/features/customers/components/customer-detail/customer-detail.js';
 import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { CustomerService } from '@/features/customers/services/customer.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ActivatedRoute } from '@angular/router';
@@ -15,9 +15,9 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
   imports: [
     CustomerDetail,
     MatButtonModule,
-    MatProgressSpinnerModule,
     MatSnackBarModule,
     MatTabsModule,
+    Spinner,
   ],
   templateUrl: './customer.html',
   styleUrl: './customer.css',

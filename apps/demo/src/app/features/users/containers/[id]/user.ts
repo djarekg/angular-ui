@@ -1,15 +1,16 @@
+import { Spinner } from '@/components/spinner/spinner';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { UserDetail } from '@/features/users/components/user-detail/user-detail.js';
+import { CustomUserModel } from '@/features/users/forms/user.model.js';
 import { UserService } from '@/features/users/services/user.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserModel } from '@aui/api';
 
 @Component({
   selector: 'app-user',
-  imports: [UserDetail, MatProgressSpinnerModule, MatSnackBarModule],
+  imports: [MatSnackBarModule, UserDetail, Spinner],
   templateUrl: './user.html',
   styleUrl: './user.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,7 +61,7 @@ export default class User {
     this.#navigateToUser(FormMode.view);
   }
 
-  protected async onSave(user: UserModel) {
+  protected async onSave(user: CustomUserModel) {
     if (this.mode() === FormMode.edit) {
       await this.#userService.updateUser(user);
     }

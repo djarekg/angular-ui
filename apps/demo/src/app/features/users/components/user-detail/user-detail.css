@@ -1,4 +1,6 @@
 :host {
+  --_container-width: 100%;
+
   display: flex;
   justify-content: center;
   width: 100%;
@@ -9,17 +11,16 @@
 form {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: var(--_container-width);
 
-  >h4 {
-    color: var(--app-color-text-dim);
-    margin-block-start: 0.5rem;
-  }
+  mat-card {
+    padding: 1.5rem;
 
-  >section {
-    display: flex;
-    gap: 0.9rem;
-    width: 100%;
+    section {
+      display: flex;
+      gap: 0.9rem;
+      width: 100%;
+    }
   }
 }
 
@@ -50,17 +51,33 @@ form {
 
 }
 
-header {
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.mdc-card {
+  --mat-card-filled-container-color: var(--mat-sys-surface-container-low);
+}
+
+.mat-mdc-card-subtitle {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+.mat-mdc-card-content {
+  padding: 0;
+  padding-block-start: 1.5rem;
 
+  &:last-child {
+    padding-block-end: 0;
+  }
+}
+
+.mdc-switch {
+  --mat-switch-selected-icon-color: var(--app-color-success);
 }
 
 .new-user {
