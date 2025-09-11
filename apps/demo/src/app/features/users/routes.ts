@@ -7,6 +7,6 @@ export default [
   },
   {
     path: ':id',
-    loadComponent: () => import('./containers/[id]/user'),
+    loadComponent: () => import('./containers/$id/user'),
   },
 ] satisfies Routes;

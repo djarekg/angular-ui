@@ -7,7 +7,7 @@ export default [
   },
   {
     path: ':id',
-    loadComponent: () => import('./containers/[id]/customer'),
+    loadComponent: () => import('./containers/$id/customer'),
     children: [
       {
         path: 'contacts',

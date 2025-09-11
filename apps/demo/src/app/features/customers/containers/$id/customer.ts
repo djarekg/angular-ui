@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@a
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { distinctUntilChanged, map, tap } from 'rxjs';
 
 @Component({
@@ -18,6 +18,7 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
     MatSnackBarModule,
     MatTabsModule,
     Spinner,
+    RouterOutlet,
   ],
   templateUrl: './customer.html',
   styleUrl: './customer.css',
@@ -27,6 +28,7 @@ import { distinctUntilChanged, map, tap } from 'rxjs';
   },
 })
 export default class Customer {
+  readonly #router = inject(Router);
   readonly #service = inject(CustomerService);
   readonly #snackbar = inject(MatSnackBar);
   readonly #id = signal('');
@@ -70,5 +72,11 @@ export default class Customer {
       duration: 5000,
       panelClass: 'app-snackbar-success',
     });
+  }
+
+  protected onTabSelectedIndexChange(index: number) {
+    if (index === 1) {
+      this.#router.navigate(['/customers', this.#id(), 'contacts']);
+    }
   }
 }
