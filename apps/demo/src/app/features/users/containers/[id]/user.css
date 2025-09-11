@@ -1,5 +1,6 @@
 :host {
-  &:has(.mat-mdc-progress-spinner) {
-    align-items: center;
-  }
+  width: 70%;
+  margin-block-end: 130px;
+  /* TODO: this is temp fix for padding bottom from viewport edge */
+  box-sizing: border-box;
 }

@@ -4,7 +4,7 @@
  * @param {unknown} value - The value to check.
  * @returns {boolean} - Returns true if the value is null or undefined, otherwise false.
  */
-export const isNull = (value: unknown): boolean => {
+export const isNull = (value: unknown): value is null => {
   return value === null || value === undefined;
 };
 
@@ -14,7 +14,7 @@ export const isNull = (value: unknown): boolean => {
  * @param {unknown} value - The value to check.
  * @returns - Returns true if the value is empty, otherwise false.
  */
-export const isEmpty = (value: unknown) => {
+export const isEmpty = (value: unknown): value is null | undefined => {
   if (value === null || value === undefined) {
     return true;
   }

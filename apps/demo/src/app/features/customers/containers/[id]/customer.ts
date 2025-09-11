@@ -34,8 +34,8 @@ export default class Customer {
   protected readonly mode = signal<FormMode>(FormMode.view);
 
   protected readonly resource = resource({
-    params: () => ({ id: this.#id() }),
-    loader: ({ params: { id } }) => this.#service.getCustomer(id),
+    params: () => this.#id(),
+    loader: ({ params: id }) => this.#service.getCustomer(id),
   });
 
   constructor(route: ActivatedRoute) {

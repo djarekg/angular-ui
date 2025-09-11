@@ -1,7 +1,7 @@
 @defer (when userResource.hasValue()) {
-@if (userResource.hasValue()) {
+@if (userResource.value()) {
 <app-user-detail [mode]="mode()"
-                 [user]="userResource.value()"
+                 [user]="userResource.value()!"
                  (new)="onNew()"
                  (edit)="onEdit()"
                  (cancel)="onCancel()"

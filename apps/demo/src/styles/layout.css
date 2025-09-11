@@ -34,11 +34,10 @@ button {
 
 .app-loader {
   display: block;
-  width: 100%;
   height: 100%;
-  margin-inline: auto;
 
   &:has(.mat-mdc-table) {
     display: flex;
+    justify-self: center;
   }
 }

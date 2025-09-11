@@ -13,4 +13,9 @@ main {
   padding-block-end: 2rem;
   padding-inline: 2rem;
   overflow: hidden auto;
+
+  ::ng-deep>router-outlet+* {
+    display: block;
+    margin-inline: auto;
+  }
 }

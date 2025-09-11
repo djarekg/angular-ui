@@ -1,12 +1,12 @@
 import { Spinner } from '@/components/spinner/spinner';
 import { FormMode } from '@/core/constants/form-mode.js';
+import { isEmpty } from '@/core/utils/object.js';
 import { UserDetail } from '@/features/users/components/user-detail/user-detail.js';
 import { CustomUserModel } from '@/features/users/forms/user.model.js';
 import { UserService } from '@/features/users/services/user.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserModel } from '@aui/api';
 
 @Component({
   selector: 'app-user',
@@ -28,12 +28,12 @@ export default class User {
   protected readonly mode = signal<FormMode>(FormMode.view);
 
   protected readonly userResource = resource({
-    params: () => ({ id: this.#userId() }),
-    loader: ({ params: { id } }) => {
-      if (id && this.mode() === FormMode.view) {
+    params: () => this.#userId(),
+    loader: ({ params: id }) => {
+      if (!isEmpty(id) && this.mode() !== FormMode.new) {
         return this.#userService.getUser(id);
       }
-      return Promise.resolve({} as UserModel);
+      return Promise.resolve(null);
     },
   });
 

@@ -77,17 +77,17 @@ export class UserDetail {
   });
 
   readonly user = input.required<UserModel>();
-  readonly mode = input<FormMode>();
+  readonly mode = input<FormMode>(FormMode.view);
   readonly cancel = output();
   readonly edit = output();
   readonly new = output();
   readonly save = output<CustomUserModel>();
 
-  protected readonly isEditing = linkedSignal(() => this.mode() !== FormMode.view);
+  protected readonly isEditing = computed(() => this.mode() !== FormMode.view);
   protected readonly isNew = computed(() => this.mode() === FormMode.new);
   protected readonly form = form(this.#user, path => {
     apply(path, userSchema);
-    disabled(path, () => this.mode() === FormMode.view);
+    disabled(path, () => !this.isEditing());
   });
 
   protected onCancel() {
