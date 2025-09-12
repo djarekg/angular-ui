@@ -1,12 +1,16 @@
 :host {
-  --_container-width: 70%;
+  width: 70%;
 }
 
 .mat-mdc-tab-group {
-  width: var(--_container-width);
-  margin-inline: auto;
+  width: 100%;
 }
 
 ::ng-deep .mat-mdc-tab-body-content {
+  box-sizing: border-box;
   padding: 2rem 0;
+}
+
+::ng-deep .mat-mdc-tab-body-content router-outlet+* {
+  width: 100%;
 }
