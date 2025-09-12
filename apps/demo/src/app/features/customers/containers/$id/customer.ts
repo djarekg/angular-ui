@@ -76,7 +76,11 @@ export default class Customer {
 
   protected onTabSelectedIndexChange(index: number) {
     if (index === 1) {
-      this.#router.navigate(['/customers', this.#id(), 'contacts']);
+      this.#router.navigate(['/customers', this.#id(), 'contacts'], { skipLocationChange: true });
     }
+  }
+
+  protected onRouteOutletActivate(e: any) {
+    console.log(e);
   }
 }

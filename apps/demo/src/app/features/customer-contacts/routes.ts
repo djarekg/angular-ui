@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export default [
   {
     path: '',
+    outlet: 'customer-contacts',
     loadComponent: () => import('./containers/customer-contacts'),
   },
   {

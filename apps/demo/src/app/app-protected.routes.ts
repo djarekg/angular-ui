@@ -17,11 +17,6 @@ export default [
     loadChildren: () => import('@/features/customers/routes'),
   },
   {
-    path: 'customer-contacts',
-    title: 'Customer Contacts',
-    loadChildren: () => import('@/features/customer-contacts/routes'),
-  },
-  {
     path: 'settings',
     title: 'Settings',
     loadComponent: () => import('@/features/settings/settings'),

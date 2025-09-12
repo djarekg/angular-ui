@@ -19,8 +19,7 @@ export default class CustomerContacts {
   readonly #route = inject(ActivatedRoute);
   readonly #service = inject(CustomerContact);
 
-  readonly #customerId = this.#route.snapshot.paramMap.get('id')
-    ?? this.#route.parent?.snapshot.paramMap.get('id')
+  readonly #customerId = this.#route.parent?.parent?.snapshot.paramMap.get('id')
     ?? undefined;
 
   protected readonly resource = resource<CustomerContactModel[], string | undefined>({
