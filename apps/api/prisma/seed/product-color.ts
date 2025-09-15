@@ -1,5 +1,4 @@
-import { ProductType } from '#app/constants/product-type.js';
-import { Color, type PrismaClient } from '#app/generated/prisma/client.js';
+import { Color, type PrismaClient, ProductType } from '#app/generated/prisma/client.js';
 
 export const createProductColors = async (prisma: PrismaClient) => {
   console.log('Seeding ProductColor...');
@@ -12,67 +11,67 @@ export const createProductColors = async (prisma: PrismaClient) => {
       data: [
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Dress },
+            where: { productType: ProductType.DRESS },
           }))!.id,
           color: Color.BLACK,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Hat },
+            where: { productType: ProductType.HAT },
           }))!.id,
           color: Color.GREEN,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Hoodie },
+            where: { productType: ProductType.HOODIE },
           }))!.id,
           color: Color.BLUE,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Jacket },
+            where: { productType: ProductType.JACKET },
           }))!.id,
           color: Color.PINK,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Pants },
+            where: { productType: ProductType.PANTS },
           }))!.id,
           color: Color.BLUE,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Shirt },
+            where: { productType: ProductType.SHIRT },
           }))!.id,
           color: Color.RED,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Shoes },
+            where: { productType: ProductType.SHOES },
           }))!.id,
           color: Color.WHITE,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Shorts },
+            where: { productType: ProductType.SHORTS },
           }))!.id,
           color: Color.YELLOW,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Socks },
+            where: { productType: ProductType.SOCKS },
           }))!.id,
           color: Color.WHITE,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Sweater },
+            where: { productType: ProductType.SWEATER },
           }))!.id,
           color: Color.BLACK,
         },
         {
           productId: (await prisma.product.findFirst({
-            where: { productTypeId: ProductType.Underwear },
+            where: { productType: ProductType.UNDERWEAR },
           }))!.id,
           color: Color.ORANGE,
         },

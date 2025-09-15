@@ -21,4 +21,9 @@ export default [
     title: 'Settings',
     loadComponent: () => import('@/features/settings/settings'),
   },
+  {
+    path: 'products',
+    title: 'Products',
+    loadChildren: () => import('@/features/products/routes'),
+  },
 ] satisfies Routes;

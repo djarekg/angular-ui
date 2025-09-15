@@ -1,164 +1,163 @@
-import { ProductType } from '#app/constants/product-type.js';
-import { Gender, PrismaClient } from '#app/generated/prisma/client.js';
+import { Gender, PrismaClient, ProductType } from '#app/generated/prisma/client.js';
 import { faker } from '@faker-js/faker';
 
 export const createProducts = async (prisma: PrismaClient) => {
   console.log('Seeding Product...');
 
-  const createDressProduct = async (gender: Gender) =>
+  const createDRESSProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Dress`,
-        description: `${faker.commerce.productDescription()} dress`,
+        name: `${faker.commerce.productAdjective()} DRESS`,
+        description: `${faker.commerce.productDescription()} DRESS`,
         price: faker.commerce.price({ min: 10, max: 100 }),
-        productTypeId: ProductType.Dress,
+        productType: ProductType.DRESS,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createCamoHatProduct = async (gender: Gender) =>
+  const createCamoHATProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Hat`,
-        description: `${faker.commerce.productDescription()} hat`,
+        name: `${faker.commerce.productAdjective()} HAT`,
+        description: `${faker.commerce.productDescription()} HAT`,
         price: faker.commerce.price({ min: 10, max: 50 }),
-        productTypeId: ProductType.Hat,
+        productType: ProductType.HAT,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createHoodieProduct = async (gender: Gender) =>
+  const createHOODIEProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Hoodie`,
-        description: `${faker.commerce.productDescription()} hoodie`,
+        name: `${faker.commerce.productAdjective()} HOODIE`,
+        description: `${faker.commerce.productDescription()} HOODIE`,
         price: faker.commerce.price({ min: 20, max: 80 }),
-        productTypeId: ProductType.Hoodie,
+        productType: ProductType.HOODIE,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createJacketProduct = async (gender: Gender) =>
+  const createJACKETProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Jacket`,
-        description: `${faker.commerce.productDescription()} jacket`,
+        name: `${faker.commerce.productAdjective()} JACKET`,
+        description: `${faker.commerce.productDescription()} JACKET`,
         price: faker.commerce.price({ min: 30, max: 120 }),
-        productTypeId: ProductType.Jacket,
+        productType: ProductType.JACKET,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createPantsProduct = async (gender: Gender) =>
+  const createPANTSProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} ${faker.word.interjection()} Pants`,
-        description: `${faker.commerce.productDescription()} pants`,
+        name: `${faker.commerce.productAdjective()} ${faker.word.interjection()} PANTS`,
+        description: `${faker.commerce.productDescription()} PANTS`,
         price: faker.commerce.price({ min: 15, max: 90 }),
-        productTypeId: ProductType.Pants,
+        productType: ProductType.PANTS,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createShirtProduct = async (gender: Gender) =>
+  const createSHIRTProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Shirt`,
-        description: `${faker.commerce.productDescription()} shirt`,
+        name: `${faker.commerce.productAdjective()} SHIRT`,
+        description: `${faker.commerce.productDescription()} SHIRT`,
         price: faker.commerce.price({ min: 10, max: 70 }),
-        productTypeId: ProductType.Shirt,
+        productType: ProductType.SHIRT,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createShoesProduct = async (gender: Gender) =>
+  const createSHOESProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Shoes`,
-        description: `${faker.commerce.productDescription()} shoes`,
+        name: `${faker.commerce.productAdjective()} SHOES`,
+        description: `${faker.commerce.productDescription()} SHOES`,
         price: faker.commerce.price({ min: 25, max: 150 }),
-        productTypeId: ProductType.Shoes,
+        productType: ProductType.SHOES,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createShortsProduct = async (gender: Gender) =>
+  const createSHORTSProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Shorts`,
-        description: `${faker.commerce.productDescription()} shorts`,
+        name: `${faker.commerce.productAdjective()} SHORTS`,
+        description: `${faker.commerce.productDescription()} SHORTS`,
         price: faker.commerce.price({ min: 15, max: 80 }),
-        productTypeId: ProductType.Shorts,
+        productType: ProductType.SHORTS,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createSocksProduct = async (gender: Gender) =>
+  const createSOCKSProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Socks`,
-        description: `${faker.commerce.productDescription()} socks`,
+        name: `${faker.commerce.productAdjective()} SOCKS`,
+        description: `${faker.commerce.productDescription()} SOCKS`,
         price: faker.commerce.price({ min: 5, max: 30 }),
-        productTypeId: ProductType.Socks,
+        productType: ProductType.SOCKS,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createSweaterProduct = async (gender: Gender) =>
+  const createSWEATERProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Sweater`,
-        description: `${faker.commerce.productDescription()} sweater`,
+        name: `${faker.commerce.productAdjective()} SWEATER`,
+        description: `${faker.commerce.productDescription()} SWEATER`,
         price: faker.commerce.price({ min: 20, max: 100 }),
-        productTypeId: ProductType.Sweater,
+        productType: ProductType.SWEATER,
         genderId: gender,
         isActive: true,
       },
     });
 
-  const createUnderwearProduct = async (gender: Gender) =>
+  const createUNDERWEARProduct = async (gender: Gender) =>
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} Underwear`,
-        description: `${faker.commerce.productDescription()} underwear`,
+        name: `${faker.commerce.productAdjective()} UNDERWEAR`,
+        description: `${faker.commerce.productDescription()} UNDERWEAR`,
         price: faker.commerce.price({ min: 5, max: 50 }),
-        productTypeId: ProductType.Underwear,
+        productType: ProductType.UNDERWEAR,
         genderId: gender,
         isActive: true,
       },
     });
 
   for (const [_, value] of Object.entries(Gender)) {
-    Array.from({ length: 5 }).forEach(async () => await createDressProduct(value));
-    Array.from({ length: 5 }).forEach(async () => await createCamoHatProduct(value));
-    Array.from({ length: 7 }).forEach(async () => await createHoodieProduct(value));
-    Array.from({ length: 4 }).forEach(async () => await createJacketProduct(value));
-    Array.from({ length: 3 }).forEach(async () => await createPantsProduct(value));
-    Array.from({ length: 5 }).forEach(async () => await createShirtProduct(value));
-    Array.from({ length: 6 }).forEach(async () => await createShoesProduct(value));
-    Array.from({ length: 3 }).forEach(async () => await createShortsProduct(value));
-    Array.from({ length: 33 }).forEach(async () => await createSocksProduct(value));
-    Array.from({ length: 7 }).forEach(async () => await createSweaterProduct(value));
-    Array.from({ length: 5 }).forEach(async () => await createUnderwearProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createDRESSProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createCamoHATProduct(value));
+    Array.from({ length: 7 }).forEach(async () => await createHOODIEProduct(value));
+    Array.from({ length: 4 }).forEach(async () => await createJACKETProduct(value));
+    Array.from({ length: 3 }).forEach(async () => await createPANTSProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createSHIRTProduct(value));
+    Array.from({ length: 6 }).forEach(async () => await createSHOESProduct(value));
+    Array.from({ length: 3 }).forEach(async () => await createSHORTSProduct(value));
+    Array.from({ length: 33 }).forEach(async () => await createSOCKSProduct(value));
+    Array.from({ length: 7 }).forEach(async () => await createSWEATERProduct(value));
+    Array.from({ length: 5 }).forEach(async () => await createUNDERWEARProduct(value));
   }
 };

@@ -2,7 +2,6 @@ import { prisma } from '#app/client/index.js';
 import { createProductColors } from '#prisma/seed/product-color.js';
 import { createProductInventories } from '#prisma/seed/product-inventory.js';
 import { createProductSales } from '#prisma/seed/product-sale.js';
-import { createProductTypes } from '#prisma/seed/product-type.js';
 import { createProducts } from '#prisma/seed/product.js';
 import { createUserCredential } from '#prisma/seed/user-credential.js';
 import { createCustomerContacts } from './customer-contact.js';
@@ -16,7 +15,6 @@ const load = async () => {
   await createUserCredential(prisma);
   await createCustomers(prisma);
   await createCustomerContacts(prisma);
-  await createProductTypes(prisma);
   await createProducts(prisma);
   await createProductColors(prisma);
   await createProductInventories(prisma);

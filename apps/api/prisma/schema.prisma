@@ -12,7 +12,7 @@ datasource db {
 
 generator client {
   provider        = "prisma-client"
-  previewFeatures = ["queryCompiler", "driverAdapters", "fullTextSearchPostgres"]
+  previewFeatures = ["fullTextSearchPostgres"]
   output          = "../src/generated/prisma"
 }
 
@@ -55,6 +55,20 @@ enum Color {
   RED
   WHITE
   YELLOW
+}
+
+enum ProductType {
+  DRESS
+  HAT
+  HOODIE
+  JACKET
+  PANTS
+  SHIRT
+  SHOES
+  SHORTS
+  SOCKS
+  SWEATER
+  UNDERWEAR
 }
 
 model State {
@@ -129,28 +143,19 @@ model CustomerContact {
   state          State    @relation(fields: [stateId], references: [id])
 }
 
-model ProductType {
-  id          String    @id @default(uuid())
-  name        String
-  dateCreated DateTime  @default(now())
-  dateUpdated DateTime  @updatedAt
-  product     Product[]
-}
-
 model Product {
   id               String             @id @default(uuid())
   name             String
   description      String
   price            String
   genderId         String
-  productTypeId    String
+  productType      ProductType
   isActive         Boolean            @default(false)
   dateCreated      DateTime           @default(now())
   dateUpdated      DateTime           @updatedAt
-  productType      ProductType?       @relation(fields: [productTypeId], references: [id])
   productInventory ProductInventory[]
   productSales     ProductSale[]
-  ProductColor     ProductColor[]
+  productColor     ProductColor[]
 }
 
 model ProductColor {
