@@ -1,1 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
 
+.app-filter-input {
+  width: 60%;
+  opacity: 0;
+  animation: fadeIn 500ms ease-in 1s forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

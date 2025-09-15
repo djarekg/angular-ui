@@ -40,9 +40,9 @@ export class AppErrorHandler implements ErrorHandler {
           actionText,
         } satisfies ErrorSnackBarData,
       },
-    ).onAction()
+    ) /*.onAction()
       .subscribe(() => {
         this.#document.location.reload();
-      });
+      })*/;
   }
 }

@@ -1,0 +1,16 @@
+<button matIconButton
+        #trigger="cdkOverlayOrigin"
+        cdkOverlayOrigin
+        [matTooltip]="tooltip()"
+        aria-label="Filter options"
+        (click)="isOpen.set(true)">
+  <mat-icon>{{ triggerIcon() }}</mat-icon>
+</button>
+<ng-template cdkConnectedOverlay
+             [cdkConnectedOverlayOrigin]="trigger"
+             [cdkConnectedOverlayOpen]="isOpen()"
+             (detach)="isOpen.set(false)">
+  <div class="popover-container">
+    <ng-content />
+  </div>
+</ng-template>

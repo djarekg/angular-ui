@@ -26,6 +26,7 @@ import { CustomerModel } from '@aui/api';
 })
 export class CustomerList {
   readonly customers = input.required<CustomerModel[]>();
+  readonly filter = input('');
 
   protected readonly columnsToDisplay = [
     'name',
@@ -40,6 +41,10 @@ export class CustomerList {
   constructor() {
     effect(() => {
       this.dataSource.data = this.customers() ?? [];
+    });
+
+    effect(() => {
+      this.dataSource.filter = this.filter();
     });
   }
 }

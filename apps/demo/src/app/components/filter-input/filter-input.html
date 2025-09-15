@@ -1,0 +1,12 @@
+<mat-form-field>
+  @if (hasLabel()) {
+  <mat-label>{{ label() }}</mat-label>
+  }
+  @if (hasIcon()) {
+  <mat-icon matPrefix>{{ icon() }}</mat-icon>
+  }
+  <input matInput
+         autocomplete="filter-input"
+         [placeholder]="placeholder()"
+         (keypress)="onKeypress($event)" />
+</mat-form-field>
