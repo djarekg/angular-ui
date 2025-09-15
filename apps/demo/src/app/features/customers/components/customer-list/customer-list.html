@@ -1,4 +1,4 @@
-<!-- @defer (when dataSource.data.length) { -->
+@defer (when dataSource.data.length) {
 <mat-table matSort
            class="app-table app-selectable"
            [dataSource]="dataSource">
@@ -55,6 +55,8 @@
   <mat-row *matRowDef="let row; columns: columnsToDisplay" />
 
 </mat-table>
-<!-- }
-@loading {
-} -->
+}
+@loading (minimum 2s) {
+<app-table-skeleton rows="9"
+                    columns="3" />
+}

@@ -1,4 +1,4 @@
-import { CardSkeleton } from '@/components/skeletons/card-skeleton/card-skeleton.js';
+import { CardSkeleton } from '@/components/skeleton/card-skeleton/card-skeleton.js';
 import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
