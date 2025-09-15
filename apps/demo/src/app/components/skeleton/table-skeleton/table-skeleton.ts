@@ -13,6 +13,9 @@ import {
   templateUrl: './table-skeleton.html',
   styleUrl: './table-skeleton.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'app-table-skeleton',
+  },
 })
 export class TableSkeleton {
   readonly rows = input<number, string>(5, { transform: numberAttribute });

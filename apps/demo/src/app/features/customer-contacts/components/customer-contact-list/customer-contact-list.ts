@@ -1,4 +1,4 @@
-import { Spinner } from "@/components/spinner/spinner";
+import { TableSkeleton } from '@/components/skeleton/table-skeleton/table-skeleton.js';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,7 @@ import { CustomerContactModel } from '@aui/api';
     MatTableModule,
     MatTooltipModule,
     RouterLink,
-    Spinner
+    TableSkeleton,
   ],
   templateUrl: './customer-contact-list.html',
   styleUrl: './customer-contact-list.css',

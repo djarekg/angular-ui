@@ -5,6 +5,10 @@
   padding-inline-end: 2px;
 }
 
+.app-table-skeleton {
+  width: calc(100% - 2px);
+}
+
 .mat-column-dateCreated {
   max-width: 150px;
 }

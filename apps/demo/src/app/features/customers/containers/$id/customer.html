@@ -1,6 +1,7 @@
 @defer (when resource.hasValue()) {
 @if (resource.hasValue()) {
 <mat-tab-group dynamicHeight
+               animationDuration="0ms"
                mat-stretch-tabs="false"
                (selectedIndexChange)="onTabSelectedIndexChange($event)">
   <mat-tab label="Details">

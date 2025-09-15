@@ -1,10 +1,4 @@
 @defer (when resource.hasValue()) {
-<!-- <header>
-  <app-filter-input (valueChange)="onFilter($event)" />
-</header> -->
 <app-customer-list [customers]="resource.value()"
                    [filter]="filter()" />
 }
-<!-- @loading (minimum 2s) {
-<app-spinner />
-} -->

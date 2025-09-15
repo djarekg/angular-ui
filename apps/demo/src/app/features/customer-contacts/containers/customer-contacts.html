@@ -1,6 +1,3 @@
 @defer (when resource.hasValue()) {
 <app-customer-contact-list [items]="resource.value()" />
 }
-@loading (minimum 2s) {
-<app-spinner />
-}
