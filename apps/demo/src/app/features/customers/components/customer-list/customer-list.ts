@@ -1,4 +1,3 @@
-import { Spinner } from '@/components/spinner/spinner';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +14,7 @@ import { CustomerModel } from '@aui/api';
     MatTableModule,
     MatTooltipModule,
     RouterLink,
-    Spinner,
+    // Spinner,
   ],
   templateUrl: './customer-list.html',
   styleUrl: './customer-list.css',
