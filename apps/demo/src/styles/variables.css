@@ -9,7 +9,7 @@
   --app-color-on-success: var(--mat-sys-on-surface);
   --app-color-info: #2979ff;
   --app-color-warning: #ffa726;
-  --app-color-error: var(--mat-sys-error-container);
+  --app-color-error: var(--app-color-error-light);
   --app-color-on-error: var(--mat-sys-on-surface);
   --app-color-text-dim: var(--mat-sys-outline);
   --app-color-yellow: #fff9c4;
