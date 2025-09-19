@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.mat-mdc-card {
+  gap: 1rem;
+
+  &:not(.placeholder) {
+    will-change: transform;
+
+    &:hover {
+      transform: scale(1.05);
+      transition: transform 150ms ease-in;
+    }
+  }
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  justify-content: space-between;
+}

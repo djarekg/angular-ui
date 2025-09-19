@@ -1,6 +1,6 @@
 import { ApiService } from '@/core/api/api.service.js';
 import { inject, Injectable } from '@angular/core';
-import { ProductModel } from '@aui/api';
+import { ProductModel, ProductType } from '@aui/api';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,8 @@ import { ProductModel } from '@aui/api';
 export class ProductService {
   readonly #api = inject(ApiService);
 
-  get = () => this.#api.get<ProductModel[]>('/products');
+  get = (productTypes: ProductType[]) =>
+    this.#api.get<ProductModel[]>(`/products?productTypes=${productTypes.join(',')}`);
   getById = (id: string) => this.#api.get<ProductModel>(`/products/${id}`);
   update = (product: ProductModel) =>
     this.#api.post<ProductModel>(`/produts/${product.id}`, product);

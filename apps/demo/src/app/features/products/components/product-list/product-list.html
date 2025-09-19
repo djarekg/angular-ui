@@ -1,0 +1,21 @@
+<div class="container">
+  @defer (when products()) {
+  @if (products(); as products) {
+  @for (product of products; track product.id) {
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        {{ product.name }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        {{ product.description }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      {{ product.price | currency }}
+    </mat-card-content>
+  </mat-card>
+  }
+  }
+  }
+</div>

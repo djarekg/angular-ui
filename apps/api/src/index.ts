@@ -1,5 +1,5 @@
 export { type SearchResultType, SearchResultTypes } from '#app/constants/index.js';
-export type { Color, Gender, ProductType, Role, Size } from '#app/generated/prisma/enums.js';
+export { Color, Gender, ProductType, Role, Size } from '#app/generated/prisma/enums.js';
 export type {
   CustomerContactModel,
   CustomerModel,

@@ -1,10 +1,22 @@
 import { prisma } from '#app/client/index.js';
+import type { ProductType } from '#app/generated/prisma/enums.js';
 import type { ProductModel } from '#app/generated/prisma/models.js';
 import type { Context } from 'koa';
 
 export const getProducts = async (ctx: Context) => {
+  const { query: { productTypes } } = ctx;
+  const where = productTypes === ''
+    ? undefined
+    : {
+      productType: {
+        in: (`${productTypes}`.split(',') as ProductType[]),
+      },
+    };
+
   try {
-    const products = await prisma.product.findMany();
+    const products = await prisma.product.findMany({
+      where,
+    });
     ctx.body = products;
   }
   catch (err) {

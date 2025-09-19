@@ -8,8 +8,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} DRESS`,
-        description: `${faker.commerce.productDescription()} DRESS`,
+        name: `${faker.commerce.productAdjective()} dress`,
+        description: `${faker.commerce.productDescription()} dress`,
         price: faker.commerce.price({ min: 10, max: 100 }),
         productType: ProductType.DRESS,
         genderId: gender,
@@ -21,8 +21,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} HAT`,
-        description: `${faker.commerce.productDescription()} HAT`,
+        name: `${faker.commerce.productAdjective()} hat`,
+        description: `${faker.commerce.productDescription()} hat`,
         price: faker.commerce.price({ min: 10, max: 50 }),
         productType: ProductType.HAT,
         genderId: gender,
@@ -34,8 +34,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} HOODIE`,
-        description: `${faker.commerce.productDescription()} HOODIE`,
+        name: `${faker.commerce.productAdjective()} hoodie`,
+        description: `${faker.commerce.productDescription()} hoodie`,
         price: faker.commerce.price({ min: 20, max: 80 }),
         productType: ProductType.HOODIE,
         genderId: gender,
@@ -47,8 +47,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} JACKET`,
-        description: `${faker.commerce.productDescription()} JACKET`,
+        name: `${faker.commerce.productAdjective()} jacket`,
+        description: `${faker.commerce.productDescription()} jacket`,
         price: faker.commerce.price({ min: 30, max: 120 }),
         productType: ProductType.JACKET,
         genderId: gender,
@@ -60,8 +60,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} ${faker.word.interjection()} PANTS`,
-        description: `${faker.commerce.productDescription()} PANTS`,
+        name: `${faker.commerce.productAdjective()} ${faker.word.interjection()} pants`,
+        description: `${faker.commerce.productDescription()} pants`,
         price: faker.commerce.price({ min: 15, max: 90 }),
         productType: ProductType.PANTS,
         genderId: gender,
@@ -73,8 +73,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} SHIRT`,
-        description: `${faker.commerce.productDescription()} SHIRT`,
+        name: `${faker.commerce.productAdjective()} shirt`,
+        description: `${faker.commerce.productDescription()} shirt`,
         price: faker.commerce.price({ min: 10, max: 70 }),
         productType: ProductType.SHIRT,
         genderId: gender,
@@ -86,8 +86,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} SHOES`,
-        description: `${faker.commerce.productDescription()} SHOES`,
+        name: `${faker.commerce.productAdjective()} shoes`,
+        description: `${faker.commerce.productDescription()} shoes`,
         price: faker.commerce.price({ min: 25, max: 150 }),
         productType: ProductType.SHOES,
         genderId: gender,
@@ -99,8 +99,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} SHORTS`,
-        description: `${faker.commerce.productDescription()} SHORTS`,
+        name: `${faker.commerce.productAdjective()} shorts`,
+        description: `${faker.commerce.productDescription()} shorts`,
         price: faker.commerce.price({ min: 15, max: 80 }),
         productType: ProductType.SHORTS,
         genderId: gender,
@@ -112,8 +112,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} SOCKS`,
-        description: `${faker.commerce.productDescription()} SOCKS`,
+        name: `${faker.commerce.productAdjective()} socks`,
+        description: `${faker.commerce.productDescription()} socks`,
         price: faker.commerce.price({ min: 5, max: 30 }),
         productType: ProductType.SOCKS,
         genderId: gender,
@@ -125,8 +125,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} SWEATER`,
-        description: `${faker.commerce.productDescription()} SWEATER`,
+        name: `${faker.commerce.productAdjective()} sweater`,
+        description: `${faker.commerce.productDescription()} sweater`,
         price: faker.commerce.price({ min: 20, max: 100 }),
         productType: ProductType.SWEATER,
         genderId: gender,
@@ -138,8 +138,8 @@ export const createProducts = async (prisma: PrismaClient) => {
     await prisma.product.create({
       data: {
         id: faker.string.uuid(),
-        name: `${faker.commerce.productAdjective()} UNDERWEAR`,
-        description: `${faker.commerce.productDescription()} UNDERWEAR`,
+        name: `${faker.commerce.productAdjective()} underwear`,
+        description: `${faker.commerce.productDescription()} underwear`,
         price: faker.commerce.price({ min: 5, max: 50 }),
         productType: ProductType.UNDERWEAR,
         genderId: gender,

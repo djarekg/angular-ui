@@ -1,0 +1,4 @@
+@for (type of productTypes; track $index) {
+<mat-checkbox [value]="type.value"
+              (change)="onCheckboxChange()">{{ type.key | titlecase }}</mat-checkbox>
+}
