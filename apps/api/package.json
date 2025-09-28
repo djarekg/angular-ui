@@ -2,9 +2,9 @@
   "name": "@aui/api",
   "private": false,
   "version": "1.0.0",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
-    "pnpm": "10.13.1"
+    "pnpm": "10.17.1"
   },
   "type": "module",
   "imports": {

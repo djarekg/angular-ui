@@ -6,6 +6,7 @@ import {
   authRouter,
   customerContactsRouter,
   customersRouter,
+  dashboardRouter,
   productsRouter,
   searchRouter,
   statesRouter,
@@ -30,5 +31,6 @@ app.use(searchRouter.routes());
 app.use(customersRouter.routes());
 app.use(customerContactsRouter.routes());
 app.use(productsRouter.routes());
+app.use(dashboardRouter.routes());
 
 app.listen(port, () => console.log(`🚀 Server ready at: http://localhost:${port}`));
