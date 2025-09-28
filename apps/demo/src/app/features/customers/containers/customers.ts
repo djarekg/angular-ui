@@ -1,12 +1,10 @@
-import { FilterInput } from '@/components/filter-input/filter-input.js';
-import { Spinner } from '@/components/spinner/spinner';
 import { CustomerList } from '@/features/customers/components/customer-list/customer-list.js';
 import { CustomerService } from '@/features/customers/services';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 
 @Component({
   selector: 'app-customers',
-  imports: [CustomerList, FilterInput, Spinner],
+  imports: [CustomerList],
   templateUrl: './customers.html',
   styleUrl: './customers.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

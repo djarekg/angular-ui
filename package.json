@@ -2,7 +2,7 @@
   "name": "@aui/workspace",
   "private": true,
   "version": "1.0.0",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.17.1",
   "type": "module",
   "scripts": {
     "setup": "rimraf -g **/node_modules pnpm-lock.yaml && pnpm install"

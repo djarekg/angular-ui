@@ -1,7 +1,7 @@
 <div class="container">
-  @defer (when products()) {
   @if (products(); as products) {
   @for (product of products; track product.id) {
+  @defer (on viewport; prefetch on idle) {
   <mat-card>
     <mat-card-header>
       <mat-card-title>
@@ -11,10 +11,14 @@
         {{ product.description }}
       </mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      {{ product.price | currency }}
-    </mat-card-content>
+    <img mat-card-image
+         loading="lazy"
+         src="/assets/images/product-types/{{ product.productType | lowercase }}.jpeg" />
+    <div class="price">{{ product.price | currency }}</div>
   </mat-card>
+  }
+  @placeholder {
+  <div class="app-card"></div>
   }
   }
   }

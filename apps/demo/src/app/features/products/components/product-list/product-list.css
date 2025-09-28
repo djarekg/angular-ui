@@ -7,6 +7,7 @@
 }
 
 .mat-mdc-card {
+  position: relative;
   gap: 1rem;
 
   &:not(.placeholder) {
@@ -17,9 +18,36 @@
       transition: transform 150ms ease-in;
     }
   }
+
+  img {
+    border-end-start-radius: var(--mat-sys-corner-medium);
+    border-end-end-radius: var(--mat-sys-corner-medium);
+  }
 }
 
 .mat-mdc-card-header {
   display: flex;
   justify-content: space-between;
+}
+
+/* .mat-mdc-card-title {
+  color: var(--app-color-primary);
+} */
+
+.mat-mdc-card-subtitle {
+  font-size: var(--mat-sys-title-small-size);
+  font-weight: 300;
+  height: 75px;
+  margin-block-start: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--app-color-text);
+}
+
+.price {
+  position: absolute;
+  inset-block-end: 1rem;
+  inset-inline-end: 1rem;
+  font: var(--mat-sys-title-large);
+  /* color: var(--app-color-secondary); */
 }

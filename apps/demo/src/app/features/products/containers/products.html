@@ -1,5 +1,5 @@
-<app-product-type-select (valueChange)="onProductTypeChange($event)" />
 @defer (when resource.hasValue()) {
+<app-product-type-select (valueChange)="onProductTypesChange($event)" />
 @if (resource.value(); as products) {
 <app-product-list [products]="products" />
 }

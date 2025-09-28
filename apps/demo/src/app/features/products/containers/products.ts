@@ -20,7 +20,7 @@ export default class Products {
     loader: ({ params }) => this.#service.get(params),
   });
 
-  protected onProductTypeChange(productTypes: ProductType[]) {
-    this.#productTypes.set(productTypes);
+  onProductTypesChange(value: ProductType[]) {
+    this.#productTypes.set(value);
   }
 }
