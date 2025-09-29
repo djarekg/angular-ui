@@ -1,5 +1,11 @@
-:host {
-  padding-block-start: 3rem;
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "a b"
+    "b c";
+  gap: 4rem;
+  padding: 2rem 4rem;
 }
 
 .app-home-title {

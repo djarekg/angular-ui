@@ -3,6 +3,12 @@
 @use "./theme-colors" as app-theme;
 
 html {
+  $app-color-primary-dark: map.get(app-theme.$primary-palette, primary, 35);
+  --app-color-primary-dark: #{$app-color-primary-dark};
+
+  $app-color-primary-light: map.get(app-theme.$primary-palette, primary, 60);
+  --app-color-primary-light: #{$app-color-primary-light};
+
   $app-color-text: map.get(app-theme.$primary-palette, neutral-variant, 80);
   --app-color-text: #{$app-color-text};
 

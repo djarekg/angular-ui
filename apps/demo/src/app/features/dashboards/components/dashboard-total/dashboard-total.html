@@ -1,0 +1,21 @@
+@defer (when resource.hasValue()) {
+@if (resource.value(); as value) {
+<mat-icon class="icon">{{ icon() }}</mat-icon>
+<button matIconButton
+        aria-label="Options"
+        class="options">
+  <mat-icon>more_horiz</mat-icon>
+</button>
+<span class="label">{{ label() | titlecase }}</span>
+<span class="total">
+  @switch (totalType()) {
+  @case (1) {
+  {{ value.total | currency }}
+  }
+  @case (2) {
+  {{ value.total | number }}
+  }
+  }
+</span>
+}
+}
