@@ -26,7 +26,7 @@ section {
 .options {
   position: absolute !important;
   inset-block-start: -4px;
-  inset-inline-end: -14px;
+  inset-inline-end: -22px;
   color: var(--mat-sys-primary);
 }
 

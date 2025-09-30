@@ -7,7 +7,7 @@ import DashboardTotal from './dashboard-total/dashboard-total.js';
   selector: 'app-dashboard-total-quantity-sold',
   imports: [DashboardTotal],
   template: `
-    <app-dashboard-total [type]="type" [totalType]="totalType" label="Total Sales" />
+    <app-dashboard-total [type]="type" [totalType]="totalType" label="Total Quantity Sold" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
