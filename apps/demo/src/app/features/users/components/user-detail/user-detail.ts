@@ -41,6 +41,9 @@ import { UserModel } from '@aui/api';
   templateUrl: './user-detail.html',
   styleUrl: './user-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'has-active',
+  },
 })
 export class UserDetail {
   readonly #user = linkedSignal<CustomUserModel>(() => {

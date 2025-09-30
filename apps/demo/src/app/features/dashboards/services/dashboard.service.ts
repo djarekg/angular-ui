@@ -1,5 +1,4 @@
 import { ApiService } from '@/core/api/api.service.js';
-import { TotalModel } from '@/features/dashboards/models/total.js';
 import { DashboardType } from '@/features/dashboards/types/dashboard-type.js';
 import { inject, Injectable } from '@angular/core';
 
@@ -16,6 +15,6 @@ export const DashboardApi = {
 export class DashboardService {
   readonly #api = inject(ApiService);
 
-  get = (type: DashboardType, year: number) =>
-    this.#api.get<TotalModel>(`/dashboard/${DashboardApi[type]}/${year}`);
+  get = <T = unknown>(type: DashboardType, year: number) =>
+    this.#api.get<T>(`/dashboard/${DashboardApi[type]}/${year}`);
 }

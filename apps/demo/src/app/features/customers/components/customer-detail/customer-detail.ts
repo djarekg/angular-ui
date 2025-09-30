@@ -32,6 +32,9 @@ import { CustomerModel } from '@aui/api';
   templateUrl: './customer-detail.html',
   styleUrl: './customer-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'has-active',
+  },
 })
 export class CustomerDetail {
   readonly #customer = linkedSignal<AppCustomerModel>(() => {

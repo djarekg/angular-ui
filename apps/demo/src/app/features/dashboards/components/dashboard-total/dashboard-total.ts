@@ -1,4 +1,4 @@
-import { TotalModel } from '@/features/dashboards/models/total.js';
+import { TotalModel } from '@/features/dashboards/models';
 import { DashboardService } from '@/features/dashboards/services/dashboard.service.js';
 import { DashboardType } from '@/features/dashboards/types/dashboard-type.js';
 import { CurrencyPipe, DecimalPipe, TitleCasePipe } from '@angular/common';
@@ -38,8 +38,8 @@ export default class DashboardTotal {
     }
   });
 
-  protected resource = resource({
+  protected readonly resource = resource({
     defaultValue: this.defaultValue(),
-    loader: () => this.#service.get(this.type(), new Date().getFullYear()),
+    loader: () => this.#service.get<TotalModel>(this.type(), new Date().getFullYear()),
   });
 }

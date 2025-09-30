@@ -1,0 +1,18 @@
+<header>
+  <span class="label">{{ label() }}</span>
+  <mat-slide-toggle [checked]="isTopFive()"
+                    (change)="isTopFive.set($event.checked)">
+    {{ isTopFive() ? 'Top 5' : 'All' }}
+  </mat-slide-toggle>
+  <button matIconButton
+          aria-label="Options"
+          class="options">
+    <mat-icon>more_horiz</mat-icon>
+  </button>
+</header>
+<section>
+  @for (item of filtered(); track item.id) {
+  <div class="name">{{ item.name | titlecase }}</div>
+  <div class="total">{{ item.total | currency }}</div>
+  }
+</section>

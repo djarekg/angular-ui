@@ -4,8 +4,11 @@
   grid-template-areas:
     "a b"
     "b c";
-  gap: 4rem;
-  padding: 2rem 4rem;
+  column-gap: 4rem;
+  row-gap: 2rem;
+  width: 70%;
+  padding: 2rem;
+  margin-inline: auto;
 }
 
 .app-home-title {

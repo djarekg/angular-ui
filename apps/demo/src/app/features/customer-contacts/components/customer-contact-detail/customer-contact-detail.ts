@@ -5,8 +5,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [],
   templateUrl: './customer-contact-detail.html',
   styleUrl: './customer-contact-detail.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    class: 'has-active',
+  },
 })
 export default class CustomerContactDetail {
-
 }

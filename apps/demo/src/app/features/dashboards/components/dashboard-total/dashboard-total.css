@@ -10,7 +10,7 @@
 }
 
 .icon {
-  --_size: 44px;
+  --_size: 40px;
 
   position: absolute;
   inset-block-start: 6px;
@@ -29,11 +29,11 @@
 }
 
 .label {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   text-transform: uppercase;
 }
 
 .total {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 600;
 }
