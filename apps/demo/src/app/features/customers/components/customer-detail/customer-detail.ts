@@ -1,4 +1,4 @@
-import { StateSelect } from '@/components/state-select/state-select.js';
+import { StateSelect } from '@/components/select/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { customerSchema } from '@/features/customers/forms/customer.schema.js';

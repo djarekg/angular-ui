@@ -1,7 +1,6 @@
 import { CurrencyPipe, LowerCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
 import { ProductModel } from '@aui/api';
 
 @Component({
@@ -12,11 +11,10 @@ import { ProductModel } from '@aui/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductList {
-  readonly #router = inject(Router);
-
   readonly products = input.required<ProductModel[]>();
+  readonly productClick = output<string>();
 
   protected onProductClick(id: string) {
-    this.#router.navigate(['/products', id]);
+    this.productClick.emit(id);
   }
 }

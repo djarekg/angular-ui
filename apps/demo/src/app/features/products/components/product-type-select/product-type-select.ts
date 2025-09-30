@@ -1,13 +1,12 @@
 import { TitleCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { FormValueControl, ValidationError, WithOptionalField } from '@angular/forms/signals';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { ProductType } from '@aui/api';
 
 @Component({
   selector: 'app-product-type-select',
-  imports: [MatCheckboxModule, MatSelectModule, TitleCasePipe],
+  imports: [MatSelectModule, TitleCasePipe],
   templateUrl: './product-type-select.html',
   styleUrl: './product-type-select.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

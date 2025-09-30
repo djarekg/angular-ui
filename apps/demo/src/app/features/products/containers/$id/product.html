@@ -1,1 +1,3 @@
-<p>product works!</p>
+@if (resource.value(); as product) {
+<app-product-detail [product]="product" />
+}

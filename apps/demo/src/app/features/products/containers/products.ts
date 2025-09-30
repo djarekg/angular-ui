@@ -2,6 +2,7 @@ import { ProductList } from '@/features/products/components/product-list/product
 import { ProductTypeSelect } from '@/features/products/components/product-type-select/product-type-select.js';
 import { ProductService } from '@/features/products/services/product.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductType } from '@aui/api';
 
 @Component({
@@ -12,6 +13,7 @@ import { ProductType } from '@aui/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Products {
+  readonly #router = inject(Router);
   readonly #service = inject(ProductService);
   readonly #productTypes = signal<ProductType[]>([]);
 
@@ -20,7 +22,11 @@ export default class Products {
     loader: ({ params }) => this.#service.get(params),
   });
 
-  onProductTypesChange(value: ProductType[]) {
+  protected onProductTypesChange(value: ProductType[]) {
     this.#productTypes.set(value);
+  }
+
+  protected onProductClick(id: string) {
+    this.#router.navigate(['/products', id]);
   }
 }
