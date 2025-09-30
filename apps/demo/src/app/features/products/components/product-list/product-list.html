@@ -2,7 +2,7 @@
   @if (products(); as products) {
   @for (product of products; track product.id) {
   @defer (on viewport; prefetch on idle) {
-  <mat-card>
+  <mat-card (click)="onProductClick(product.id)">
     <mat-card-header>
       <mat-card-title>
         {{ product.name }}

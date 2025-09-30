@@ -1,6 +1,7 @@
-import { CurrencyPipe, LowerCasePipe, NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CurrencyPipe, LowerCasePipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 import { ProductModel } from '@aui/api';
 
 @Component({
@@ -11,5 +12,11 @@ import { ProductModel } from '@aui/api';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductList {
-  products = input.required<ProductModel[]>();
+  readonly #router = inject(Router);
+
+  readonly products = input.required<ProductModel[]>();
+
+  protected onProductClick(id: string) {
+    this.#router.navigate(['/products', id]);
+  }
 }
