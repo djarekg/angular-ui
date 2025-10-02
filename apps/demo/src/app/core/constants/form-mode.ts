@@ -1,7 +1,9 @@
 export const FormMode = {
-  view: 0,
-  edit: 1,
-  new: 2,
+  cancel: 0,
+  view: 1,
+  edit: 2,
+  new: 3,
+  save: 4,
 } as const;
 
 export type FormMode = (typeof FormMode)[keyof typeof FormMode];

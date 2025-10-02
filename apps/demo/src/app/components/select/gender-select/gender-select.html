@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>Gender</mat-label>
-  <mat-select multiple
+  <mat-select [disabled]="disabled()"
               [value]="value()"
               (valueChange)="onChange($event)">
     @for (type of genders; track type.value) {

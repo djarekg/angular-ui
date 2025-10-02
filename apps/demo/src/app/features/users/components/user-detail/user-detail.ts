@@ -1,7 +1,9 @@
+import { Form, FormCard } from '@/components/form';
+import { GenderSelect } from '@/components/select';
 import { StateSelect } from '@/components/select/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { userSchema } from '@/features/users/forms';
-import { CustomUserModel } from '@/features/users/forms/user.model.js';
+import { UserFormModel } from '@/features/users/forms/user-form.model.js';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -10,12 +12,9 @@ import {
   linkedSignal,
   output,
 } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -26,16 +25,15 @@ import { UserModel } from '@aui/api';
   selector: 'app-user-detail',
   imports: [
     Control,
+    Form,
+    FormCard,
     FormsModule,
-    MatButtonModule,
-    MatCardModule,
+    GenderSelect,
     MatCheckboxModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatSlideToggleModule,
     MatTooltipModule,
-    ReactiveFormsModule,
     StateSelect,
   ],
   templateUrl: './user-detail.html',
@@ -46,7 +44,7 @@ import { UserModel } from '@aui/api';
   },
 })
 export class UserDetail {
-  readonly #user = linkedSignal<CustomUserModel>(() => {
+  readonly #user = linkedSignal<UserFormModel>(() => {
     const {
       id,
       firstName,
@@ -84,30 +82,33 @@ export class UserDetail {
   readonly cancel = output();
   readonly edit = output();
   readonly new = output();
-  readonly save = output<CustomUserModel>();
+  readonly save = output<UserFormModel>();
 
   protected readonly isEditing = computed(() => this.mode() !== FormMode.view);
-  protected readonly isNew = computed(() => this.mode() === FormMode.new);
+  protected readonly = computed(() => this.mode() === FormMode.new);
   protected readonly form = form(this.#user, path => {
     apply(path, userSchema);
     disabled(path, () => !this.isEditing());
   });
 
-  protected onCancel() {
-    this.cancel.emit();
+  protected onFormChange(mode: FormMode) {
+    switch (mode) {
+      case FormMode.cancel:
+        this.cancel.emit();
+        break;
+      case FormMode.edit:
+        this.edit.emit();
+        break;
+      case FormMode.new:
+        this.new.emit();
+        break;
+      case FormMode.save:
+        this.onSave();
+        break;
+    }
   }
 
-  protected onEdit() {
-    this.edit.emit();
-  }
-
-  protected onNew() {
-    this.new.emit();
-  }
-
-  protected async onSave(e: Event) {
-    e.preventDefault();
-
+  protected async onSave() {
     await submit(this.form, async form => {
       try {
         this.save.emit(form().value());

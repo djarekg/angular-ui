@@ -1,3 +1,4 @@
+import { Form, FormCard } from '@/components/form';
 import { StateSelect } from '@/components/select/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
@@ -11,8 +12,6 @@ import {
   output,
 } from '@angular/core';
 import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -22,8 +21,8 @@ import { CustomerModel } from '@aui/api';
   selector: 'app-customer-detail',
   imports: [
     Control,
-    MatButtonModule,
-    MatCardModule,
+    Form,
+    FormCard,
     MatInputModule,
     MatSlideToggleModule,
     MatTooltipModule,
@@ -65,12 +64,21 @@ export class CustomerDetail {
     disabled(path, () => this.mode() === FormMode.view);
   });
 
-  protected onCancel() {
-    this.cancel.emit();
-  }
-
-  protected onEdit() {
-    this.edit.emit();
+  protected onFormChange(mode: FormMode) {
+    switch (mode) {
+      case FormMode.cancel:
+        this.cancel.emit();
+        break;
+      case FormMode.edit:
+        this.edit.emit();
+        break;
+      // case FormMode.new:
+      //   this.new.emit();
+      //   break;
+      case FormMode.save:
+        this.onSave();
+        break;
+    }
   }
 
   protected async onSave() {

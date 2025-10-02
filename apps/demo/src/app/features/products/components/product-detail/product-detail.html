@@ -1,14 +1,23 @@
-<form>
+<app-form [mode]="mode()"
+          (change)="onFormChange($event)">
 
-  <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput
-           [control]="form.name" />
-    @if (form.name().errors.length > 0) {
-    <mat-error>{{ form.name().errors()[0].message }}</mat-error>
-    }
-  </mat-form-field>    
+  <app-form-card title="Contact">
+    <mat-slide-toggle #activeToggle
+                      class="app-acive"
+                      [matTooltip]="activeToggle.checked ? 'Customer is active' : 'Customer is inactive'"
+                      [control]="form.isActive" />
 
-  <app-gender-select [control]="form.genderId" />
+    <section class="name">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput
+               [control]="form.name" />
+        @if (form.name().errors.length > 0) {
+        <mat-error>{{ form.name().errors()[0].message }}</mat-error>
+        }
+      </mat-form-field>    
+      <app-gender-select [control]="form.genderId" />
+    </section>
+  </app-form-card>
 
-</form>
+</app-form>

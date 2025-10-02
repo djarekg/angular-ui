@@ -1,7 +1,7 @@
 import { email, required, schema } from '@angular/forms/signals';
-import { CustomUserModel } from './user.model.js';
+import { UserFormModel } from './user-form.model.js';
 
-export const userSchema = schema<CustomUserModel>(path => {
+export const userSchema = schema<UserFormModel>(path => {
   required(path.firstName, { message: 'First Name is required' });
   required(path.lastName, { message: 'Last Name is required' });
   required(path.gender, { message: 'Gender is required' });

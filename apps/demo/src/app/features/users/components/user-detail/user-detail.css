@@ -1,5 +1,6 @@
 :host {
   --_container-width: 100%;
+  --_padding: 1.5rem;
 
   display: block;
   width: 100%;
@@ -7,31 +8,17 @@
   container: form-container / inline-size;
 }
 
-form {
+app-form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   width: var(--_container-width);
-
-  mat-card {
-    padding: 1.5rem;
-
-    section {
-      display: flex;
-      gap: 0.9rem;
-      width: 100%;
-    }
-  }
 }
 
 @container form-container (width < 700px) {
-  form {
+  app-form {
     width: 100%;
     gap: 0.9rem;
-
-    h4 {
-      margin: 0;
-    }
 
     .name,
     .contact,
@@ -51,44 +38,16 @@ form {
 
 }
 
-footer {
+section {
   display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-block-start: 1.5rem;
+  gap: 0.9rem;
+  width: 100%;
 }
 
-.mdc-card {
-  --mat-card-filled-container-color: var(--mat-sys-surface-container-low);
-}
-
-.mat-mdc-card-subtitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.mat-mdc-card-content {
-  padding: 0;
-  padding-block-start: 1.5rem;
-
-  &:last-child {
-    padding-block-end: 0;
-  }
-}
-
-.mdc-switch {
-  --mat-switch-selected-icon-color: var(--app-color-success);
-}
-
-.new-user {
-  margin-inline-end: auto;
-}
-
-.user-id {
-  font: var(--mat-sys-label-large);
-  font-style: italic;
-  color: var(--app-color-text-dim);
+.mat-mdc-slide-toggle {
+  position: absolute;
+  inset-block-start: var(--_padding);
+  inset-inline-end: var(--_padding);
 }
 
 .name {

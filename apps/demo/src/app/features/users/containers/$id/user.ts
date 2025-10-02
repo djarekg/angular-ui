@@ -2,7 +2,7 @@ import { Spinner } from '@/components/spinner/spinner';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { isEmpty } from '@/core/utils/object.js';
 import { UserDetail } from '@/features/users/components/user-detail/user-detail.js';
-import { CustomUserModel } from '@/features/users/forms/user.model.js';
+import { UserFormModel } from '@/features/users/forms/user-form.model.js';
 import { UserService } from '@/features/users/services/user.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -61,7 +61,7 @@ export default class User {
     this.#navigateToUser(FormMode.view);
   }
 
-  protected async onSave(user: CustomUserModel) {
+  protected async onSave(user: UserFormModel) {
     if (this.mode() === FormMode.edit) {
       await this.#userService.updateUser(user);
     }
@@ -70,7 +70,7 @@ export default class User {
       this.#router.navigate(['/users', id]);
     }
 
-    // Reset back mode
+    // Reset mode
     this.mode.set(FormMode.view);
 
     this.#snackbar.open('User updated successfully', 'OK', {
@@ -81,15 +81,13 @@ export default class User {
 
   #navigateToUser(mode: FormMode) {
     // If canceling creating new user, navigate back to users route.
-    if (this.mode() === FormMode.new && mode === FormMode.view) {
+    if (mode === FormMode.view && this.mode() === FormMode.new) {
       this.#router.navigate(['/users']);
       return;
     }
 
     if (mode === FormMode.new) {
-      this.#router.navigate(['/users', 0], {
-        queryParams: { mode: FormMode.new },
-      });
+      this.#router.navigate(['/users', 0], { queryParams: { mode: FormMode.new } });
       return;
     }
 
