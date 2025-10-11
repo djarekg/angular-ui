@@ -7,10 +7,19 @@
   "scripts": {
     "setup": "rimraf -g **/node_modules pnpm-lock.yaml && pnpm install"
   },
-  "dependencies": {
-  },
   "devDependencies": {
-    "rimraf": "^6.0.1"
+    "@angular-eslint/builder": "20.3.0",
+    "@eslint/css": "^0.13.0",
+    "@eslint/js": "^9.35.0",
+    "@eslint/json": "^0.13.2",
+    "angular-eslint": "20.3.0",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.4.0",
+    "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
+    "typescript-eslint": "8.40.0"
   },
   "workspaces": [
     "apps/*"
