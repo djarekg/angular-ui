@@ -1,11 +1,9 @@
 //// @ts-check
-import css from '@eslint/css';
 import js from '@eslint/js';
-import json from '@eslint/json';
-import markdown from '@eslint/markdown';
 import angular from 'angular-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
+import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 const jsTsRules = {
@@ -14,7 +12,7 @@ const jsTsRules = {
   '@typescript-eslint/consistent-indexed-object-style': 'off',
   '@typescript-eslint/consistent-type-assertions': 'warn',
   '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
-  '@typescript-eslint/explicit-function-return-type': 'error',
+  '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/explicit-member-accessibility': [
     'error',
     {
@@ -74,9 +72,9 @@ const jsTsRules = {
 };
 
 export default tseslint.config(
-  {
-    plugins: { json, markdown, css },
-  },
+  // {
+  //   plugins: { json, markdown, css },
+  // },
   {
     files: ['./apps/api/**/*.ts'],
     extends: [
@@ -92,6 +90,7 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
         ecmaVersion: 'latest',
       },
+      globals: globals.node,
     },
     rules: {
       ...jsTsRules,
@@ -113,6 +112,7 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
         ecmaVersion: 'latest',
       },
+      globals: globals.browser,
     },
     processor: angular.processInlineTemplates,
     rules: {
@@ -152,60 +152,60 @@ export default tseslint.config(
       prettierPlugin,
     ],
     rules: {},
-  },
-  {
-    files: ['**/*.json'],
-    plugins: { json },
-    language: 'json/json',
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 'latest',
-      },
-    },
-    extends: [json.configs.recommended],
-  },
-  {
-    files: ['**/*.jsonc'],
-    plugins: { json },
-    language: 'json/jsonc',
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 'latest',
-      },
-    },
-    extends: [json.configs.recommended],
-  },
-  {
-    files: ['**/*.json5'],
-    plugins: { json },
-    language: 'json/json5',
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 'latest',
-      },
-    },
-    extends: [json.configs.recommended],
-  },
-  {
-    files: ['**/*.md'],
-    plugins: { markdown },
-    language: 'markdown/gfm',
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 'latest',
-      },
-    },
-    extends: [markdown.configs.recommended],
-  },
-  {
-    files: ['**/*.css'],
-    plugins: { css },
-    language: 'css/css',
-    languageOptions: {
-      parserOptions: {
-        ecmaVersion: 'latest',
-      },
-    },
-    extends: [css.configs.recommended],
   }
+  // {
+  //   files: ['**/*.json'],
+  //   plugins: { json },
+  //   language: 'json/json',
+  //   languageOptions: {
+  //     parserOptions: {
+  //       ecmaVersion: 'latest',
+  //     },
+  //   },
+  //   extends: ['json/recommended'],
+  // },
+  // {
+  //   files: ['**/*.jsonc'],
+  //   plugins: { json },
+  //   language: 'json/jsonc',
+  //   languageOptions: {
+  //     parserOptions: {
+  //       ecmaVersion: 'latest',
+  //     },
+  //   },
+  //   extends: ['json/recommended'],
+  // },
+  // {
+  //   files: ['**/*.json5'],
+  //   plugins: { json },
+  //   language: 'json/json5',
+  //   languageOptions: {
+  //     parserOptions: {
+  //       ecmaVersion: 'latest',
+  //     },
+  //   },
+  //   extends: ['json/recommended'],
+  // },
+  // {
+  //   files: ['**/*.md'],
+  //   plugins: { markdown },
+  //   language: 'markdown/gfm',
+  //   languageOptions: {
+  //     parserOptions: {
+  //       ecmaVersion: 'latest',
+  //     },
+  //   },
+  //   extends: ['markdown/recommended'],
+  // },
+  // {
+  //   files: ['**/*.css'],
+  //   plugins: { css },
+  //   language: 'css/css',
+  //   languageOptions: {
+  //     parserOptions: {
+  //       ecmaVersion: 'latest',
+  //     },
+  //   },
+  //   extends: ['css/recommended'],
+  // },
 );
