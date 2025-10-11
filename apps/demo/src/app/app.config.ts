@@ -15,6 +15,8 @@ import {
   withHttpTransferCacheOptions,
   withIncrementalHydration,
 } from '@angular/platform-browser';
+import { Colors, Legend, LineController } from 'chart.js';
+import { provideCharts } from 'ng2-charts';
 import { authInterceptor } from './core/auth/auth.interceptor.js';
 
 export const appConfig: ApplicationConfig = {
@@ -36,5 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideErrorHandler(),
     provideWindow(),
     provideDefaultOptions(),
+    provideCharts({ registerables: [LineController, Legend, Colors] }),
   ],
 };

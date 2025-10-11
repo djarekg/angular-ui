@@ -1,11 +1,10 @@
 import { prisma } from '#app/client/index.js';
+import { getYearRange } from '#app/utils/date.js';
 import type { Context } from 'koa';
 
 export const getTopSellers = async (ctx: Context) => {
   const { params: { year } } = ctx;
-  // Construct the start and end dates for the year
-  const startOfYear = new Date(`${Number(year)}-01-01T00:00:00.000Z`);
-  const startOfNextYear = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
     const totalSales = await prisma.productSale.groupBy({
@@ -62,9 +61,7 @@ export const getTopSellers = async (ctx: Context) => {
 
 export const getTopSellingProductTypes = async (ctx: Context) => {
   const { params: { year } } = ctx;
-  // Construct the start and end dates for the year
-  const startOfYear = new Date(`${Number(year)}-01-01T00:00:00.000Z`);
-  const startOfNextYear = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
     // Load sales with product.productType included
@@ -109,9 +106,7 @@ export const getTopSellingProductTypes = async (ctx: Context) => {
 
 export const getTotalSales = async (ctx: Context) => {
   const { params: { year } } = ctx;
-  // Construct the start and end dates for the year
-  const startOfYear = new Date(`${Number(year)}-01-01T00:00:00.000Z`);
-  const startOfNextYear = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
     const sales = await prisma.productSale.findMany({
@@ -145,9 +140,7 @@ export const getTotalSales = async (ctx: Context) => {
 
 export const getTotalQuantitySold = async (ctx: Context) => {
   const { params: { year } } = ctx;
-  // Construct the start and end dates for the year
-  const startOfYear = new Date(`${Number(year)}-01-01T00:00:00.000Z`);
-  const startOfNextYear = new Date(`${Number(year) + 1}-01-01T00:00:00.000Z`);
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
     const { _sum } = await prisma.productSale.aggregate({
@@ -163,6 +156,52 @@ export const getTotalQuantitySold = async (ctx: Context) => {
     });
 
     ctx.body = { total: _sum.quantity };
+  }
+  catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: 'Failed to fetch total quantity sold' };
+    console.error('Failed to fetch total quantity sold', err);
+  }
+};
+
+export const getTotalSalesByMonth = async (ctx: Context) => {
+  const { params: { year } } = ctx;
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
+
+  try {
+    const sales = await prisma.productSale.findMany({
+      select: {
+        quantity: true,
+        price: true,
+        dateCreated: true,
+      },
+      where: {
+        dateCreated: {
+          gte: startOfYear,
+          lt: startOfNextYear,
+        },
+      },
+    });
+
+    // calculate sales by multiplying qty * price and summing the result
+    const salesByMonth = sales.reduce((acc, item) => {
+      const q = Number(item.quantity ?? 0);
+      const p = Number(item.price ?? 0);
+      const date = item.dateCreated;
+      if (date) {
+        const month = date.getUTCMonth(); // getUTCMonth returns month index (0-11)
+        acc[month] = (acc[month] || 0) + q * p;
+      }
+      return acc;
+    }, {} as Record<number, number>);
+
+    // Convert to array of { month, total } objects for each month (0-11)
+    const result = Array.from({ length: 12 }, (_, month) => ({
+      month,
+      total: salesByMonth[month] || 0,
+    }));
+
+    ctx.body = result;
   }
   catch (err) {
     ctx.status = 500;

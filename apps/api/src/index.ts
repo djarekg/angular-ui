@@ -17,5 +17,6 @@ export type {
   SearchResultParams,
   TopSellerModel,
   TotalQuantitySoldModel,
+  TotalSaleByMonthModel,
   TotalSalesModel,
 } from '#app/types/index.js';
