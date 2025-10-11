@@ -9,10 +9,14 @@
     },
   ],
   "settings": {
+    "prettier.documentSelectors": [
+      "**/*.{css,html,js,json,md,scss,ts}"
+    ],
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "npm.packageManager": "npm",
     "angular.log": "verbose",
     "angular.forceStrictTemplates": true,
+    "angular.suggest.includeCompletionsWithSnippetText": true,
     "editor.lightbulb.enabled": "on",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.insertSpaces": true,
@@ -31,11 +35,12 @@
       "typescript",
       "json",
       "jsonc",
+      "json5",
       "html",
       "css"
     ],
     "[css]": {
-      "editor.defaultFormatter": "vscode.css-language-features",
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true,
     },
     "[json]": {
@@ -43,11 +48,11 @@
       "editor.formatOnSave": true,
     },
     "[jsonc]": {
-      "editor.defaultFormatter": "vscode.json-language-features",
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true,
     },
     "[html]": {
-      "editor.defaultFormatter": "vscode.html-language-features",
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true,
     },
     "[prisma]": {
@@ -126,6 +131,10 @@
       "lmdb",
       "malva",
       "msgpackr",
+      "ngeslint",
+      "ngplugin",
+      "ngsrc",
+      "ngtemplate",
       "Stroustrup",
       "Tsgo",
       "tsquery",
@@ -137,6 +146,7 @@
   },
   "extensions": {
     "recommendations": [
+      "angular.ng-template",
       "prisma.prisma-insider",
       "esbenp.prettier-vscode",
       "dbaeumer.vscode-eslint"

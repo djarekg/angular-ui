@@ -12,6 +12,7 @@
     "@eslint/css": "^0.13.0",
     "@eslint/js": "^9.37.0",
     "@eslint/json": "^0.13.2",
+    "@eslint/markdown": "^7.4.0",
     "angular-eslint": "20.3.0",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
@@ -27,9 +28,11 @@
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "@angular/core": "21.0.0-next.2",
-        "@angular/common": "21.0.0-next.2",
-        "@angular/ssr": "21.0.0-next.2"
+        "@angular/core": "21.0.0-next.7",
+        "@angular/common": "21.0.0-next.7",
+        "@angular/ssr": "21.0.0-next.7",
+        "@angular/material": "21.0.0-next.8",
+        "@angular/cdk": "21.0.0-next.8"
       }
     }
   }

@@ -1,10 +1,11 @@
 @defer (when resource.hasValue()) {
-@if (resource.value(); as data) {
-<canvas baseChart
-        [data]="data"
-        [options]="lineChartOptions"
-        [type]="lineChartType"
-        (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
-}
+  @if (resource.value(); as data) {
+    <!-- <canvas
+      baseChart
+      [data]="data"
+      [options]="lineChartOptions"
+      [type]="lineChartType"
+      (chartHover)="chartHovered($event)"
+      (chartClick)="chartClicked($event)"></canvas> -->
+  }
 }

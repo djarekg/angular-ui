@@ -21,5 +21,11 @@ export default {
         singleQuote: false,
       },
     },
+    {
+      files: '*.html',
+      options: {
+        parser: 'angular',
+      },
+    },
   ],
 };

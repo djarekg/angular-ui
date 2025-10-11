@@ -2,16 +2,15 @@ import { DashboardService } from '@/features/dashboards/services/dashboard.servi
 import { DashboardType } from '@/features/dashboards/types/dashboard-type.js';
 import { ChangeDetectionStrategy, Component, inject, input, resource } from '@angular/core';
 import { TotalSaleByMonthModel } from '@aui/api';
-import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
-const lineChartOptions: ChartConfiguration['options'] = {
-  elements: {
-    line: {
-      tension: 0.5,
-    },
-  },
-};
+// const lineChartOptions: ChartConfiguration['options'] = {
+//   elements: {
+//     line: {
+//       tension: 0.5,
+//     },
+//   },
+// };
 
 @Component({
   selector: 'app-dashboard-total-sales-by-month',
