@@ -1,5 +1,8 @@
 //// @ts-check
-import eslint from '@eslint/js';
+import css from '@eslint/css';
+import js from '@eslint/js';
+import json from '@eslint/json';
+import markdown from '@eslint/markdown';
 import angular from 'angular-eslint';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
@@ -72,9 +75,12 @@ const jsTsRules = {
 
 export default tseslint.config(
   {
+    plugins: { json, markdown, css },
+  },
+  {
     files: ['./apps/api/**/*.ts'],
     extends: [
-      eslint.configs.recommended,
+      js.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       eslintConfigPrettier,
@@ -84,6 +90,7 @@ export default tseslint.config(
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 'latest',
       },
     },
     rules: {
@@ -93,7 +100,7 @@ export default tseslint.config(
   {
     files: ['./apps/demo/**/*.ts'],
     extends: [
-      eslint.configs.recommended,
+      js.configs.recommended,
       ...tseslint.configs.strictTypeChecked,
       ...tseslint.configs.stylisticTypeChecked,
       ...angular.configs.tsRecommended,
@@ -104,6 +111,7 @@ export default tseslint.config(
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        ecmaVersion: 'latest',
       },
     },
     processor: angular.processInlineTemplates,
@@ -144,5 +152,60 @@ export default tseslint.config(
       prettierPlugin,
     ],
     rules: {},
+  },
+  {
+    files: ['**/*.json'],
+    plugins: { json },
+    language: 'json/json',
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
+    extends: [json.configs.recommended],
+  },
+  {
+    files: ['**/*.jsonc'],
+    plugins: { json },
+    language: 'json/jsonc',
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
+    extends: [json.configs.recommended],
+  },
+  {
+    files: ['**/*.json5'],
+    plugins: { json },
+    language: 'json/json5',
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
+    extends: [json.configs.recommended],
+  },
+  {
+    files: ['**/*.md'],
+    plugins: { markdown },
+    language: 'markdown/gfm',
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
+    extends: [markdown.configs.recommended],
+  },
+  {
+    files: ['**/*.css'],
+    plugins: { css },
+    language: 'css/css',
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 'latest',
+      },
+    },
+    extends: [css.configs.recommended],
   }
 );
