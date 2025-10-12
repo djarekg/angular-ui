@@ -15,7 +15,17 @@ import {
   withHttpTransferCacheOptions,
   withIncrementalHydration,
 } from '@angular/platform-browser';
-import { Colors, Legend, LineController } from 'chart.js';
+import {
+  CategoryScale,
+  Colors,
+  Legend,
+  LinearScale,
+  LineController,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js';
 import { provideCharts } from 'ng2-charts';
 import { authInterceptor } from './core/auth/auth.interceptor.js';
 
@@ -28,16 +38,25 @@ export const appConfig: ApplicationConfig = {
       withEventReplay(),
       withHttpTransferCacheOptions({
         includePostRequests: true,
-      }),
+      })
     ),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([apiInterceptor, authInterceptor]),
-    ),
+    provideHttpClient(withFetch(), withInterceptors([apiInterceptor, authInterceptor])),
     routerProviders,
     provideErrorHandler(),
     provideWindow(),
     provideDefaultOptions(),
-    provideCharts({ registerables: [LineController, Legend, Colors] }),
+    provideCharts({
+      registerables: [
+        CategoryScale,
+        Colors,
+        Legend,
+        LinearScale,
+        LineController,
+        LineElement,
+        PointElement,
+        Title,
+        Tooltip,
+      ],
+    }),
   ],
 };

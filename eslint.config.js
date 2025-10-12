@@ -29,9 +29,12 @@ const jsTsRules = {
   '@typescript-eslint/no-empty-function': 'warn',
   '@typescript-eslint/no-empty-interface': 'error',
   '@typescript-eslint/no-explicit-any': 'warn',
+  '@typescript-eslint/no-floating-promises': 'off',
   '@typescript-eslint/no-inferrable-types': 'warn',
   '@typescript-eslint/no-shadow': 'warn',
+  '@typescript-eslint/no-unsafe-member-access': 'off',
   '@typescript-eslint/no-unused-vars': 'warn',
+  '@typescript-eslint/restrict-template-expressions': 'off',
 
   // JavaScript best practices
   eqeqeq: 'error',

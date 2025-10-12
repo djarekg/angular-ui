@@ -9,9 +9,7 @@
     },
   ],
   "settings": {
-    "prettier.documentSelectors": [
-      "**/*.{css,html,js,json,md,scss,ts}"
-    ],
+    "prettier.documentSelectors": ["**/*.{css,html,js,json,md,scss,ts}"],
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,
     "npm.packageManager": "npm",
     "angular.log": "verbose",
@@ -24,21 +22,11 @@
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit",
     },
-    "editor.rulers": [
-      100
-    ],
+    "editor.rulers": [100],
     "editor.overviewRulerBorder": true,
     "editor.experimentalWhitespaceRendering": "font",
     "editor.renderWhitespace": "none",
-    "eslint.validate": [
-      "javascript",
-      "typescript",
-      "json",
-      "jsonc",
-      "json5",
-      "html",
-      "css"
-    ],
+    "eslint.validate": ["javascript", "typescript", "json", "jsonc", "json5", "html", "css"],
     "[css]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnSave": true,
@@ -52,7 +40,7 @@
       "editor.formatOnSave": true,
     },
     "[html]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.defaultFormatter": "Angular.ng-template",
       "editor.formatOnSave": true,
     },
     "[prisma]": {
@@ -110,7 +98,7 @@
       "**/.nitro": true,
       "**/.output": true,
       "**/.tanstack": true,
-      "**/.angular": true
+      "**/.angular": true,
     },
     "search.exclude": {
       "**/routeTree.gen.ts": true,
@@ -118,7 +106,7 @@
       "**/.nitro": true,
       "**/.output": true,
       "**/.tanstack": true,
-      "**/prisma/generated": true
+      "**/prisma/generated": true,
     },
     "cSpell.words": [
       "Camo",
@@ -141,7 +129,7 @@
       "tsvector",
       "XLARGE",
       "XSMALL",
-      "XXLARGE"
+      "XXLARGE",
     ],
   },
   "extensions": {
@@ -149,7 +137,7 @@
       "angular.ng-template",
       "prisma.prisma-insider",
       "esbenp.prettier-vscode",
-      "dbaeumer.vscode-eslint"
+      "dbaeumer.vscode-eslint",
     ],
   },
 }

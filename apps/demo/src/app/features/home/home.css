@@ -10,11 +10,12 @@
   padding: 2rem;
   margin-inline: auto;
 
-
-  &>div {
+  & > div {
     opacity: 1;
     transform: scale(1);
-    transition: opacity 700ms ease-in, transform 400ms ease-in;
+    transition:
+      opacity 700ms ease-in,
+      transform 400ms ease-in;
 
     @starting-style {
       opacity: 0;

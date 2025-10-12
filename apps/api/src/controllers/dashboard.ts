@@ -1,9 +1,12 @@
 import { prisma } from '#app/client/index.js';
+import type { ProductType } from '#app/generated/prisma/enums.js';
 import { getYearRange } from '#app/utils/date.js';
 import type { Context } from 'koa';
 
 export const getTopSellers = async (ctx: Context) => {
-  const { params: { year } } = ctx;
+  const {
+    params: { year },
+  } = ctx;
   const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
@@ -41,7 +44,10 @@ export const getTopSellers = async (ctx: Context) => {
     });
 
     const result = totalSales.map(({ _sum: { price }, userId }) => {
-      const { firstName, lastName } = users.find(({ id }) => id === userId)!;
+      const { firstName, lastName } = users.find(({ id }) => id === userId) ?? {
+        firstName: '',
+        lastName: '',
+      };
 
       return {
         id: userId,
@@ -51,8 +57,7 @@ export const getTopSellers = async (ctx: Context) => {
     });
 
     ctx.body = result;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch top sellers' };
     console.error('Failed to fetch top sellers', err);
@@ -60,7 +65,9 @@ export const getTopSellers = async (ctx: Context) => {
 };
 
 export const getTopSellingProductTypes = async (ctx: Context) => {
-  const { params: { year } } = ctx;
+  const {
+    params: { year },
+  } = ctx;
   const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
@@ -83,9 +90,9 @@ export const getTopSellingProductTypes = async (ctx: Context) => {
 
     // Aggregate totals by productType (sum of quantity * price)
     const totalsByType = productSales.reduce<Record<string, number>>((acc, sale) => {
-      const productType = sale.product?.productType ?? 'Unknown';
-      const qty = Number(sale.quantity ?? 0);
-      const price = Number(sale.price ?? 0);
+      const productType = sale.product.productType;
+      const qty = sale.quantity;
+      const price = Number(sale.price);
       acc[productType] = (acc[productType] || 0) + qty * price;
       return acc;
     }, {});
@@ -96,8 +103,7 @@ export const getTopSellingProductTypes = async (ctx: Context) => {
       .sort((a, b) => b.total - a.total);
 
     ctx.body = result;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch top selling product types' };
     console.error('Failed to fetch top selling product types', err);
@@ -105,7 +111,9 @@ export const getTopSellingProductTypes = async (ctx: Context) => {
 };
 
 export const getTotalSales = async (ctx: Context) => {
-  const { params: { year } } = ctx;
+  const {
+    params: { year },
+  } = ctx;
   const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
@@ -124,14 +132,13 @@ export const getTotalSales = async (ctx: Context) => {
 
     // calculate sales by multiplying qty * price and summing the result
     const totalSales = sales.reduce((acc, item) => {
-      const q = Number(item.quantity ?? 0);
-      const p = Number(item.price ?? 0);
+      const q = item.quantity;
+      const p = Number(item.price);
       return acc + q * p;
     }, 0);
 
     ctx.body = { total: totalSales };
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch total sales' };
     console.error('Failed to fetch total sales', err);
@@ -139,11 +146,13 @@ export const getTotalSales = async (ctx: Context) => {
 };
 
 export const getTotalQuantitySold = async (ctx: Context) => {
-  const { params: { year } } = ctx;
+  const {
+    params: { year },
+  } = ctx;
   const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
-    const { _sum } = await prisma.productSale.aggregate({
+    const sumResult = await prisma.productSale.aggregate({
       _sum: {
         quantity: true,
       },
@@ -155,55 +164,101 @@ export const getTotalQuantitySold = async (ctx: Context) => {
       },
     });
 
-    ctx.body = { total: _sum.quantity };
-  }
-  catch (err) {
+    ctx.body = { total: sumResult._sum.quantity };
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch total quantity sold' };
     console.error('Failed to fetch total quantity sold', err);
   }
 };
 
-export const getTotalSalesByMonth = async (ctx: Context) => {
-  const { params: { year } } = ctx;
+export const getProductTypesTotalSalesByMonth = async (ctx: Context) => {
+  const {
+    params: { year },
+  } = ctx;
   const { startOfYear, startOfNextYear } = getYearRange(Number(year));
 
   try {
-    const sales = await prisma.productSale.findMany({
+    // Efficient in-memory aggregation using typed buckets (Float64Array) per productType
+    const salesWithProduct = await prisma.productSale.findMany({
+      select: {
+        quantity: true,
+        price: true,
+        dateCreated: true,
+        product: { select: { productType: true } },
+      },
+      where: {
+        dateCreated: { gte: startOfYear, lt: startOfNextYear },
+      },
+    });
+
+    const map = new Map<string, Float64Array>();
+
+    for (const s of salesWithProduct) {
+      const type = s.product.productType;
+      if (!map.has(type)) {
+        map.set(type, new Float64Array(12));
+      }
+
+      const month = s.dateCreated.getUTCMonth(); // 0-11
+      const qty = Number((s.quantity as unknown) ?? 0);
+      const price = Number((s.price as unknown) ?? 0);
+      const amount = qty * price;
+
+      const bucket = map.get(type);
+      if (bucket) {
+        bucket[month] += amount;
+      }
+    }
+
+    const totalsByType: Record<string, number[]> = {};
+    for (const [type, arr] of map.entries()) {
+      totalsByType[type] = Array.from(arr);
+    }
+
+    ctx.body = totalsByType;
+  } catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: 'Failed to fetch total quantity sold' };
+    console.error('Failed to fetch total quantity sold', err);
+  }
+};
+
+export const getProductTypeTotalSalesByMonth = async (ctx: Context) => {
+  const {
+    params: { productType, year },
+  } = ctx;
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
+
+  try {
+    // Efficient in-memory aggregation using typed buckets (Float64Array) per productType
+    const salesWithProduct = await prisma.productSale.findMany({
       select: {
         quantity: true,
         price: true,
         dateCreated: true,
       },
       where: {
-        dateCreated: {
-          gte: startOfYear,
-          lt: startOfNextYear,
+        dateCreated: { gte: startOfYear, lt: startOfNextYear },
+        product: {
+          productType: productType as ProductType,
         },
       },
     });
 
-    // calculate sales by multiplying qty * price and summing the result
-    const salesByMonth = sales.reduce((acc, item) => {
-      const q = Number(item.quantity ?? 0);
-      const p = Number(item.price ?? 0);
-      const date = item.dateCreated;
-      if (date) {
-        const month = date.getUTCMonth(); // getUTCMonth returns month index (0-11)
-        acc[month] = (acc[month] || 0) + q * p;
-      }
-      return acc;
-    }, {} as Record<number, number>);
+    const totals = new Float64Array(12);
 
-    // Convert to array of { month, total } objects for each month (0-11)
-    const result = Array.from({ length: 12 }, (_, month) => ({
-      month,
-      total: salesByMonth[month] || 0,
-    }));
+    for (const s of salesWithProduct) {
+      const month = s.dateCreated.getUTCMonth(); // 0-11
+      const qty = Number((s.quantity as unknown) ?? 0);
+      const price = Number((s.price as unknown) ?? 0);
+      const amount = qty * price;
 
-    ctx.body = result;
-  }
-  catch (err) {
+      totals[month] += amount;
+    }
+
+    ctx.body = totals;
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch total quantity sold' };
     console.error('Failed to fetch total quantity sold', err);

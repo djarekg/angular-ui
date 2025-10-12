@@ -1,6 +1,10 @@
-import { DashboardTotalQuantitySold, DashboardTotalSales } from '@/features/dashboards/components';
-import { DashboardTopSellers } from '@/features/dashboards/components/dashboard-top-sellers.js';
-import { DashboardTopSellingProductTypes } from '@/features/dashboards/components/dashboard-top-selling-product-types.js';
+import {
+  DashboardProductTypesTotalSalesByMonth,
+  DashboardTopSellers,
+  DashboardTopSellingProductTypes,
+  DashboardTotalQuantitySold,
+  DashboardTotalSales,
+} from '@/features/dashboards/components';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
@@ -10,10 +14,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     DashboardTopSellingProductTypes,
     DashboardTotalSales,
     DashboardTotalQuantitySold,
+    DashboardProductTypesTotalSalesByMonth,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class Home {
-}
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+export default class Home {}

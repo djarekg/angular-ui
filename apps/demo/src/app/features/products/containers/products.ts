@@ -1,5 +1,5 @@
+import { ProductTypeSelect } from '@/components/select/product-type-select/product-type-select.js';
 import { ProductList } from '@/features/products/components/product-list/product-list.js';
-import { ProductTypeSelect } from '@/features/products/components/product-type-select/product-type-select.js';
 import { ProductService } from '@/features/products/services/product.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,8 +22,8 @@ export default class Products {
     loader: ({ params }) => this.#service.get(params),
   });
 
-  protected onProductTypesChange(value: ProductType[]) {
-    this.#productTypes.set(value);
+  protected onProductTypesChange(value: ProductType | ProductType[] | null) {
+    this.#productTypes.set(value as ProductType[]);
   }
 
   protected onProductClick(id: string) {
