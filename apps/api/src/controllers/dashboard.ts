@@ -1,5 +1,6 @@
 import { prisma } from '#app/client/index.js';
 import type { ProductType } from '#app/generated/prisma/enums.js';
+import type { MonthTotalModel } from '#app/types/month-total.ts';
 import { getYearRange } from '#app/utils/date.js';
 import type { Context } from 'koa';
 
@@ -246,7 +247,7 @@ export const getProductTypeTotalSalesByMonth = async (ctx: Context) => {
       },
     });
 
-    const totals = new Float64Array(12);
+    const monthTotals: MonthTotalModel = {};
 
     for (const s of salesWithProduct) {
       const month = s.dateCreated.getUTCMonth(); // 0-11
@@ -254,10 +255,10 @@ export const getProductTypeTotalSalesByMonth = async (ctx: Context) => {
       const price = Number((s.price as unknown) ?? 0);
       const amount = qty * price;
 
-      totals[month] += amount;
+      monthTotals[month] = (monthTotals[month] || 0) + amount;
     }
 
-    ctx.body = totals;
+    ctx.body = monthTotals;
   } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch total quantity sold' };

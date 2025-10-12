@@ -1,7 +1,7 @@
 import { ApiService } from '@/core/api/api.service.js';
 import { DashboardType } from '@/features/dashboards/types/dashboard-type.js';
 import { inject, Injectable } from '@angular/core';
-import { ProductType } from '@aui/api';
+import { MonthTotalModel, ProductType } from '@aui/api';
 
 export const DashboardApi = {
   [DashboardType.topSellers]: 'top-sellers',
@@ -20,5 +20,5 @@ export class DashboardService {
     this.#api.get<T>(`/dashboard/${DashboardApi[type]}/${year}`);
 
   getProductTypeTotalSalesByMonth = (type: ProductType, year: number) =>
-    this.#api.get<number[]>(`/dashboard/product-type-total-sales-by-month/${type}/${year}`);
+    this.#api.get<MonthTotalModel>(`/dashboard/product-type-total-sales-by-month/${type}/${year}`);
 }

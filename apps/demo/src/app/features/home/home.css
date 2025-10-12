@@ -37,5 +37,13 @@
     &:nth-child(4) {
       transition-delay: 1000ms;
     }
+
+    &:nth-child(4) {
+      transition-delay: 1200ms;
+    }
+
+    &:nth-child(4) {
+      transition-delay: 1400ms;
+    }
   }
 }

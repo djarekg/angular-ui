@@ -12,12 +12,18 @@ import { DashboardProductTypeTotalSalesByMonth } from './dashboard-product-type-
   selector: 'app-dashboard-product-types-total-sales-by-month',
   imports: [DashboardProductTypeTotalSalesByMonth, ProductTypeSelect],
   template: `
-    <app-product-type-select (valueChange)="onProductTypeChange($event)" />
+    <!-- <app-product-type-select (valueChange)="onProductTypeChange($event)" /> -->
     <app-dashboard-product-type-total-sales-by-month
       [productType]="productType()"
       [totals]="resource.value()" />
   `,
-  styles: ``,
+  styles: `
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardProductTypesTotalSalesByMonth {
@@ -26,7 +32,6 @@ export class DashboardProductTypesTotalSalesByMonth {
   protected readonly productType = signal<ProductType>(ProductType.DRESS);
 
   protected readonly resource = resource({
-    defaultValue: [] as number[],
     params: () => this.productType(),
     loader: ({ params }) =>
       this.#service.getProductTypeTotalSalesByMonth(params, new Date().getFullYear()),

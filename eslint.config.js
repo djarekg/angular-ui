@@ -32,6 +32,7 @@ const jsTsRules = {
   '@typescript-eslint/no-floating-promises': 'off',
   '@typescript-eslint/no-inferrable-types': 'warn',
   '@typescript-eslint/no-shadow': 'warn',
+  '@typescript-eslint/no-unnecessary-condition': 'off',
   '@typescript-eslint/no-unsafe-member-access': 'off',
   '@typescript-eslint/no-unused-vars': 'warn',
   '@typescript-eslint/restrict-template-expressions': 'off',

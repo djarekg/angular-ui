@@ -1,8 +1,8 @@
 :root {
-  --app-color-primary: #2b7fff;
+  --app-color-primary: hsl(216, 100%, 58%);
   --app-color-primary-dark: #004396;
   --app-color-primary-light: #4f8eff;
-  --app-color-secondary: #7f22fe;
+  --app-color-secondary: hsl(265, 99%, 56%);
   --app-color-success: #26a69a;
   --app-color-on-success: var(--mat-sys-on-surface);
   --app-color-info: #2979ff;
@@ -11,15 +11,19 @@
   --app-color-on-error: var(--mat-sys-on-surface);
   --app-color-text-dim: var(--mat-sys-outline);
   --app-color-yellow: #fff9c4;
-  --app-color-light-blue: #90caf9;
+  --app-color-light-blue: hsl(207, 90%, 77%);
 
-  --app-color-gradient-primary: linear-gradient(to top left,
-      var(--app-color-primary-light),
-      var(--app-color-primary-dark));
+  --app-color-gradient-primary: linear-gradient(
+    to top left,
+    var(--app-color-primary-light),
+    var(--app-color-primary-dark)
+  );
 
-  --app-color-gradient-brand: linear-gradient(90deg,
-      var(--app-color-primary),
-      var(--app-color-secondary));
+  --app-color-gradient-brand: linear-gradient(
+    90deg,
+    var(--app-color-primary),
+    var(--app-color-secondary)
+  );
 
   --app-header-height: 100px;
   --app-height: calc(100% - var(--app-header-height));

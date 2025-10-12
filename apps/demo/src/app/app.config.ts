@@ -18,6 +18,7 @@ import {
 import {
   CategoryScale,
   Colors,
+  Filler,
   Legend,
   LinearScale,
   LineController,
@@ -49,6 +50,7 @@ export const appConfig: ApplicationConfig = {
       registerables: [
         CategoryScale,
         Colors,
+        Filler,
         Legend,
         LinearScale,
         LineController,

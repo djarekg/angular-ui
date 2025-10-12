@@ -6,8 +6,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-dashboard-top-selling-product-types',
   imports: [DashboardTopSelling],
   template: `
-      <app-dashboard-top-selling [type]="type" label="Top Sellers" />
-    `,
+    <app-dashboard-top-selling
+      [type]="type"
+      label="Top Sellers" />
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardTopSellingProductTypes {
