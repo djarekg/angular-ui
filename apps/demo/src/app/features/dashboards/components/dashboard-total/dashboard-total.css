@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: var(--app-color-gradient-primary);
+  border: 3px solid var(--mat-sys-surface-container);
   padding: 3rem;
   border-radius: 12px;
 }
