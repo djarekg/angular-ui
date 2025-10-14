@@ -2,19 +2,18 @@ import {
   ProductTypeSelect,
   ProductTypeSelectType,
 } from '@/components/select/product-type-select/product-type-select.js';
+import { DashboardTotalSales } from '@/features/dashboards/components/dashboard-total-sales/dashboard-total-sales.js';
 import { DashboardService } from '@/features/dashboards/services/dashboard.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
 import { ProductType } from '@aui/api';
-// eslint-disable-next-line max-len
-import { DashboardProductTypeTotalSalesByMonth } from './dashboard-product-type-total-sales-by-month/dashboard-product-type-total-sales-by-month.js';
 
 @Component({
   selector: 'app-dashboard-product-types-total-sales-by-month',
-  imports: [DashboardProductTypeTotalSalesByMonth, ProductTypeSelect],
+  imports: [DashboardTotalSales, ProductTypeSelect],
   template: `
     <!-- <app-product-type-select (valueChange)="onProductTypeChange($event)" /> -->
-    <app-dashboard-product-type-total-sales-by-month
-      [productType]="productType()"
+    <app-dashboard-total-sales
+      title="Product Type Sales by Month"
       [totals]="resource.value()" />
   `,
   styles: `

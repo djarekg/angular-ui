@@ -4,6 +4,7 @@ import {
   getTopSellingProductTypes,
   getTotalQuantitySold,
   getTotalSales,
+  getTotalSalesByMonth,
 } from '#app/controllers/dashboard.js';
 import Router from '@koa/router';
 
@@ -17,5 +18,6 @@ router.get(
   '/dashboard/product-type-total-sales-by-month/:productType/:year',
   getProductTypeTotalSalesByMonth
 );
+router.get('/dashboard/total-sales-by-month/:year', getTotalSalesByMonth);
 
 export default router;

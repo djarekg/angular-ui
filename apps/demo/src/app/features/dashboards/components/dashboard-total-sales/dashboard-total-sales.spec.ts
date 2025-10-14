@@ -9,12 +9,11 @@ describe('DashboardTotalSales', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DashboardTotalSales],
-    })
-      .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardTotalSales);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {

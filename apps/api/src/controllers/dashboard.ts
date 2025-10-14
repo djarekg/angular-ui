@@ -1,6 +1,6 @@
 import { prisma } from '#app/client/index.js';
 import type { ProductType } from '#app/generated/prisma/enums.js';
-import type { MonthTotalModel } from '#app/types/month-total.ts';
+import type { MonthTotalModel } from '#app/types/month-total.js';
 import { getYearRange } from '#app/utils/date.js';
 import type { Context } from 'koa';
 
@@ -263,5 +263,43 @@ export const getProductTypeTotalSalesByMonth = async (ctx: Context) => {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch total quantity sold' };
     console.error('Failed to fetch total quantity sold', err);
+  }
+};
+
+export const getTotalSalesByMonth = async (ctx: Context) => {
+  const {
+    params: { year },
+  } = ctx;
+  const { startOfYear, startOfNextYear } = getYearRange(Number(year));
+
+  try {
+    const sales = await prisma.productSale.findMany({
+      select: {
+        price: true,
+        quantity: true,
+        dateCreated: true,
+      },
+      where: {
+        dateCreated: {
+          gte: startOfYear,
+          lt: startOfNextYear,
+        },
+      },
+    });
+
+    const monthTotals = new Float32Array(12);
+
+    for (let i = 0, len = sales.length; i < len; i++) {
+      const { price, quantity, dateCreated } = sales[i];
+      const month = dateCreated.getMonth();
+      const total = Number(price) * quantity;
+      monthTotals[month] += total;
+    }
+
+    ctx.body = monthTotals;
+  } catch (err) {
+    ctx.status = 500;
+    ctx.body = { error: 'Failed to fetch total sales by month' };
+    console.error('Failed to fetch total sales by month', err);
   }
 };

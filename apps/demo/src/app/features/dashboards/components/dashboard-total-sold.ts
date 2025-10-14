@@ -4,14 +4,17 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import DashboardTotal from './dashboard-total/dashboard-total.js';
 
 @Component({
-  selector: 'app-dashboard-total-sales',
+  selector: 'app-dashboard-total-sold',
   imports: [DashboardTotal],
   template: `
-    <app-dashboard-total [type]="type" [totalType]="totalType" label="Total Sales" />
+    <app-dashboard-total
+      [type]="type"
+      [totalType]="totalType"
+      label="Total Sales" />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardTotalSales {
+export class DashboardTotalSold {
   protected readonly type = DashboardType.totalSales;
   protected readonly totalType = TotalType.currency;
 }

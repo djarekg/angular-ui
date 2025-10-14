@@ -1,0 +1,10 @@
+<div class="title">{{ title() }}</div>
+<div class="container">
+  @defer (when data()) {
+    <canvas
+      baseChart
+      [data]="data()"
+      [options]="chartOptions"
+      [type]="chartType"></canvas>
+  }
+</div>

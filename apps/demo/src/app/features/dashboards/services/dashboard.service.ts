@@ -8,6 +8,7 @@ export const DashboardApi = {
   [DashboardType.topSellingProductTypes]: 'top-selling-product-types',
   [DashboardType.totalQuantitySold]: 'total-quantity-sold',
   [DashboardType.totalSales]: 'total-sales',
+  [DashboardType.totalSalesByMonth]: 'total-sales-by-month',
 };
 
 @Injectable({

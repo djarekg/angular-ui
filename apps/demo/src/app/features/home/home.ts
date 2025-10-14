@@ -3,18 +3,20 @@ import {
   DashboardTopSellers,
   DashboardTopSellingProductTypes,
   DashboardTotalQuantitySold,
-  DashboardTotalSales,
+  DashboardTotalSold,
 } from '@/features/dashboards/components';
+import { DashboardTotalSalesByMonth } from '@/features/dashboards/components/dashboard-total-sales-by-month.js';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   imports: [
+    DashboardProductTypesTotalSalesByMonth,
     DashboardTopSellers,
     DashboardTopSellingProductTypes,
-    DashboardTotalSales,
     DashboardTotalQuantitySold,
-    DashboardProductTypesTotalSalesByMonth,
+    DashboardTotalSalesByMonth,
+    DashboardTotalSold,
   ],
   templateUrl: './home.html',
   styleUrl: './home.css',

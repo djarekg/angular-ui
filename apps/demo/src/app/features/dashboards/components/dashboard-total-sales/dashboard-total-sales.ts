@@ -1,6 +1,6 @@
 import { MonthsAbbr } from '@/core/constants/months.js';
 import { DashboardType } from '@/features/dashboards/types/dashboard-type.js';
-import { CurrencyPipe, formatCurrency } from '@angular/common';
+import { formatCurrency } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,26 +9,22 @@ import {
   input,
   LOCALE_ID,
 } from '@angular/core';
-import { MonthTotalModel, ProductType } from '@aui/api';
-import { ChartConfiguration, ChartEvent, ChartType } from 'chart.js';
+import { MonthTotalModel } from '@aui/api';
+import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
-type CustomerChartEvent = {
-  event?: ChartEvent;
-  active?: object[];
-};
-
 @Component({
-  selector: 'app-dashboard-product-type-total-sales-by-month',
-  imports: [BaseChartDirective, CurrencyPipe],
-  templateUrl: './dashboard-product-type-total-sales-by-month.html',
-  styleUrl: './dashboard-product-type-total-sales-by-month.css',
+  selector: 'app-dashboard-total-sales',
+  imports: [BaseChartDirective],
+  templateUrl: './dashboard-total-sales.html',
+  styleUrl: './dashboard-total-sales.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardProductTypeTotalSalesByMonth {
+export class DashboardTotalSales {
   readonly #locale = inject(LOCALE_ID);
-  readonly type = input<DashboardType>(DashboardType.totalSaleByMonth);
-  readonly productType = input.required<ProductType>();
+
+  readonly title = input.required<string>();
+  readonly type = input<DashboardType>(DashboardType.totalSalesByMonth);
   readonly totals = input.required<MonthTotalModel | undefined>();
 
   protected chartType: ChartType = 'line';
@@ -110,12 +106,4 @@ export class DashboardProductTypeTotalSalesByMonth {
       },
     },
   };
-
-  protected chartClicked({ event, active }: CustomerChartEvent): void {
-    console.log(event, active);
-  }
-
-  protected chartHovered({ event, active }: CustomerChartEvent): void {
-    console.log(event, active);
-  }
 }
