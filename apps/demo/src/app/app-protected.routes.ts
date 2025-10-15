@@ -19,7 +19,7 @@ export default [
   {
     path: 'settings',
     title: 'Settings',
-    loadComponent: () => import('@/features/settings/settings'),
+    loadChildren: () => import('@/features/settings/routes'),
   },
   {
     path: 'products',

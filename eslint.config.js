@@ -29,6 +29,7 @@ const jsTsRules = {
   '@typescript-eslint/no-empty-function': 'warn',
   '@typescript-eslint/no-empty-interface': 'error',
   '@typescript-eslint/no-explicit-any': 'warn',
+  '@typescript-eslint/no-extraneous-class': 'off',
   '@typescript-eslint/no-floating-promises': 'off',
   '@typescript-eslint/no-inferrable-types': 'warn',
   '@typescript-eslint/no-shadow': 'warn',

@@ -1,5 +1,6 @@
 import { prisma } from '#app/client/index.js';
 import type { CustomerModel } from '#app/generated/prisma/models.js';
+import type { AuiContext } from '#app/types';
 import type { Context } from 'koa';
 
 export const getCustomers = async (ctx: Context) => {
@@ -10,8 +11,7 @@ export const getCustomers = async (ctx: Context) => {
       },
     });
     ctx.body = customers;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch customers' };
     console.error('Failed to fetch customers', err);
@@ -33,16 +33,17 @@ export const getCustomersHeaderInfo = async (ctx: Context) => {
       },
     });
     ctx.body = customers;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to fetch customers' };
     console.error('Failed to fetch customers', err);
   }
 };
 
-export const getCustomer = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+export const getCustomer = async (ctx: AuiContext<{ id: string }>) => {
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     const customer = await prisma.customer.findFirst({
@@ -52,17 +53,19 @@ export const getCustomer = async (ctx: Context) => {
     });
 
     ctx.body = customer;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to fetch customer: ${id}` };
     console.error(`Failed to fetch customer: ${id}`, err);
   }
 };
 
-export const updateCustomer = async (ctx: Context) => {
-  const { params: { id }, request } = ctx;
-  const data = (request as any).body as CustomerModel;
+export const updateCustomer = async (ctx: AuiContext<CustomerModel>) => {
+  const {
+    params: { id },
+    request,
+  } = ctx;
+  const data = request.body;
 
   try {
     const customer = await prisma.customer.update({
@@ -73,17 +76,16 @@ export const updateCustomer = async (ctx: Context) => {
     });
 
     ctx.body = customer;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to update customer id: ${id}` };
     console.error(`Failed to update customer id: ${id}`, err);
   }
 };
 
-export const createCustomer = async (ctx: Context) => {
+export const createCustomer = async (ctx: AuiContext<CustomerModel>) => {
   const { request } = ctx;
-  const data = (request as any).body as CustomerModel;
+  const data = request.body;
 
   try {
     const { id } = await prisma.customer.create({
@@ -94,16 +96,17 @@ export const createCustomer = async (ctx: Context) => {
     });
 
     ctx.body = { id };
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: 'Failed to create customer' };
     console.error(`Failed to create customer`, err);
   }
 };
 
-export const deleteCustomer = async (ctx: Context) => {
-  const { params: { id } } = ctx;
+export const deleteCustomer = async (ctx: AuiContext<{ id: string }>) => {
+  const {
+    params: { id },
+  } = ctx;
 
   try {
     await prisma.customer.delete({
@@ -113,8 +116,7 @@ export const deleteCustomer = async (ctx: Context) => {
     });
 
     ctx.body = true;
-  }
-  catch (err) {
+  } catch (err) {
     ctx.status = 500;
     ctx.body = { error: `Failed to delete customer id: ${id}` };
     console.error(`Failed to delete customer id: ${id}`, err);

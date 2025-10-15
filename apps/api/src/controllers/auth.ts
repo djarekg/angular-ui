@@ -1,11 +1,16 @@
 import { prisma } from '#app/client/index.js';
 import { accessTokenSecret } from '#app/config.js';
 import { compareHash } from '#app/crypto/hash.js';
+import { Role } from '#app/generated/prisma/enums.js';
+import type { AuiContext } from '#app/types';
 import jwt from 'jsonwebtoken';
 import type { Context } from 'koa';
 
-export const getUser = async (ctx: Context) => {
-  const { params: { username } } = ctx;
+export const getUser = async (ctx: AuiContext<{ username: string }>) => {
+  const {
+    params: { username },
+  } = ctx;
+
   const user = await prisma.user.findFirst({
     where: {
       email: username,
@@ -15,14 +20,15 @@ export const getUser = async (ctx: Context) => {
   ctx.body = user;
 };
 
-export const signin = async (ctx: Context) => {
-  const { username, password } = (ctx.request as any).body;
+export const signin = async (ctx: AuiContext<{ username: string; password: string }>) => {
+  const { username, password } = ctx.request.body;
   const user = await prisma.user.findFirst({
     select: {
       id: true,
       userCredential: {
         select: {
           password: true,
+          role: true,
         },
       },
     },
@@ -37,7 +43,7 @@ export const signin = async (ctx: Context) => {
   }
 
   // Validate password against stored hash
-  const hashPassword = user.userCredential!.password;
+  const hashPassword = user.userCredential?.password ?? '';
   const isValid = compareHash(password, hashPassword);
 
   if (isValid) {
@@ -46,7 +52,7 @@ export const signin = async (ctx: Context) => {
       expiresIn: '1h',
     });
 
-    ctx.body = { token, userId: user.id };
+    ctx.body = { token, userId: user.id, role: user.userCredential?.role ?? Role.USER };
     return;
   }
 
@@ -54,7 +60,7 @@ export const signin = async (ctx: Context) => {
 };
 
 export const signout = (ctx: Context) => {
-  jwt.sign({}, accessTokenSecret!, {
+  jwt.sign({}, accessTokenSecret, {
     expiresIn: '1s', // Expire the token immediately
   });
 

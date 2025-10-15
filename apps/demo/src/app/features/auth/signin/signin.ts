@@ -12,13 +12,7 @@ const ERROR_MSG_SIGNIN_FAILED = 'Failed to login with username and password';
 
 @Component({
   selector: 'app-signin',
-  imports: [
-    Control,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-  ],
+  imports: [Control, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -37,23 +31,26 @@ export default class Signin {
   protected async onSubmit(e: Event) {
     e?.preventDefault();
 
-    await submit(this.form, async form => {
+    await submit(this.form, async f => {
       const errors: ValidationError[] = [];
-      const { username, password } = form().value();
+      const { username, password } = f().value();
 
       try {
         await this.authService.signin(username, password);
-      }
-      catch (err) {
+      } catch (err) {
+        console.error(ERROR_MSG_SIGNIN_FAILED, err);
+
         this.errorMessage.set(ERROR_MSG_SIGNIN_FAILED);
 
-        errors.push(customError({
-          field: form,
-          error: {
-            kind: 'authenticationError',
-            message: ERROR_MSG_SIGNIN_FAILED,
-          },
-        }));
+        errors.push(
+          customError({
+            field: f,
+            error: {
+              kind: 'authenticationError',
+              message: ERROR_MSG_SIGNIN_FAILED,
+            },
+          })
+        );
       }
 
       this.errorMessage.set(null);

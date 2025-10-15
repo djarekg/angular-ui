@@ -2,25 +2,29 @@
   <div class="app-header-nav">
     <nav>
       <a routerLink="/">
-        <img class="angular-logo"
-             width="64px"
-             height="64px"
-             src="/assets/images/angular-logo.svg"
-             alt="Angular" />
+        <img
+          class="angular-logo"
+          width="64px"
+          height="64px"
+          src="/assets/images/angular-logo.svg"
+          alt="Angular" />
       </a>
-      <a matButton
-         routerLink="/users"
-         routerLinkActive="app-link-active">
+      <a
+        matButton
+        routerLink="/users"
+        routerLinkActive="app-link-active">
         Users
       </a>
-      <a matButton
-         routerLink="/customers"
-         routerLinkActive="app-link-active">
+      <a
+        matButton
+        routerLink="/customers"
+        routerLinkActive="app-link-active">
         Customers
       </a>
-      <a matButton
-         routerLink="/products"
-         routerLinkActive="app-link-active">
+      <a
+        matButton
+        routerLink="/products"
+        routerLinkActive="app-link-active">
         Products
       </a>
     </nav>
@@ -28,9 +32,10 @@
 
   <span class="title">{{ title() }}</span>
 
-  <button matIconButton
-          [matMenuTriggerFor]="menu"
-          aria-label="Open profile menu">
+  <button
+    matIconButton
+    [matMenuTriggerFor]="menu"
+    aria-label="Open profile menu">
     <mat-icon>person</mat-icon>
   </button>
 
@@ -39,10 +44,17 @@
       <mat-icon>settings</mat-icon>
       <span>Settings</span>
     </button>
-    <button mat-menu-item
-            (click)="onSignout()">
+    <button
+      mat-menu-item
+      (click)="onSignout()">
       <mat-icon>logout</mat-icon>
       <span>Signout</span>
     </button>
+    <a
+      mat-menu-item
+      href="/settings/dashboard">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard settings</span>
+    </a>
   </mat-menu>
 </header>

@@ -1,7 +1,4 @@
-import {
-  ProductTypeSelect,
-  ProductTypeSelectType,
-} from '@/components/select/product-type-select/product-type-select.js';
+import { ProductTypeSelectType } from '@/components/select/product-type-select/product-type-select.js';
 import { DashboardTotalSales } from '@/features/dashboards/components/dashboard-total-sales/dashboard-total-sales.js';
 import { DashboardService } from '@/features/dashboards/services/dashboard.service.js';
 import { ChangeDetectionStrategy, Component, inject, resource, signal } from '@angular/core';
@@ -9,7 +6,7 @@ import { ProductType } from '@aui/api';
 
 @Component({
   selector: 'app-dashboard-product-types-total-sales-by-month',
-  imports: [DashboardTotalSales, ProductTypeSelect],
+  imports: [DashboardTotalSales],
   template: `
     <!-- <app-product-type-select (valueChange)="onProductTypeChange($event)" /> -->
     <app-dashboard-total-sales
