@@ -40,6 +40,7 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommandPalette {
+  // eslint-disable-next-line @angular-eslint/no-output-native
   readonly close = output();
 
   protected readonly iconMap = searchResultTypeIconMap;
@@ -51,10 +52,7 @@ export class CommandPalette {
   readonly #search = inject(Search);
   readonly #searchQuery = this.#search.query;
   readonly #injector = inject(Injector);
-  readonly #keyManager = new ActiveDescendantKeyManager(
-    this.items,
-    this.#injector,
-  ).withWrap();
+  readonly #keyManager = new ActiveDescendantKeyManager(this.items, this.#injector).withWrap();
 
   protected readonly resultsResource = this.#search.resultsResource;
   protected readonly searchResults = this.#search.searchResults;
@@ -69,7 +67,9 @@ export class CommandPalette {
   }
 
   constructor() {
-    inject(DestroyRef).onDestroy(() => this.#keyManager.destroy());
+    inject(DestroyRef).onDestroy(() => {
+      this.#keyManager.destroy();
+    });
 
     this.searchControl.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
       this.#searchQuery.set(value);
@@ -81,9 +81,11 @@ export class CommandPalette {
       this.items();
       afterNextRender(
         {
-          write: () => this.#keyManager.setFirstItemActive(),
+          write: () => {
+            this.#keyManager.setFirstItemActive();
+          },
         },
-        { injector: this.#injector },
+        { injector: this.#injector }
       );
     });
 

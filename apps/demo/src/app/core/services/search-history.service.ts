@@ -28,7 +28,7 @@ export class SearchHistory {
     Array.from(this.history().values()).sort((a, b) => b.createdAt - a.createdAt)
   );
 
-  readonly items = computed<{ recent: HistoryItem[]; favorite: HistoryItem[]; }>(() => ({
+  readonly items = computed<{ recent: HistoryItem[]; favorite: HistoryItem[] }>(() => ({
     recent: this.allItems().filter(v => !v.isFavorite),
     favorite: this.allItems().filter(v => v.isFavorite),
   }));
@@ -41,7 +41,7 @@ export class SearchHistory {
 
   addItem(item: SearchResultItem | HistoryItem): void {
     this.updateHistory(map => {
-      const labelHtml = (item.labelHtml || '').replace(/<\/?mark>/g, '');
+      const labelHtml = (item.labelHtml ?? '').replace(/<\/?mark>/g, '');
 
       map.set(item.id, {
         id: item.id,
@@ -55,8 +55,8 @@ export class SearchHistory {
 
       // `items` still hasn't been updated so we should use `>=`.
       if (this.items().recent.length >= MAX_RECENT_HISTORY_SIZE) {
-        const { id } = this.items().recent.at(-1)!;
-        map.delete(id);
+        const { id } = this.items().recent.at(-1) ?? {};
+        id && map.delete(id);
       }
     });
   }
@@ -86,8 +86,7 @@ export class SearchHistory {
     try {
       const historyData = this.localStorage?.getItem(SEARCH_HISTORY_LS_KEY) as string | null;
       parsedData = JSON.parse(historyData ?? '[]') as HistoryItem[];
-    }
-    catch {
+    } catch {
       parsedData = [];
     }
 
@@ -95,6 +94,7 @@ export class SearchHistory {
     for (const item of parsedData) {
       history.set(item.id, item);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     this.history.set(history);
   }
 
@@ -105,7 +105,7 @@ export class SearchHistory {
 
     try {
       this.localStorage?.setItem(SEARCH_HISTORY_LS_KEY, JSON.stringify(this.allItems()));
-    }
-    catch {}
+      // eslint-disable-next-line no-empty
+    } catch {}
   }
 }

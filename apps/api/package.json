@@ -35,13 +35,13 @@
     "koa-body": "^6.0.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^10.0.0",
+    "@faker-js/faker": "^10.1.0",
     "@prisma/adapter-pg": "^6.17.1",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/koa": "^3.0.0",
     "@types/koa__cors": "^5.0.0",
     "@types/koa__router": "^12.0.4",
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.7.2",
     "dotenv-cli": "^10.0.0",
     "prisma": "^6.17.1",
     "ts-node": "^10.9.2",

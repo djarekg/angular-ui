@@ -17,7 +17,7 @@ header {
   background: color-mix(in srgb, var(--mat-sys-surface) 80%, transparent);
   backdrop-filter: blur(4px);
 
-  >button {
+  > button {
     grid-area: c;
     place-self: end;
     align-self: center;
@@ -28,7 +28,6 @@ a {
   cursor: pointer;
   text-decoration: none;
 }
-
 
 nav {
   display: flex;

@@ -21,11 +21,13 @@ export class Search {
       // Debounce by waiting for short delay. Temporary until have better way.
       await wait(SEARCH_DELAY, abortSignal);
 
-      return this.#api.post<SearchResultParams, SearchResult[]>('/search', {
-        query,
-        highlightPreTag: HIGHLIGHT_START_TAG,
-        highlightPostTag: HIGHLIGHT_END_TAG,
-      }).then(results => this.#parseResults(results));
+      return this.#api
+        .post<SearchResultParams, SearchResult[]>('/search', {
+          query,
+          highlightPreTag: HIGHLIGHT_START_TAG,
+          highlightPostTag: HIGHLIGHT_END_TAG,
+        })
+        .then(results => this.#parseResults(results));
     },
   });
 
@@ -60,12 +62,12 @@ export class Search {
       return null;
     }
 
-    const parts: Array<{ highlight: boolean; text: string; }> = [];
-    while (label.indexOf(HIGHLIGHT_START_TAG) !== -1) {
+    const parts: { highlight: boolean; text: string }[] = [];
+    while (label.includes(HIGHLIGHT_START_TAG)) {
       const beforeMatch = label.substring(0, label.indexOf(HIGHLIGHT_START_TAG));
       const match = label.substring(
         label.indexOf(HIGHLIGHT_START_TAG) + 3,
-        label.indexOf(HIGHLIGHT_END_TAG),
+        label.indexOf(HIGHLIGHT_END_TAG)
       );
       parts.push({ highlight: false, text: beforeMatch });
       parts.push({ highlight: true, text: match });

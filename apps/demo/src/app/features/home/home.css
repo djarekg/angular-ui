@@ -3,7 +3,8 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     "a b"
-    "b c";
+    "b c"
+    "d e";
   column-gap: 4rem;
   row-gap: 2rem;
   width: 70%;

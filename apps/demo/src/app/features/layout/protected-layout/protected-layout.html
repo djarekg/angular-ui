@@ -1,10 +1,10 @@
 <app-header />
 @defer (when isBrowser) {
-@defer (when displaySearchDialog(); prefetch on idle) {
-@if (displaySearchDialog()) {
-<app-command-palette (close)="displaySearchDialog.set(false)" />
-}
-}
+  @defer (when displaySearchDialog(); prefetch on idle) {
+    @if (displaySearchDialog()) {
+      <app-command-palette (close)="displaySearchDialog.set(false)" />
+    }
+  }
 }
 <main>
   <router-outlet />

@@ -1,0 +1,28 @@
+<mat-list
+  cdkDropList
+  [cdkDropListData]="unselected()"
+  cdkDropListSortingDisabled
+  (cdkDropListDropped)="drop($event)">
+  @for (widget of unselected(); track widget.id) {
+    <mat-list-item cdkDrag>
+      <span matListItemTitle>{{ widget.name }}</span>
+      <span matListItemLine>{{ widget.description }}</span>
+    </mat-list-item>
+  }
+</mat-list>
+
+<mat-grid-list
+  cols="2"
+  rowHeight="2:1"
+  cdkDropList
+  cdkDropListOrientation="mixed"
+  [cdkDropListData]="selected()"
+  (cdkDropListDropped)="selectedDrop($event)">
+  @for (widget of selected(); track widget.id) {
+    <mat-grid-tile
+      cdkDrag
+      class="widget">
+      {{ widget.name }}
+    </mat-grid-tile>
+  }
+</mat-grid-list>

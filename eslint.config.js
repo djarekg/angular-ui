@@ -12,6 +12,19 @@ const jsTsRules = {
   '@typescript-eslint/consistent-indexed-object-style': 'off',
   '@typescript-eslint/consistent-type-assertions': 'warn',
   '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
+  '@typescript-eslint/consistent-type-exports': [
+    'error',
+    {
+      fixMixedExportsWithInlineTypeSpecifier: true,
+    },
+  ],
+  '@typescript-eslint/consistent-type-imports': [
+    'error',
+    {
+      prefer: 'type-imports',
+      fixStyle: 'inline-type-imports',
+    },
+  ],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/explicit-member-accessibility': [
     'error',
@@ -29,6 +42,7 @@ const jsTsRules = {
   '@typescript-eslint/no-empty-function': 'warn',
   '@typescript-eslint/no-empty-interface': 'error',
   '@typescript-eslint/no-explicit-any': 'warn',
+  '@typescript-eslint/no-unused-expressions': 'off',
   '@typescript-eslint/no-extraneous-class': 'off',
   '@typescript-eslint/no-floating-promises': 'off',
   '@typescript-eslint/no-inferrable-types': 'warn',
