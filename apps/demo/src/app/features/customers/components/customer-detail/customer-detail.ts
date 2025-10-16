@@ -1,7 +1,7 @@
 import { Form, FormCard } from '@/components/form';
 import { StateSelect } from '@/components/select/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
-import { AppCustomerModel } from '@/features/customers/forms/customer.model.js';
+import { type AppCustomerModel } from '@/features/customers/forms/customer.model.js';
 import { customerSchema } from '@/features/customers/forms/customer.schema.js';
 import {
   ChangeDetectionStrategy,
@@ -11,16 +11,16 @@ import {
   linkedSignal,
   output,
 } from '@angular/core';
-import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
+import { apply, disabled, Field, form, submit } from '@angular/forms/signals';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { CustomerModel } from '@aui/api';
+import { type CustomerModel } from '@aui/api';
 
 @Component({
   selector: 'app-customer-detail',
   imports: [
-    Control,
+    Field,
     Form,
     FormCard,
     MatInputModule,
@@ -37,8 +37,8 @@ import { CustomerModel } from '@aui/api';
 })
 export class CustomerDetail {
   readonly #customer = linkedSignal<AppCustomerModel>(() => {
-    const { name, phone, streetAddress, streetAddress2, city, stateId, zip, isActive } = this
-      .customer();
+    const { name, phone, streetAddress, streetAddress2, city, stateId, zip, isActive } =
+      this.customer();
 
     return {
       name,
@@ -85,14 +85,15 @@ export class CustomerDetail {
     await submit(this.form, async form => {
       try {
         this.save.emit(form().value());
-      }
-      catch (err) {
+      } catch (err) {
         console.error('Failed to save customer', err);
 
-        return [{
-          kind: 'customer-update-failed',
-          message: 'Failed to save customer.',
-        }];
+        return [
+          {
+            kind: 'customer-update-failed',
+            message: 'Failed to save customer.',
+          },
+        ];
       }
 
       return [];

@@ -2,7 +2,7 @@ import { Form, FormCard } from '@/components/form';
 import { GenderSelect } from '@/components/select';
 import { FormMode } from '@/core/constants/form-mode.js';
 import productSchema from '@/features/products/forms/product.schema.js';
-import { ProductFormModel } from '@/features/products/models';
+import { type ProductFormModel } from '@/features/products/models';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,16 +11,16 @@ import {
   linkedSignal,
   output,
 } from '@angular/core';
-import { apply, Control, form, submit } from '@angular/forms/signals';
+import { apply, Field, form, submit } from '@angular/forms/signals';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ProductModel } from '@aui/api';
+import { type ProductModel } from '@aui/api';
 
 @Component({
   selector: 'app-product-detail',
   imports: [
-    Control,
+    Field,
     Form,
     FormCard,
     GenderSelect,
@@ -72,17 +72,19 @@ export default class ProductDetail {
   }
 
   protected async onSave() {
-    await submit(this.form, async form => {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    await submit(this.form, async f => {
       try {
-        this.save.emit(form().value());
-      }
-      catch (err) {
+        this.save.emit(f().value());
+      } catch (err) {
         console.error('Failed to save product', err);
 
-        return [{
-          kind: 'product-update-failed',
-          message: 'Failed to save product.',
-        }];
+        return [
+          {
+            kind: 'product-update-failed',
+            message: 'Failed to save product.',
+          },
+        ];
       }
 
       return [];

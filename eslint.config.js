@@ -42,13 +42,13 @@ const jsTsRules = {
   '@typescript-eslint/no-empty-function': 'warn',
   '@typescript-eslint/no-empty-interface': 'error',
   '@typescript-eslint/no-explicit-any': 'warn',
-  '@typescript-eslint/no-unused-expressions': 'off',
   '@typescript-eslint/no-extraneous-class': 'off',
   '@typescript-eslint/no-floating-promises': 'off',
   '@typescript-eslint/no-inferrable-types': 'warn',
   '@typescript-eslint/no-shadow': 'warn',
   '@typescript-eslint/no-unnecessary-condition': 'off',
   '@typescript-eslint/no-unsafe-member-access': 'off',
+  '@typescript-eslint/no-unused-expressions': 'off',
   '@typescript-eslint/no-unused-vars': 'warn',
   '@typescript-eslint/restrict-template-expressions': 'off',
 
@@ -154,6 +154,7 @@ export default tseslint.config(
 
       // Angular best practices
       '@angular-eslint/no-empty-lifecycle-method': 'warn',
+      '@angular-eslint/no-output-native': 'off',
       '@angular-eslint/prefer-on-push-component-change-detection': 'warn',
       '@angular-eslint/prefer-output-readonly': 'warn',
       '@angular-eslint/prefer-signals': 'warn',

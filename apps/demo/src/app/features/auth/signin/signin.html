@@ -1,50 +1,54 @@
 <header>
   Sign-in to access your account
-  <img width="64px"
-       height="64px"
-       loading="lazy"
-       alt="Ghost"
-       src="/ghost.svg" />
+  <img
+    width="64px"
+    height="64px"
+    loading="lazy"
+    alt="Ghost"
+    src="/ghost.svg" />
 </header>
 
 <form (submit)="onSubmit($event)">
   <mat-form-field>
     <mat-label>Username</mat-label>
-    <input matInput
-           autocomplete="username"
-           [control]="form.username" />
-    @if ( form.username().errors().length) {
-    <mat-error>
-      {{ form.username().errors()[0].message }}
-    </mat-error>
+    <input
+      matInput
+      autocomplete="username"
+      [field]="form.username" />
+    @if (form.username().errors().length) {
+      <mat-error>
+        {{ form.username().errors()[0].message }}
+      </mat-error>
     }
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Password</mat-label>
-    <input matInput
-           type="password"
-           autocomplete="current-password"
-           [control]="form.password" />
+    <input
+      matInput
+      type="password"
+      autocomplete="current-password"
+      [field]="form.password" />
     @if (form.password().errors().length) {
-    <mat-error>
-      {{ form.password().errors()[0].message }}
-    </mat-error>
+      <mat-error>
+        {{ form.password().errors()[0].message }}
+      </mat-error>
     }
   </mat-form-field>
 
-  <button matButton="outlined"
-          color="primary"
-          type="submit"
-          [disabled]="form().submitting() || form().invalid()">
+  <button
+    matButton="outlined"
+    color="primary"
+    type="submit"
+    [disabled]="form().submitting() || form().invalid()">
     Sign In
   </button>
 </form>
 
 <footer>
   @if (errorMessage()) {
-  <mat-error>
-    {{ errorMessage() }}
-  </mat-error>
+    <mat-error>
+      {{ errorMessage() }}
+    </mat-error>
   }
 </footer>

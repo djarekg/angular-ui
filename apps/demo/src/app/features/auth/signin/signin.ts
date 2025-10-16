@@ -1,9 +1,9 @@
 import { AuthService } from '@/core/auth/auth.service.js';
-import { SigninModel } from '@/features/auth/signin/signin.model.js';
+import { type SigninModel } from '@/features/auth/signin/signin.model.js';
 import { signinSchema } from '@/features/auth/signin/signin.schema.js';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Control, customError, form, submit, ValidationError } from '@angular/forms/signals';
+import { customError, Field, form, submit, type ValidationError } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +12,7 @@ const ERROR_MSG_SIGNIN_FAILED = 'Failed to login with username and password';
 
 @Component({
   selector: 'app-signin',
-  imports: [Control, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [Field, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './signin.html',
   styleUrl: './signin.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

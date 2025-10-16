@@ -3,7 +3,7 @@ import { GenderSelect } from '@/components/select';
 import { StateSelect } from '@/components/select/state-select/state-select.js';
 import { FormMode } from '@/core/constants/form-mode.js';
 import { userSchema } from '@/features/users/forms';
-import { UserFormModel } from '@/features/users/forms/user-form.model.js';
+import { type UserFormModel } from '@/features/users/forms/user-form.model.js';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,18 +13,18 @@ import {
   output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { apply, Control, disabled, form, submit } from '@angular/forms/signals';
+import { apply, disabled, Field, form, submit } from '@angular/forms/signals';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UserModel } from '@aui/api';
+import { type UserModel } from '@aui/api';
 
 @Component({
   selector: 'app-user-detail',
   imports: [
-    Control,
+    Field,
     Form,
     FormCard,
     FormsModule,
@@ -58,8 +58,7 @@ export class UserDetail {
       stateId,
       zip,
       isActive,
-    } = this
-      .user();
+    } = this.user();
 
     return {
       id,
@@ -85,7 +84,7 @@ export class UserDetail {
   readonly save = output<UserFormModel>();
 
   protected readonly isEditing = computed(() => this.mode() !== FormMode.view);
-  protected readonly = computed(() => this.mode() === FormMode.new);
+  protected readonly readonly = computed(() => this.mode() === FormMode.new);
   protected readonly form = form(this.#user, path => {
     apply(path, userSchema);
     disabled(path, () => !this.isEditing());
@@ -109,17 +108,19 @@ export class UserDetail {
   }
 
   protected async onSave() {
-    await submit(this.form, async form => {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    await submit(this.form, async f => {
       try {
-        this.save.emit(form().value());
-      }
-      catch (err) {
+        this.save.emit(f().value());
+      } catch (err) {
         console.error('Failed to save customer', err);
 
-        return [{
-          kind: 'customer-update-failed',
-          message: 'Failed to save customer.',
-        }];
+        return [
+          {
+            kind: 'customer-update-failed',
+            message: 'Failed to save customer.',
+          },
+        ];
       }
 
       return [];

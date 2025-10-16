@@ -5,18 +5,18 @@
     <mat-slide-toggle #activeToggle
                       class="app-acive"
                       [matTooltip]="activeToggle.checked ? 'Customer is active' : 'Customer is inactive'"
-                      [control]="form.isActive" />
+                      [field]="form.isActive" />
 
     <section class="name">
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput
-               [control]="form.name" />
+               [field]="form.name" />
         @if (form.name().errors.length > 0) {
         <mat-error>{{ form.name().errors()[0].message }}</mat-error>
         }
       </mat-form-field>    
-      <app-gender-select [control]="form.genderId" />
+      <app-gender-select [field]="form.genderId" />
     </section>
   </app-form-card>
 

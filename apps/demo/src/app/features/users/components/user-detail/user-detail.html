@@ -4,13 +4,13 @@
     <mat-slide-toggle #activeToggle
                       class="app-acive"
                       [matTooltip]="activeToggle.checked ? 'Customer is active' : 'Customer is inactive'"
-                      [control]="form.isActive" />
+                      [field]="form.isActive" />
 
     <section class="name">
       <mat-form-field>
         <mat-label>First name</mat-label>
         <input matInput
-               [control]="form.firstName"
+               [field]="form.firstName"
                autocomplete="firstName" />
         @if (form.firstName().errors().length) {
         <mat-error>{{ form.firstName().errors()[0].message }}</mat-error>
@@ -19,20 +19,20 @@
       <mat-form-field>
         <mat-label>Last name</mat-label>
         <input matInput
-               [control]="form.lastName"
+               [field]="form.lastName"
                autocomplete="lastName" />
         @if (form.lastName().errors().length) {
         <mat-error>{{ form.lastName().errors()[0].message }}</mat-error>
         }
       </mat-form-field>
-      <app-gender-select [control]="form.gender" />
+      <app-gender-select [field]="form.gender" />
     </section>
 
     <section class="contact">
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput
-               [control]="form.email"
+               [field]="form.email"
                autocomplete="email" />
         @if (form.email().errors().length) {
         <mat-error>{{ form.email().errors()[0].message }}</mat-error>
@@ -41,7 +41,7 @@
       <mat-form-field>
         <mat-label>Phone</mat-label>
         <input matInput
-               [control]="form.phone"
+               [field]="form.phone"
                autocomplete="phone" />
         @if (form.phone().errors().length) {
         <mat-error>{{ form.phone().errors()[0].message }}</mat-error>
@@ -55,7 +55,7 @@
       <mat-form-field>
         <mat-label>Street address</mat-label>
         <input matInput
-               [control]="form.streetAddress"
+               [field]="form.streetAddress"
                autocomplete="streetAddress" />
         @if (form.streetAddress().errors().length) {
         <mat-error>{{ form.streetAddress().errors()[0].message }}</mat-error>
@@ -67,7 +67,7 @@
       <mat-form-field>
         <mat-label>Street address2</mat-label>
         <input matInput
-               [control]="form.streetAddress2"
+               [field]="form.streetAddress2"
                autocomplete="streetAddress2" />
       </mat-form-field>
     </section>
@@ -76,7 +76,7 @@
       <mat-form-field class="city">
         <mat-label>City</mat-label>
         <input matInput
-               [control]="form.city"
+               [field]="form.city"
                autocomplete="city" />
         @if (form.city().errors().length) {
         <mat-error>{{ form.city().errors()[0].message }}</mat-error>
@@ -84,7 +84,7 @@
       </mat-form-field>
       <mat-form-field class="state">
         <mat-label>State</mat-label>
-        <app-state-select [control]="form.stateId" />
+        <app-state-select [field]="form.stateId" />
         @if (form.stateId().errors().length) {
         <mat-error>{{ form.stateId().errors()[0].message }}</mat-error>
         }
@@ -92,7 +92,7 @@
       <mat-form-field class="zip">
         <mat-label>Zip</mat-label>
         <input matInput
-               [control]="form.zip"
+               [field]="form.zip"
                autocomplete="zip" />
         @if (form.zip().errors().length) {
         <mat-error>{{ form.zip().errors()[0].message }}</mat-error>
