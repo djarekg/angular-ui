@@ -13,6 +13,9 @@
   --app-color-yellow: #fff9c4;
   --app-color-light-blue: hsl(207, 90%, 77%);
 
+  --app-color-skeleton-opacity: 1;
+  --app-color-skeleton: hsla(0, 0%, 70%, var(--app-color-skeleton-opacity));
+
   --app-color-gradient-primary: linear-gradient(
     to top left,
     var(--app-color-primary-light),

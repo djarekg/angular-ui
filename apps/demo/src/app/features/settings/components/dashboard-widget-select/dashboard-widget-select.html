@@ -1,28 +1,45 @@
-<mat-list
-  cdkDropList
-  [cdkDropListData]="unselected()"
-  cdkDropListSortingDisabled
-  (cdkDropListDropped)="drop($event)">
-  @for (widget of unselected(); track widget.id) {
-    <mat-list-item cdkDrag>
-      <span matListItemTitle>{{ widget.name }}</span>
-      <span matListItemLine>{{ widget.description }}</span>
-    </mat-list-item>
-  }
-</mat-list>
+<div
+  cdkDropListGroup
+  class="container">
+  <mat-list
+    cdkDropList
+    #unselected="cdkDropList"
+    cdkDropListSortingDisabled
+    [cdkDropListData]="unselectedWidgets()"
+    (cdkDropListDropped)="drop($event)">
+    @for (widget of unselectedWidgets(); track widget.id) {
+      <mat-list-item
+        cdkDrag
+        class="widget">
+        <span matListItemTitle>{{ widget.name }}</span>
+        <span matListItemLine>{{ widget.description }}</span>
+      </mat-list-item>
+    }
+  </mat-list>
 
-<mat-grid-list
-  cols="2"
-  rowHeight="2:1"
-  cdkDropList
-  cdkDropListOrientation="mixed"
-  [cdkDropListData]="selected()"
-  (cdkDropListDropped)="selectedDrop($event)">
-  @for (widget of selected(); track widget.id) {
-    <mat-grid-tile
-      cdkDrag
-      class="widget">
-      {{ widget.name }}
-    </mat-grid-tile>
-  }
-</mat-grid-list>
+  <div
+    class="list"
+    cdkDropList
+    #selected="cdkDropList"
+    cdkDropListOrientation="mixed"
+    [cdkDropListData]="selectedWidgets()"
+    (cdkDropListDropped)="drop($event)">
+    @for (widget of selectedWidgets(); track widget.id) {
+      <div
+        cdkDrag
+        class="widget widget-type-{{ widget.baseType }}">
+        @switch (widget.baseType) {
+          @case (1) {
+            <app-dashboard-total-amount-placeholder [label]="widget.name" />
+          }
+          @case (2) {
+            <app-dashboard-top-selling-placeholder [label]="widget.name" />
+          }
+          @case (3) {
+            <app-dashboard-total-placeholder [label]="widget.name" />
+          }
+        }
+      </div>
+    }
+  </div>
+</div>
